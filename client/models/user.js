@@ -7,6 +7,6 @@ const userSchema = new Schema({
     favoriteRecipes: {type: Array, default: []}
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("Book", userSchema);
 
 module.exports = User;
