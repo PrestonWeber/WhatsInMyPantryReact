@@ -6,7 +6,7 @@ mongoose.connect(
     "mongodb://localhost/pantry_db"
 );
 
-const recipeSeed = [
+const recipeSeed = 
     {
         title: "Chicken Soup",
         image: "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F17638.jpg",
@@ -16,7 +16,7 @@ const recipeSeed = [
             password: ""
         }
     }
-];
+;
 
 db.Recipe
   .create({})
