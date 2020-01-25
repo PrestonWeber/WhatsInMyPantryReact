@@ -6,7 +6,7 @@ router.route("/members")
 
 router.route("/members/:userid")
   .get(pantryController.findAll)
-  .put(pantryController.update)
+  // .put(pantryController.update)
   .delete(pantryController.remove);
 
   module.exports = router;

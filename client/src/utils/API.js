@@ -8,7 +8,7 @@ export default {
         return axios.post("api/users/login", userData);
     },
     getRecipes: function(userId) {
-        return axios.post("api/recipeRoutes/recipes/" + userId);
+        return axios.get("api/recipeRoutes/recipes/" + userId);
     },
     getUser: function() {
         return axios.get("api/users");
