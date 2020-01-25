@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import { Card, CardImage, CardBody, CardTitle, CardLink } from "../components/Card";
+import { Card, CardImage, DeleteBtn, CardBody, CardTitle, CardLink } from "../components/Card";
 
 class Favorites extends Component {
 
@@ -45,6 +45,10 @@ class Favorites extends Component {
     //         .catch(err => console.log(err));
     // };
 
+    deleteRecipe = (id) => {
+        console.log(id);
+    }
+
     render() {
         return (
             <div>
@@ -61,6 +65,10 @@ class Favorites extends Component {
                             <CardLink href={recipe.link}>
                                 Link
                             </CardLink>
+                            <DeleteBtn 
+                                onClick={() => this.deleteRecipe(recipe._id)}>
+                                Delete
+                            </DeleteBtn>
                         </CardBody>
                     </Card>
                 ))}

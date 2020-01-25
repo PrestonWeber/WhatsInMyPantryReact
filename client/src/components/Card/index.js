@@ -37,3 +37,11 @@ export function CardLink(props) {
         </a>
     );
 }
+
+export function DeleteBtn(props) {
+    return (
+        <button className="delete btn btn-danger" {...props}>
+            {props.children}
+        </button>
+    )
+}
