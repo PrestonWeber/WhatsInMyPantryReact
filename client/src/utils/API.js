@@ -7,10 +7,13 @@ export default {
     loginUser: function(userData) {
         return axios.post("api/users/login", userData);
     },
-    getRecipes: function(favoriteRecipes) {
-        return axios.post("api/recipes", favoriteRecipes);
+    getRecipes: function(userId) {
+        return axios.post("api/recipeRoutes/recipes/" + userId);
     },
     getUser: function() {
         return axios.get("api/users");
+    },
+    deleteRecipe: function(recipeid) {
+        return axios.delete("api/recipeRoutes/recipes/" + recipeid);
     }
 }
