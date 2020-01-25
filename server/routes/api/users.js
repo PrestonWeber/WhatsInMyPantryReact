@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const pantryController = require("../../controller/pantrydb");
 
+router.route("/")
+  .get(pantryController.getUser);
+
 // Matches with "/api/books"
 router.route("/signup")
   .post(pantryController.createUser);

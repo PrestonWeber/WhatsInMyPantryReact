@@ -5,5 +5,13 @@ module.exports = {
 
     loginUser: function(req, res) {
         res.status(201).end();
+    },
+
+    getRecipes: function(req, res) {
+        res.status(201).end();
+    },
+
+    getUser: function(req, res) {
+        res.status(201).end();
     }
 }

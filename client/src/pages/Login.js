@@ -59,11 +59,16 @@ class Login extends Component {
                     <FormBtn
                         disabled={!(this.state.username && this.state.password)}
                         onClick={this.loginUser}
-                    >Login</FormBtn>
+                    >
+                            Login
+
+                    </FormBtn>
                     <FormBtn
                         disabled={!(this.state.username && this.state.password)}
                         onClick={this.signupUser}
-                    >Sign Up</FormBtn>
+                    >
+                        Sign Up
+                    </FormBtn>
                 </form>
             </div>
         );
