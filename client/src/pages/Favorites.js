@@ -31,23 +31,26 @@ class Favorites extends Component {
     //     API.getUser()
     //         .then(res => {
     //             this.setState({ username: res.data.username, userId: res.data._id });
-    //             this.loadRecipes(res.data.favoriteRecipes);
+    //             this.loadRecipes(res.data._id);
     //             }
     //         )
     //         .catch(err => console.log(err));
     // };
  
-    // loadRecipes = (favoriteRecipes) => {
-    //     API.getRecipes(favoriteRecipes)
+    // loadRecipes = (userId) => {
+    //     API.getRecipes(userId)
     //         .then(res =>
     //             this.setState({ recipes: res.data })
     //         )
     //         .catch(err => console.log(err));
     // };
 
-    deleteRecipe = (id) => {
-        console.log(id);
-    }
+    // deleteRecipe = (id) => {
+    //     API.deleteRecipe(id)
+    //         .then(res => 
+    //             this.loadRecipes(this.state.userId))
+    //         .catch(err => console.log(err));
+    // };
 
     render() {
         return (
