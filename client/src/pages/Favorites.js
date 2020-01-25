@@ -6,26 +6,26 @@ class Favorites extends Component {
 
     state = {
         recipes: [
-            {
-                _id: 1,
-                image: "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/2KL6JYQYH4I6REYMIWBYVUGXPI.jpg&w=767",
-                title: "Food1",
-                link: "https://www.google.com/"
-            },
-            {
-                _id: 2,
-                image: "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/2KL6JYQYH4I6REYMIWBYVUGXPI.jpg&w=767",
-                title: "Food2",
-                link: "https://www.google.com/"
-            }
+            // {
+            //     _id: 1,
+            //     image: "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/2KL6JYQYH4I6REYMIWBYVUGXPI.jpg&w=767",
+            //     title: "Food1",
+            //     link: "https://www.google.com/"
+            // },
+            // {
+            //     _id: 2,
+            //     image: "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/2KL6JYQYH4I6REYMIWBYVUGXPI.jpg&w=767",
+            //     title: "Food2",
+            //     link: "https://www.google.com/"
+            // }
         ],
         username: "",
         userId: ""
     };
 
-    // componentDidMount() {
-    //     this.getUser();
-    // }
+    componentDidMount() {
+        this.loadRecipes(1);
+    }
 
     // getUser = () => {
     //     API.getUser()
@@ -37,13 +37,13 @@ class Favorites extends Component {
     //         .catch(err => console.log(err));
     // };
  
-    // loadRecipes = (userId) => {
-    //     API.getRecipes(userId)
-    //         .then(res =>
-    //             this.setState({ recipes: res.data })
-    //         )
-    //         .catch(err => console.log(err));
-    // };
+    loadRecipes = (userId) => {
+        API.getRecipes(userId)
+            .then(res =>
+                this.setState({ recipes: res.data })
+            )
+            .catch(err => console.log(err));
+    };
 
     // deleteRecipe = (id) => {
     //     API.deleteRecipe(id)
