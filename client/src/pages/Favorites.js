@@ -45,12 +45,12 @@ class Favorites extends Component {
             .catch(err => console.log(err));
     };
 
-    // deleteRecipe = (id) => {
-    //     API.deleteRecipe(id)
-    //         .then(res => 
-    //             this.loadRecipes(this.state.userId))
-    //         .catch(err => console.log(err));
-    // };
+    deleteRecipe = (id) => {
+        API.deleteRecipe(id)
+            .then(res => 
+                this.loadRecipes(this.state.userId))
+            .catch(err => console.log(err));
+    };
 
     render() {
         return (

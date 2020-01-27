@@ -18,13 +18,30 @@ const recipeSeed =
     }
 ;
 
-db.Recipe
-  .create({})
-  .then(() => db.Recipe.collection.insertOne(recipeSeed))
-  .then(data => {
-      console.log(data.result.n + " records inserted!");
-      process.exit(0);
-  }).catch(err => {
-      console.error(err);
-      process.exit(1);
-  });
+const pantrySeed = {
+    ingredients: ["Chicken", "Pork", "Rice", "Beans", "lettuce", "cheese", "bread"],
+    user: "1"
+};
+
+
+// db.Recipe
+//   .create({})
+//   .then(() => db.Recipe.collection.insertOne(recipeSeed))
+//   .then(data => {
+//       console.log(data.result.n + " records inserted!");
+//       process.exit(0);
+//   }).catch(err => {
+//       console.error(err);
+//       process.exit(1);
+//   });
+
+  db.Pantry
+    .create({})
+    .then(() => db.Pantry.collection.insertMany(pantrySeed))
+    .then(data => {
+        console.log(data.result.n + " records inserted!");
+        process.exit(0);
+    }).catch(err => {
+        console.error(err);
+        process.exit(1);
+    });
