@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const db = require("../models");
-
 mongoose.connect(
     process.env.MONGODB_URI ||
     "mongodb://localhost/pantry_db"
@@ -15,11 +14,10 @@ const recipeSeed =
             username: "",
             password: ""
         }
-    }
-;
+    };
 
 db.Recipe
-  .create({})
+  .deleteMany({})
   .then(() => db.Recipe.collection.insertOne(recipeSeed))
   .then(data => {
       console.log(data.result.n + " records inserted!");
