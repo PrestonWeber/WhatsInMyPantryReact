@@ -13,10 +13,10 @@ const recipeSeed =
             username: "",
             password: ""
         }
-    }
-;
+    };
+
 db.Recipe
-  .create({})
+  .deleteMany({})
   .then(() => db.Recipe.collection.insertOne(recipeSeed))
   .then(data => {
       console.log(data.result.n + " records inserted!");
