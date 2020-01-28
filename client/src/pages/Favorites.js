@@ -6,8 +6,18 @@ export default function FavRecipes() {
     const [recipes, setRecipes] = useState([])
 
     useEffect(() => {
+        getUser();
         fetchRecipes(1);
     }, []);
+
+    const getUser = () => {
+        API.getUser()
+            .then(res => {
+                console.log(res);
+                }
+            )
+            .catch(err => console.log(err));
+    };
 
     const fetchRecipes = (userId) => {
         API.getRecipes(userId).then(res => {
@@ -59,12 +69,3 @@ export default function FavRecipes() {
 
 }
 
-// getUser = () => {
-//     API.getUser()
-//         .then(res => {
-//             this.setState({ username: res.data.username, userId: res.data._id });
-//             this.loadRecipes(res.data._id);
-//             }
-//         )
-//         .catch(err => console.log(err));
-// };
