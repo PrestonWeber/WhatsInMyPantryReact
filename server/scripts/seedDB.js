@@ -20,7 +20,7 @@ const recipeSeed =
 
 const pantrySeed = {
     ingredients: ["Chicken", "Pork", "Rice", "Beans", "lettuce", "cheese", "bread"],
-    user: "1"
+    user: 1
 };
 
 
