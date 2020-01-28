@@ -4,6 +4,7 @@ mongoose.connect(
     process.env.MONGODB_URI ||
     "mongodb://localhost/pantry_db"
 );
+
 const recipeSeed = 
     {
         title: "Chicken Soup",
