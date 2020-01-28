@@ -1,84 +1,70 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import API from "../utils/API";
-import { Card, CardImage, DeleteBtn, CardBody, CardTitle, CardLink } from "../components/Card";
+import Recipe from "../components/Recipe";
 
-class Favorites extends Component {
+export default function FavRecipes() {
+    const [recipes, setRecipes] = useState([])
 
-    state = {
-        recipes: [
-            // {
-            //     _id: 1,
-            //     image: "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/2KL6JYQYH4I6REYMIWBYVUGXPI.jpg&w=767",
-            //     title: "Food1",
-            //     link: "https://www.google.com/"
-            // },
-            // {
-            //     _id: 2,
-            //     image: "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/2KL6JYQYH4I6REYMIWBYVUGXPI.jpg&w=767",
-            //     title: "Food2",
-            //     link: "https://www.google.com/"
-            // }
-        ],
-        username: "",
-        userId: ""
+    useEffect(() => {
+        fetchRecipes(1);
+    }, []);
+
+    const fetchRecipes = (userId) => {
+        API.getRecipes(userId).then(res => {
+                setRecipes(res.data);
+                console.log(recipes);
+        }) .catch(err => console.log(err));
     };
-
-    componentDidMount() {
-        this.loadRecipes(1);
-    }
-
-    // getUser = () => {
-    //     API.getUser()
-    //         .then(res => {
-    //             this.setState({ username: res.data.username, userId: res.data._id });
-    //             this.loadRecipes(res.data._id);
-    //             }
-    //         )
-    //         .catch(err => console.log(err));
-    // };
- 
-    loadRecipes = (userId) => {
-        API.getRecipes(userId)
-            .then(res =>
-                this.setState({ recipes: res.data })
-            )
-            .catch(err => console.log(err));
-    };
-
-    deleteRecipe = (id) => {
-        API.deleteRecipe(id)
-            .then(res => 
-                this.loadRecipes(this.state.userId))
-            .catch(err => console.log(err));
-    };
-
-    render() {
-        return (
-            <div>
-                <h1>Favorites</h1>
-                {this.state.recipes.map(recipe => (
-                    <Card key={recipe._id}>
-                        <CardImage
-                            src={recipe.image}
+    
+    const renderRecipes = () => {
+        let recipeCards = [];
+        if(recipes.length > 0) {
+            recipeCards.push(
+                recipes.map(recipe => {
+                    return (
+                        <Recipe
+                        key={recipe._id}
+                        id={recipe._id}
+                        title={recipe.title}
+                        image={recipe.image}
+                        link={recipe.link}
+                        user={recipe.user}
+                        button="delete"
+                        deleteRecipe={deleteRecipe}
                         />
-                        <CardBody>
-                            <CardTitle>
-                                {recipe.title}
-                            </CardTitle>
-                            <CardLink href={recipe.link}>
-                                Link
-                            </CardLink>
-                            <DeleteBtn 
-                                onClick={() => this.deleteRecipe(recipe._id)}>
-                                Delete
-                            </DeleteBtn>
-                        </CardBody>
-                    </Card>
-                ))}
+                    );
+                })
+            )
+        } else {
+            recipeCards.push(<div key="none">There are no saved recipes</div>);
+        }
+        return recipeCards;
+    };
+
+    const deleteRecipe = (recipeId => {
+        console.log(recipeId);
+        API.deleteRecipe(recipeId).then(res => {
+            console.log("RECIPE DELETED");
+            fetchRecipes(1);
+        });
+    });
+
+    return (
+        <div>
+            <div className="container">
+                <div className="row">{renderRecipes()}</div>
             </div>
-        );
-    }
+        </div>
+    );
 
 }
 
-export default Favorites;
+// getUser = () => {
+//     API.getUser()
+//         .then(res => {
+//             this.setState({ username: res.data.username, userId: res.data._id });
+//             this.loadRecipes(res.data._id);
+//             }
+//         )
+//         .catch(err => console.log(err));
+// };
