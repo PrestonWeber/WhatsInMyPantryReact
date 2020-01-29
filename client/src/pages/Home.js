@@ -16,15 +16,19 @@ const Home = () => {
 
     useEffect(() => {
         setUser(user);
-        console.log(currentUser);
-        fetchPantry(1)
+        fetchPantry(currentUser.email)
         renderPantry();
     });
 
+    const addIngredient = (req) => {
+        API.createIngredient(req).then(res => {
+            setPantry(res.data);
+        }) .catch(err => console.log(err));
+    };
+    
     const fetchPantry = (userId) => {
         API.getPantry(userId).then(res => {
             setPantry(res.data);
-            console.log(pantry);
         }) .catch(err => console.log(err));
     };
 
@@ -35,8 +39,12 @@ const Home = () => {
                 pantry.map(ingredient => {
                     return (
                         <Ingredient
-                        key={ingredient.id}
+                        key={ingredient._id}
+                        id={ingredient._id}
                         ingredient={ingredient.ingredient}
+                        user={ingredient.user}
+                        button="delete"
+                        deleteIngredient={deleteIngredient}
                         />
                     );
                 })
@@ -47,12 +55,19 @@ const Home = () => {
         return ingredients;
     };
 
+    const deleteIngredient = (ingId => {
+       API.deleteIngredient(ingId).then(res => {
+           console.log("INGREDIENT DELETED");
+           fetchPantry(currentUser.email);
+       });
+    });
+
 
 
 
     return (
         <>
-            <h1>Hello, {currentUser.name}</h1>
+            <h1>Hello, {currentUser.nickname}</h1>
             <LogoutButton />
         <Jumbotron>
             <Container>
@@ -85,11 +100,12 @@ const Home = () => {
             <Row>
                 <Col size="lg-6 sm-12" className="column-1">
                    <Input name="food" placeholder="Add up to 10 items..." id="myFood"></Input>
-                   <FormBtn>Submit</FormBtn>
+                   <FormBtn value="#myFood.val()" onClick={ () => addIngredient({value}) }>Submit</FormBtn>
                    <br></br>
                    <button className="btn btn-danger">Reset</button>
                 </Col>
                 <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
+                    {renderPantry()}
                     <div className="generateButton">
                        <button id="generate"><strong>GENERATE!</strong></button>
                     </div>

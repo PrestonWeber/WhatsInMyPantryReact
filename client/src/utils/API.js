@@ -12,5 +12,11 @@ export default {
     },
     getPantry: function(userId) {
         return axios.get("api/pantryRoutes/pantry/" + userId);
+    },
+    deleteIngredient: function(ingId) {
+        return axios.delete("api/pantryRoutes/pantry/" + ingId);
+    },
+    createIngredient: function(ingredient) {
+        return axios.create("api/pantryRoutes/pantry");
     }
 }
