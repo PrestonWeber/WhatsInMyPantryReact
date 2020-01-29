@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default {
-    getRecipes: function(userId) {
-        return axios.get("api/recipeRoutes/recipes/" + userId);
+    getRecipes: function(userEmail) {
+        return axios.get("api/recipeRoutes/recipes/" + userEmail);
     },
     getUser: function() {
         return axios.get("api/users");

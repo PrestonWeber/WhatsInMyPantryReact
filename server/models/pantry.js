@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const pantrySchema = new Schema({
     ingredients: {type: Array, required: true},
-    user: {type: Schema.Types.ObjectId, ref: "User"}
+    userEmail: {type: String, required: true}
 });
 
 const Pantry = mongoose.model("Pantry", pantrySchema);
