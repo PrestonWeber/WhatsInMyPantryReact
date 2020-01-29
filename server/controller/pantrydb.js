@@ -15,9 +15,14 @@ module.exports = {
     },
     remove: function(req, res) {
         db.Pantry
-          .findById({ _id: req.params.id })
+          .findOne({ ObjectId: req.params.id })
           .then(dbModel => dbModel.remove())
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err));
+    },
+    removeAll: function(req, res) {
+      db.Pantry
+        .deleteMany()
+        .then(dbModel => dbModel.removeAll())
     }
 }

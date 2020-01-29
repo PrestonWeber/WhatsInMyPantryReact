@@ -6,7 +6,9 @@ import Grid, { Container, Row, Col } from "../components/Grid";
 import Form, { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
-const Home = () => {
+import axios from "axios";
+
+export default function Home() {
 
     const { loading, user } = useAuth0();
 
@@ -14,17 +16,37 @@ const Home = () => {
 
     const [pantry, setPantry] = useState({});
 
+    const [inputValue, setValue] = useState("");
+
     useEffect(() => {
         setUser(user);
         fetchPantry(currentUser.email)
         renderPantry();
     });
 
-    const addIngredient = (req) => {
-        API.createIngredient(req).then(res => {
-            setPantry(res.data);
-        }) .catch(err => console.log(err));
-    };
+    const handleInputChange = e => {
+        const {value} = e.target;
+        setValue(value);
+    }
+
+    const addIngredient = (ingredient => {
+        let data = {
+            ingredient: inputValue,
+            user: currentUser.email
+        }
+        axios.post("/api/pantryRoutes/pantry", data).then(res=> {
+            console.log("INGREDIENT ADDED");
+            console.log(ingredient);
+        });
+    })
+
+    const resetPantry = (userId) => { 
+        API.deletePantry(userId).then(res => {
+            fetchPantry(currentUser.email)
+            console.log(res)
+            console.log("pantry reset");
+        }).catch(err => console.log(err));
+    }
     
     const fetchPantry = (userId) => {
         API.getPantry(userId).then(res => {
@@ -99,10 +121,10 @@ const Home = () => {
         <Container>
             <Row>
                 <Col size="lg-6 sm-12" className="column-1">
-                   <Input name="food" placeholder="Add up to 10 items..." id="myFood"></Input>
-                   <FormBtn value="#myFood.val()" onClick={ () => addIngredient({value}) }>Submit</FormBtn>
+                   <Input name="food" placeholder="Add up to 10 items..." id="myFood" value={inputValue} onChange={handleInputChange}></Input>
+                   <FormBtn onClick={() => addIngredient(inputValue)}>Submit</FormBtn>
                    <br></br>
-                   <button className="btn btn-danger">Reset</button>
+                   <button onClick={() => resetPantry(currentUser.email)} className="btn btn-danger">Reset</button>
                 </Col>
                 <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
                     {renderPantry()}
@@ -121,5 +143,3 @@ const Home = () => {
     );
 
 }
-
-export default Home;
