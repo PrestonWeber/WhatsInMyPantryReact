@@ -9,5 +9,8 @@ export default {
     },
     deleteRecipe: function(recipeid) {
         return axios.delete("api/recipeRoutes/recipes/" + recipeid);
+    },
+    getPantry: function(userId) {
+        return axios.get("api/pantryRoutes/pantry/" + userId);
     }
 }
