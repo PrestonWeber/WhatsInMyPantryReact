@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import Recipe from "../components/Recipe";
+import Home from "./Home";
 
 export default function FavRecipes() {
     const [recipes, setRecipes] = useState([])
@@ -14,7 +15,7 @@ export default function FavRecipes() {
         API.getUser()
             .then(res => {
                 console.log(res);
-                }
+            }
             )
             .catch(err => console.log(err));
     };
