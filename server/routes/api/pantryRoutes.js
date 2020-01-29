@@ -4,7 +4,7 @@ const pantryController = require("../../controller/pantrydb");
 router.route("/members")
 .post(pantryController.create)
 
-router.route("/api/pantryRoutes/pantry/:userid")
+router.route("/pantry/:useremail")
   .get(pantryController.findAll)
   .delete(pantryController.remove);
 
