@@ -4,29 +4,61 @@ import { useAuth0 } from "../react-auth0-spa";
 import Jumbotron from "../components/Jumbotron";
 import Grid, { Container, Row, Col } from "../components/Grid";
 import Form, { Input, FormBtn } from "../components/Form";
+import API from "../utils/API";
+import Ingredient from "../components/Ingredient";
 const Home = () => {
 
     const { loading, user } = useAuth0();
 
     const [currentUser, setUser] = useState({});
 
+    const [pantry, setPantry] = useState({});
+
     useEffect(() => {
         setUser(user);
         console.log(currentUser);
+        fetchPantry(1)
+        renderPantry();
     });
+
+    const fetchPantry = (userId) => {
+        API.getPantry(userId).then(res => {
+            setPantry(res.data);
+            console.log(pantry);
+        }) .catch(err => console.log(err));
+    };
+
+    const renderPantry = () => {
+        let ingredients = [];
+        if(pantry.length > 0) {
+            ingredients.push(
+                pantry.map(ingredient => {
+                    return (
+                        <Ingredient
+                        key={ingredient.id}
+                        ingredient={ingredient.ingredient}
+                        />
+                    );
+                })
+            )
+        } else {
+            ingredients.push(<div key="none">Fill Your Pantry!</div>);
+        }
+        return ingredients;
+    };
 
 
 
 
     return (
         <>
-            {/* <h1>Hello, {currentUser.name}</h1> */}
+            <h1>Hello, {currentUser.name}</h1>
             <LogoutButton />
         <Jumbotron>
             <Container>
                 <h1>What's In My Pantry</h1>
                 <a href="#container-3"><strong>LETS GO</strong></a>
-                <a href="/recipes"><strong>MY FAVORITES</strong></a>
+                <a href="/favorites"><strong>MY FAVORITES</strong></a>
             </Container>
         </Jumbotron>
 
@@ -55,7 +87,7 @@ const Home = () => {
                    <Input name="food" placeholder="Add up to 10 items..." id="myFood"></Input>
                    <FormBtn>Submit</FormBtn>
                    <br></br>
-                   <FormBtn>Reset</FormBtn>
+                   <button className="btn btn-danger">Reset</button>
                 </Col>
                 <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
                     <div className="generateButton">
@@ -65,7 +97,7 @@ const Home = () => {
             </Row>
         </Container>
 
-        <Col size="sm-12">
+        <Col size="sm-12" id="generatedRecipes">
             Recipes Go Here
         </Col>
             </>
