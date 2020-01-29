@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Input, FormBtn} from "../components/Form";
+import { Input, FormBtn } from "../components/Form";
 import { LogoutButton } from "../components/Button";
 import { useAuth0 } from "../react-auth0-spa";
 
 const Home = () => {
   const { user } = useAuth0();
-  const [currentUser, setUser] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [inputValue, setValue] = useState("");
-  
-  useEffect(() => {
-    setUser(user);
-    console.log(currentUser);
-  });
 
   const handleInputChange = e => {
       const {value} = e.target;
@@ -53,7 +47,7 @@ const Home = () => {
 //   };
   return (
     <div>
-      <h1>Hello, {currentUser.email}.</h1>
+      <h1>Hello, {user.email}.</h1>
         
             <Input type="text" value={inputValue} onChange={handleInputChange} placeholder="add an item">
             </Input>
