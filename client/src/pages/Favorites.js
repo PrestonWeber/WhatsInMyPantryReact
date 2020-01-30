@@ -1,29 +1,21 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import Recipe from "../components/Recipe";
+import { useAuth0 } from "../react-auth0-spa";
 import Home from "./Home";
 
 export default function FavRecipes() {
-    const [recipes, setRecipes] = useState([])
+    const [recipes, setRecipes] = useState([]);
+    const { user } = useAuth0();
 
     useEffect(() => {
-        getUser();
-        fetchRecipes(1);
+        fetchRecipes(user.email);
     }, []);
 
-    const getUser = () => {
-        API.getUser()
-            .then(res => {
-                console.log(res);
-            }
-            )
-            .catch(err => console.log(err));
-    };
-
-    const fetchRecipes = (userId) => {
-        API.getRecipes(userId).then(res => {
+    const fetchRecipes = (userEmail) => {
+        API.getRecipes(userEmail).then(res => {
                 setRecipes(res.data);
-                console.log(recipes);
+                // console.log(recipes);
         }) .catch(err => console.log(err));
     };
     
@@ -33,6 +25,7 @@ export default function FavRecipes() {
             recipeCards.push(
                 recipes.map(recipe => {
                     return (
+                        <>
                         <Recipe
                         key={recipe._id}
                         id={recipe._id}
@@ -43,6 +36,8 @@ export default function FavRecipes() {
                         button="delete"
                         deleteRecipe={deleteRecipe}
                         />
+                        <code>{JSON.stringify(user, null, 2)}</code>
+                        </>
                     );
                 })
             )
@@ -56,7 +51,7 @@ export default function FavRecipes() {
         console.log(recipeId);
         API.deleteRecipe(recipeId).then(res => {
             console.log("RECIPE DELETED");
-            fetchRecipes(1);
+            fetchRecipes(user.email);
         });
     });
 

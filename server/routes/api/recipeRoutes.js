@@ -4,7 +4,7 @@ const recipeController = require("../../controller/recipedb");
 router.route("/recipes")
   .post(recipeController.create);
 
-router.route("/recipes/:userid")
+router.route("/recipes/:useremail")
   .get(recipeController.findAll);
 
 router

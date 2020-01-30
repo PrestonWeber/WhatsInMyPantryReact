@@ -3,7 +3,7 @@ const db = require("../models");
 module.exports = {
     findAll: function(req, res) {
         db.Pantry
-          .find()
+          .find({ user: req.params.useremail })
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err));
     },

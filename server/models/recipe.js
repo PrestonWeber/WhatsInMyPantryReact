@@ -5,7 +5,7 @@ const recipesSchema = new Schema({
     title: { type: String, required: false },
     image: { type: String, required: false },
     link: { type: String, required: false },
-    user: {type: Schema.Types.ObjectId, ref: "User"}
+    userEmail: {type: String, required: true} 
 });
 
 const Recipe = mongoose.model("Recipe", recipesSchema);
