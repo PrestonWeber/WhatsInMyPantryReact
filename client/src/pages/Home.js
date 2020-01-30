@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Input, FormBtn } from "../components/Form";
 import { LogoutButton } from "../components/Button";
 import { useAuth0 } from "../react-auth0-spa";
 import axios from "axios";
@@ -34,7 +33,7 @@ const Home = () => {
   const fetchPantry = (userId) => {
     API.getPantry(userId).then(res => {
       setPantry(res.data);
-      console.log(pantry);
+      // console.log(pantry);
     }).catch(err => console.log(err));
   };
 

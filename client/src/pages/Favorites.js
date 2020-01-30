@@ -15,7 +15,7 @@ export default function FavRecipes() {
     const fetchRecipes = (userEmail) => {
         API.getRecipes(userEmail).then(res => {
                 setRecipes(res.data);
-                console.log(recipes);
+                // console.log(recipes);
         }) .catch(err => console.log(err));
     };
     
