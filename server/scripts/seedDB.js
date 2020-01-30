@@ -60,3 +60,13 @@ db.Recipe.create(recipeSeed)
         console.error(err);
         process.exit(1);
     });
+// db.Recipe
+//   .deleteMany({})
+//   .then(() => db.Recipe.collection.insertOne(recipeSeed))
+//   .then(data => {
+//       console.log(data.result.n + " records inserted!");
+//       process.exit(0);
+//   }).catch(err => {
+//       console.error(err);
+//       process.exit(1);
+//   });

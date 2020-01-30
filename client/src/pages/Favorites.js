@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import Recipe from "../components/Recipe";
 import { useAuth0 } from "../react-auth0-spa";
+import Home from "./Home";
 
 export default function FavRecipes() {
     const [recipes, setRecipes] = useState([]);
