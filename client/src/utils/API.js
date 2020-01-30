@@ -12,8 +12,5 @@ export default {
     },
     getPantry: function(userId) {
         return axios.get("api/pantryRoutes/pantry/" + userId);
-    },
-    getApiRecipes: function(queryUrl) {
-        return axios.post("api/recipeRoutes/apiRecipes", queryUrl);
     }
 }
