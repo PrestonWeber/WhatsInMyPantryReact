@@ -13,7 +13,7 @@ const Home = () => {
   const [ingredients, setIngredients] = useState([]);
   const [inputValue, setValue] = useState("");
   const [recipes, setRecipes] = useState([]);
-  const [pantry, setPantry] = useState({});
+  const [pantry, setPantry] = useState([]);
 
   const handleInputChange = e => {
     const { value } = e.target;
@@ -26,13 +26,17 @@ const Home = () => {
   }
 
   useEffect(() => {
-    fetchPantry(1);
+    fetchPantry(user.email);
     renderPantry();
-  });
+  }, []);
 
-  const fetchPantry = (userId) => {
-    API.getPantry(userId).then(res => {
-      setPantry(res.data);
+  const fetchPantry = (userEmail) => {
+    API.getPantry(userEmail).then(res => {
+      for(let i = 0; i < res.data.length; i++) {
+        setPantry(oldArray => [...oldArray, res.data[i].ingredient]);
+      }
+      // console.log(res.data);
+      // setPantry(res.data);
       // console.log(pantry);
     }).catch(err => console.log(err));
   };
@@ -40,7 +44,7 @@ const Home = () => {
   const renderPantry = () => {
     let pantryIngredients = [];
     if (pantry.length > 0) {
-      ingredients.push(
+      pantryIngredients.push(
         pantry.map(ingredient => {
           return (
             <Ingredient
@@ -138,6 +142,7 @@ const Home = () => {
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
             <div className="generateButton">
+              <p>{pantry}</p>
               <FormBtn id="generate" onClick={() => edamamApi(ingredients)}>
                 Generate Results
             </FormBtn>
