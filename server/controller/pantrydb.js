@@ -22,7 +22,9 @@ module.exports = {
     },
     removeAll: function(req, res) {
       db.Pantry
-        .deleteMany()
+        .find({ user: req.params.useremail })
         .then(dbModel => dbModel.removeAll())
+        .catch(err => res.status(422).json(err));
+
     }
 }

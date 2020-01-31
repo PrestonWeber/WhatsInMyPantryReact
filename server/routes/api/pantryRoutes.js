@@ -9,6 +9,6 @@ router.route("/pantry/:ingId")
 
 router.route("/pantry/:useremail")
   .get(pantryController.findAll)
-  .delete(pantryController.remove);
+  .delete(pantryController.removeAll);
 
   module.exports = router;
