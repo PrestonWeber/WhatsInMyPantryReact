@@ -33,16 +33,15 @@ export default function Home() {
         setValue(value);
     }
 
-    const addIngredient = (ingredient => {
+    const addIngredient = () => {
         let data = {
             ingredient: inputValue,
             user: currentUser.email
-        }
-        axios.post("/api/pantryRoutes/pantry", data).then(res=> {
+          }
+          axios.post("/api/pantryRoutes/pantry", data).then(res=> {
             console.log("INGREDIENT ADDED");
-            console.log(ingredient);
         });
-    })
+    };
 
     const resetPantry = (userId) => { 
         API.deletePantry(userId).then(res => {
@@ -173,7 +172,7 @@ export default function Home() {
           <Col size="lg-6 sm-12" className="column-1">
             <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood"></Input>
             
-            <FormBtn onClick={handleClick /*addIngredient(inputValue)*/}>
+            <FormBtn onClick={handleClick, addIngredient}>
               Save to Pantry
             </FormBtn>
 
