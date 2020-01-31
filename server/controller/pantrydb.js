@@ -14,9 +14,10 @@ module.exports = {
           .catch(err => res.status(422).json(err));
     },
     remove: function(req, res) {
+        console.log(req.params.ingId);
         db.Pantry
-          .findOne({ ObjectId: req.params.id })
-          .then(dbModel => dbModel.remove())
+          .deleteOne({ _id: req.params.ingId })
+          // .then(dbModel => dbModel.deleteOne())
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err));
     },
