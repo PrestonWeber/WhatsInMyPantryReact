@@ -25,9 +25,9 @@ export default function Home() {
 
     useEffect(() => {
         setUser(user);
-        fetchPantry(currentUser.email)
+        fetchPantry(user.email)
         renderPantry();
-    }, []);
+    });
 
     const handleInputChange = e => {
         const {value} = e.target;
@@ -61,7 +61,6 @@ export default function Home() {
 
   const handleClick = () => {
     setIngredients(oldArray => [...oldArray, inputValue]);
-    renderPantry();
   }
 
 //   useEffect(() => {
@@ -82,9 +81,9 @@ export default function Home() {
 
   const renderPantry = () => {
     let pantryIngredients = [];
-    if (ingredients.length > 0) {
+    if (pantry.length > 0) {
       pantryIngredients.push(
-        ingredients.map(ingredient => {
+        pantry.map(ingredient => {
           return (
                 <Ingredient
                     key={ingredient._id}
