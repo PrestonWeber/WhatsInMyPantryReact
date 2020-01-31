@@ -45,14 +45,17 @@ export default function Home() {
         setIngredients(oldArray => [...oldArray, inputValue]);
         fetchPantry(user.email);
         renderPantry()
+        setValue("");
     };
 
-    const resetPantry = (userId) => { 
-        API.deletePantry(userId).then(res => {
-            fetchPantry(user.email)
-            console.log(res)
-            console.log("pantry reset");
-        }).catch(err => console.log(err));
+    const resetPantry = (userEmail) => {
+      axios.delete("api/pantryRoutes/pantry/" + userEmail).then(res => {
+        console.log("pantry-reset")
+      })
+        // API.deletePantry(userEmail).then(res => {
+        //   console.log("pantry reset");
+        //     fetchPantry(user.email)
+        // })
     }
 
     const deleteIngredient = (ingId => {
@@ -168,7 +171,7 @@ export default function Home() {
             </FormBtn>
 
             <br></br>
-            <button className="btn btn-danger">Reset</button>
+            <button  onClick={() => resetPantry(user.email)} className="btn btn-danger">Reset</button>
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
               {renderPantry()}
@@ -215,10 +218,6 @@ export default function Home() {
         
       </Container>
 
-
-
-
-    <LogoutButton />
     </div>
     </>
   );

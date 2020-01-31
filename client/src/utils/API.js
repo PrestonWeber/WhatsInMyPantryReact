@@ -13,8 +13,8 @@ export default {
     getPantry: function(userId) {
         return axios.get("api/pantryRoutes/pantry/" + userId);
     },
-    deletePantry: function(userId) {
-        return axios.delete("api/pantryRoutes/pantry/" + userId);
+    deletePantry: function(userEmail) {
+        return axios.delete("api/pantryRoutes/pantry/" + userEmail);
     },
     deleteIngredient: function(ingId) {
         return axios.delete("api/pantryRoutes/pantry/" + ingId);
