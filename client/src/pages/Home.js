@@ -7,6 +7,7 @@ import  { Container, Row, Col } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
+import ApiRecipe from "../components/ApiRecipe";
 
 export default function Home() {
 
@@ -70,11 +71,11 @@ export default function Home() {
 
   const fetchPantry = (userEmail) => {
     API.getPantry(userEmail).then(res => {
-      for(let i = 0; i < res.data.length; i++) {
-        setPantry(oldArray => [...oldArray, res.data[i].ingredient]);
-      }
+      // for(let i = 0; i < res.data.length; i++) {
+      //   setPantry(oldArray => [...oldArray, res.data[i].ingredient]);
+      // }
       // console.log(res.data);
-      // setPantry(res.data);
+      setPantry(res.data);
       // console.log(pantry);
     }).catch(err => console.log(err));
   };
@@ -129,18 +130,6 @@ export default function Home() {
       <>
     <div>
       <h1>Hello, {user.nickname}.</h1>
-
-      {/* <Input type="text" value={inputValue} onChange={handleInputChange} placeholder="add an item">
-      </Input>
-      <p>{inputValue}</p>
-      <FormBtn onClick={handleClick}>
-        Save to Pantry
-            </FormBtn>
-      <FormBtn onClick={() => edamamApi(ingredients)}>
-        Generate Results
-            </FormBtn>
-      <p>{ingredients}</p>
-      <p>{JSON.stringify(recipes)}</p> */}
       <LogoutButton />
 
     <Jumbotron>
@@ -190,10 +179,31 @@ export default function Home() {
         </Row>
       </Container>
 
+      <Container>
+        {/* <Row></Row>
       <Col size="sm-12" id="generatedRecipes">
         Recipes Go Here
-        <p>{JSON.stringify(recipes)}</p>
-        </Col>
+        
+      </Col> */}
+      {recipes.map(recipe => {
+        return (
+          <>
+            <ApiRecipe
+              // key={recipe.uri}
+              title={recipe.recipe.label}
+              image={recipe.recipe.image}
+              link={recipe.recipe.url}
+            />
+          </>
+        );
+      })}
+        
+      </Container>
+
+
+
+
+    <LogoutButton />
     </div>
     </>
   );

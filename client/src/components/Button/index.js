@@ -7,3 +7,9 @@ export function LogoutButton(props) {
         <button onClick={() => logout()}>Log out</button>
     );
 }
+
+export function SaveButton(props) {
+    return (
+        <button className="btn btn-primary" {...props}>{props.children}</button>
+    );
+}
