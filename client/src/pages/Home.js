@@ -29,7 +29,7 @@ const Home = () => {
   useEffect(() => {
     fetchPantry(user.email);
     renderPantry();
-  }, []);
+  });
 
   const fetchPantry = (userEmail) => {
     API.getPantry(userEmail).then(res => {
