@@ -1,12 +1,11 @@
 const router = require("express").Router();
 const pantryController = require("../../controller/pantrydb");
 
-router.route("/members")
+router.route("/home")
 .post(pantryController.create)
 
-router.route("/api/pantryRoutes/pantry/:userid")
+router.route("/pantry/:useremail")
   .get(pantryController.findAll)
-  // .put(pantryController.update)
   .delete(pantryController.remove);
 
   module.exports = router;
