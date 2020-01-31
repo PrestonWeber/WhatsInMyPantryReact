@@ -7,6 +7,7 @@ import Grid, { Container, Row, Col } from "../components/Grid";
 import Form, { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
+import ApiRecipe from "../components/ApiRecipe";
 
 const Home = () => {
   const { user } = useAuth0();
@@ -32,11 +33,11 @@ const Home = () => {
 
   const fetchPantry = (userEmail) => {
     API.getPantry(userEmail).then(res => {
-      for(let i = 0; i < res.data.length; i++) {
-        setPantry(oldArray => [...oldArray, res.data[i].ingredient]);
-      }
+      // for(let i = 0; i < res.data.length; i++) {
+      //   setPantry(oldArray => [...oldArray, res.data[i].ingredient]);
+      // }
       // console.log(res.data);
-      // setPantry(res.data);
+      setPantry(res.data);
       // console.log(pantry);
     }).catch(err => console.log(err));
   };
@@ -48,7 +49,7 @@ const Home = () => {
         pantry.map(ingredient => {
           return (
             <Ingredient
-              key={ingredient.id}
+              key={ingredient._id}
               ingredient={ingredient.ingredient}
             />
           );
@@ -87,18 +88,6 @@ const Home = () => {
   return (
     <div>
       <h1>Hello, {user.email}.</h1>
-
-      {/* <Input type="text" value={inputValue} onChange={handleInputChange} placeholder="add an item">
-      </Input>
-      <p>{inputValue}</p>
-      <FormBtn onClick={handleClick}>
-        Save to Pantry
-            </FormBtn>
-      <FormBtn onClick={() => edamamApi(ingredients)}>
-        Generate Results
-            </FormBtn>
-      <p>{ingredients}</p>
-      <p>{JSON.stringify(recipes)}</p> */}
       <LogoutButton />
       <Jumbotron>
         <Container>
@@ -142,7 +131,7 @@ const Home = () => {
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
             <div className="generateButton">
-              <p>{pantry}</p>
+              <p>{renderPantry()}</p>
               <FormBtn id="generate" onClick={() => edamamApi(ingredients)}>
                 Generate Results
             </FormBtn>
@@ -151,10 +140,26 @@ const Home = () => {
         </Row>
       </Container>
 
+      <Container>
+        {/* <Row></Row>
       <Col size="sm-12" id="generatedRecipes">
         Recipes Go Here
-        <p>{JSON.stringify(recipes)}</p>
-        </Col>
+        
+      </Col> */}
+      {recipes.map(recipe => {
+        return (
+          <>
+            <ApiRecipe
+              // key={recipe.uri}
+              title={recipe.recipe.label}
+              image={recipe.recipe.image}
+              link={recipe.recipe.url}
+            />
+          </>
+        );
+      })}
+        
+      </Container>
 
 
 
