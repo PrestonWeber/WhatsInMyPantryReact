@@ -5,6 +5,7 @@ import Favorites from "./pages/Favorites";
 import Home from "./pages/Home";
 import PrivateRoute from "./components/PrivateRoute";
 import { useAuth0 } from "./react-auth0-spa";
+import "./App.css";
 
 function App() {
 
