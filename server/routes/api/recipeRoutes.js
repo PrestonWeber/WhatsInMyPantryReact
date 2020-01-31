@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const recipeController = require("../../controller/recipedb");
 
-router.route("/recipes")
-  .post(recipeController.create);
+router.route("/recipe")
+  .post(recipeController.create)
 
 router.route("/recipes/:useremail")
   .get(recipeController.findAll);

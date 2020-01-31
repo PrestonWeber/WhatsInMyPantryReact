@@ -37,16 +37,19 @@ export default function Home() {
     const addIngredient = () => {
         let data = {
             ingredient: inputValue,
-            user: currentUser.email
+            user: user.email
           }
           axios.post("/api/pantryRoutes/pantry", data).then(res=> {
             console.log("INGREDIENT ADDED");
         });
+        setIngredients(oldArray => [...oldArray, inputValue]);
+        fetchPantry(user.email);
+        renderPantry()
     };
 
     const resetPantry = (userId) => { 
         API.deletePantry(userId).then(res => {
-            fetchPantry(currentUser.email)
+            fetchPantry(user.email)
             console.log(res)
             console.log("pantry reset");
         }).catch(err => console.log(err));
@@ -55,18 +58,9 @@ export default function Home() {
     const deleteIngredient = (ingId => {
        API.deleteIngredient(ingId).then(res => {
            console.log("INGREDIENT DELETED");
-           fetchPantry(currentUser.email);
+           fetchPantry(user.email);
        });
     });
-
-  const handleClick = () => {
-    setIngredients(oldArray => [...oldArray, inputValue]);
-  }
-
-//   useEffect(() => {
-//     fetchPantry(user.email);
-//     renderPantry();
-//   }, []);
 
   const fetchPantry = (userEmail) => {
     API.getPantry(userEmail).then(res => {
@@ -123,10 +117,19 @@ export default function Home() {
       .catch(function (error) {
         console.log(error);
       });
-}
+  }
 
+  const saveRecipe = (data => {
+    console.log(data);
+    axios.post("/api/recipeRoutes/recipe", data).then(res=> {
+      console.log("RECIPE ADDED");
+    });
+
+  }) 
+  
+  
   return (
-      <>
+    <>
     <div>
       <h1>Hello, {user.nickname}.</h1>
       <LogoutButton />
@@ -160,7 +163,7 @@ export default function Home() {
           <Col size="lg-6 sm-12" className="column-1">
             <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood"></Input>
             
-            <FormBtn onClick={handleClick, addIngredient}>
+            <FormBtn onClick={addIngredient}>
               Save to Pantry
             </FormBtn>
 
@@ -181,10 +184,22 @@ export default function Home() {
       <Container>
         {/* <Row></Row>
       <Col size="sm-12" id="generatedRecipes">
-        Recipes Go Here
-        
-      </Col> */}
+      Recipes Go Here
+      
+    </Col> */}
       {recipes.map(recipe => {
+
+        const handleSave = () => {
+          let data = {
+            title: recipe.recipe.label,
+            image: recipe.recipe.image,
+            link: recipe.recipe.url,
+            userEmail: user.email
+          }
+          saveRecipe(data)
+          
+        }
+
         return (
           <>
             <ApiRecipe
@@ -192,6 +207,7 @@ export default function Home() {
               title={recipe.recipe.label}
               image={recipe.recipe.image}
               link={recipe.recipe.url}
+              handleSave={handleSave}
             />
           </>
         );
