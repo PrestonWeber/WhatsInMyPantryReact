@@ -3,11 +3,10 @@ import { LogoutButton } from "../components/Button";
 import { useAuth0 } from "../react-auth0-spa";
 import axios from "axios";
 import Jumbotron from "../components/Jumbotron";
-import Grid, { Container, Row, Col } from "../components/Grid";
-import Form, { Input, FormBtn } from "../components/Form";
+import  { Container, Row, Col } from "../components/Grid";
+import { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
-import axios from "axios";
 
 export default function Home() {
 
@@ -15,15 +14,19 @@ export default function Home() {
 
     const [currentUser, setUser] = useState({});
 
-    const [pantry, setPantry] = useState({});
+    const [pantry, setPantry] = useState([]);
 
     const [inputValue, setValue] = useState("");
+
+    const [ingredients, setIngredients] = useState([]);
+
+    const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
         setUser(user);
         fetchPantry(currentUser.email)
         renderPantry();
-    });
+    }, []);
 
     const handleInputChange = e => {
         const {value} = e.target;
@@ -48,35 +51,6 @@ export default function Home() {
             console.log("pantry reset");
         }).catch(err => console.log(err));
     }
-    
-    const fetchPantry = (userId) => {
-        API.getPantry(userId).then(res => {
-            setPantry(res.data);
-        }) .catch(err => console.log(err));
-    };
-
-    const renderPantry = () => {
-        let ingredients = [];
-        if(pantry.length > 0) {
-            ingredients.push(
-                pantry.map(ingredient => {
-                    return (
-                        <Ingredient
-                        key={ingredient._id}
-                        id={ingredient._id}
-                        ingredient={ingredient.ingredient}
-                        user={ingredient.user}
-                        button="delete"
-                        deleteIngredient={deleteIngredient}
-                        />
-                    );
-                })
-            )
-        } else {
-            ingredients.push(<div key="none">Fill Your Pantry!</div>);
-        }
-        return ingredients;
-    };
 
     const deleteIngredient = (ingId => {
        API.deleteIngredient(ingId).then(res => {
@@ -85,30 +59,15 @@ export default function Home() {
        });
     });
 
-
-
-
-    return (
-        <>
-            <h1>Hello, {currentUser.nickname}</h1>
-            <LogoutButton />
-        <Jumbotron>
-            <Container>
-                <h1>What's In My Pantry</h1>
-                <a href="#container-3"><strong>LETS GO</strong></a>
-                <a href="/favorites"><strong>MY FAVORITES</strong></a>
-            </Container>
-        </Jumbotron>
-
   const handleClick = () => {
     setIngredients(oldArray => [...oldArray, inputValue]);
-    setValue("");
+    renderPantry();
   }
 
-  useEffect(() => {
-    fetchPantry(user.email);
-    renderPantry();
-  }, []);
+//   useEffect(() => {
+//     fetchPantry(user.email);
+//     renderPantry();
+//   }, []);
 
   const fetchPantry = (userEmail) => {
     API.getPantry(userEmail).then(res => {
@@ -123,14 +82,18 @@ export default function Home() {
 
   const renderPantry = () => {
     let pantryIngredients = [];
-    if (pantry.length > 0) {
+    if (ingredients.length > 0) {
       pantryIngredients.push(
-        pantry.map(ingredient => {
+        ingredients.map(ingredient => {
           return (
-            <Ingredient
-              key={ingredient.id}
-              ingredient={ingredient.ingredient}
-            />
+                <Ingredient
+                    key={ingredient._id}
+                    id={ingredient._id}
+                    ingredient={ingredient.ingredient}
+                    user={ingredient.user}
+                    button="delete"
+                    deleteIngredient={deleteIngredient}
+                />
           );
         })
       )
@@ -161,12 +124,12 @@ export default function Home() {
       .catch(function (error) {
         console.log(error);
       });
-
-  };
+}
 
   return (
+      <>
     <div>
-      <h1>Hello, {user.email}.</h1>
+      <h1>Hello, {user.nickname}.</h1>
 
       {/* <Input type="text" value={inputValue} onChange={handleInputChange} placeholder="add an item">
       </Input>
@@ -180,47 +143,12 @@ export default function Home() {
       <p>{ingredients}</p>
       <p>{JSON.stringify(recipes)}</p> */}
       <LogoutButton />
-      <Jumbotron>
-        <Container>
-            <Row>
-                <h2>How it Works</h2>
-            </Row>
-            <Row>
-                <Col size="md-4">
-                    <i className="fa fa-fish"></i>
-                    <p className="icons">Log the contents of your kitchen in our handy-dandy form below.</p>
-                </Col>
-                <Col size="md-4">
-                    <i className="fas fa-utensils"></i>
-                    <p className="icons">Use what you already have to make a delicious, easy recipe...</p>  
-                </Col>
-                <Col size="md-4">
-                    <i className="fas fa-carrot"></i>
-                    <p className="icons">...or see what else you need in order to make it!</p>
-                </Col>
-            </Row>
-        </Container>
-        <Container>
-            <Row>
-                <Col size="lg-6 sm-12" className="column-1">
-                   <Input name="food" placeholder="Add up to 10 items..." id="myFood" value={inputValue} onChange={handleInputChange}></Input>
-                   <FormBtn onClick={() => addIngredient(inputValue)}>Submit</FormBtn>
-                   <br></br>
-                   <button onClick={() => resetPantry(currentUser.email)} className="btn btn-danger">Reset</button>
-                </Col>
-                <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
-                    {renderPantry()}
-                    <div className="generateButton">
-                       <button id="generate"><strong>GENERATE!</strong></button>
-                    </div>
-                </Col>
-            </Row>
-          <h1>What's In My Pantry</h1>
+
+    <Jumbotron>
+        <h1>What's In My Pantry</h1>
           <a href="#container-3"><strong>LETS GO</strong></a>
           <a href="/favorites"><strong>MY FAVORITES</strong></a>
-        </Container>
-      </Jumbotron>
-
+    </Jumbotron>
       <Container>
         <Row>
           <h2>How it Works</h2>
@@ -244,18 +172,17 @@ export default function Home() {
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
             <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood"></Input>
-            <p>{inputValue}</p>
-            <FormBtn onClick={handleClick}>
+            
+            <FormBtn onClick={handleClick /*addIngredient(inputValue)*/}>
               Save to Pantry
             </FormBtn>
-            <p>{ingredients}</p>
 
             <br></br>
             <button className="btn btn-danger">Reset</button>
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
+              {renderPantry()}
             <div className="generateButton">
-              <p>{pantry}</p>
               <FormBtn id="generate" onClick={() => edamamApi(ingredients)}>
                 Generate Results
             </FormBtn>
@@ -268,12 +195,6 @@ export default function Home() {
         Recipes Go Here
         <p>{JSON.stringify(recipes)}</p>
         </Col>
-
-
-
-
-
-    <LogoutButton />
     </div>
     </>
   );
