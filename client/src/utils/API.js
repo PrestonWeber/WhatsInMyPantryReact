@@ -10,7 +10,16 @@ export default {
     deleteRecipe: function(recipeid) {
         return axios.delete("api/recipeRoutes/recipes/" + recipeid);
     },
-    getPantry: function(userEmail) {
-        return axios.get("api/pantryRoutes/pantry/" + userEmail);
+    getPantry: function(userId) {
+        return axios.get("api/pantryRoutes/pantry/" + userId);
+    },
+    deletePantry: function(userId) {
+        return axios.delete("api/pantryRoutes/pantry/" + userId);
+    },
+    deleteIngredient: function(ingId) {
+        return axios.delete("api/pantryRoutes/pantry/" + ingId);
+    },
+    createIngredient: function(ingredient) {
+        return axios.create("api/pantryRoutes/pantry", ingredient);
     }
 }
