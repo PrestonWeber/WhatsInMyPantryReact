@@ -7,6 +7,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { useAuth0 } from "./react-auth0-spa";
 import "./App.css"; 
 
+
 function App() {
 
   const { loading } = useAuth0();

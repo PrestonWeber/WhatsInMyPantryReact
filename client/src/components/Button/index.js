@@ -8,6 +8,10 @@ export function LogoutButton(props) {
     );
 }
 
-
-
+=======
+export function SaveButton(props) {
+    return (
+        <button className="btn btn-primary" {...props}>{props.children}</button>
+    );
+}
 

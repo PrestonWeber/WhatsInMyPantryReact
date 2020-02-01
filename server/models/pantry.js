@@ -10,7 +10,7 @@ const Schema = mongoose.Schema;
 
 const pantrySchema = new Schema({
     ingredient: String,
-    user: String
+    user: String,
 });
 
 const Pantry = mongoose.model("Pantry", pantrySchema);
