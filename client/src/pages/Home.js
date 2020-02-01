@@ -7,6 +7,7 @@ import Grid, { Container, Row, Col } from "../components/Grid";
 import Form, { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
+import ApiRecipe from "../components/ApiRecipe";
 
 const Home = () => {
   const { user } = useAuth0();
@@ -27,51 +28,51 @@ const Home = () => {
 
   useEffect(() => {
     fetchPantry(user.email);
-    renderPantry();
+    // renderPantry();
   }, []);
 
   const fetchPantry = (userEmail) => {
     API.getPantry(userEmail).then(res => {
-      for(let i = 0; i < res.data.length; i++) {
-        setPantry(oldArray => [...oldArray, res.data[i].ingredient]);
-      }
+      // for(let i = 0; i < res.data.length; i++) {
+      //   setPantry(oldArray => [...oldArray, res.data[i].ingredient]);
+      // }
       // console.log(res.data);
-      // setPantry(res.data);
+      setPantry(res.data);
       // console.log(pantry);
     }).catch(err => console.log(err));
   };
 
-  const renderPantry = () => {
-    let pantryIngredients = [];
-    if (pantry.length > 0) {
-      pantryIngredients.push(
-        pantry.map(ingredient => {
-          return (
-            <Ingredient
-              key={ingredient.id}
-              ingredient={ingredient.ingredient}
-            />
-          );
-        })
-      )
-    } else {
-      pantryIngredients.push(<div key="none">Fill Your Pantry!</div>);
-    }
-    return pantryIngredients;
-  };
+  // const renderPantry = () => {
+  //   let pantryIngredients = [];
+  //   if (pantry.length > 0) {
+  //     pantryIngredients.push(
+  //       pantry.map(ingredient => {
+  //         return (
+  //           <Ingredient
+  //             key={ingredient._id}
+  //             ingredient={ingredient.ingredient}
+  //           />
+  //         );
+  //       })
+  //     )
+  //   } else {
+  //     pantryIngredients.push(<div key="none">Fill Your Pantry!</div>);
+  //   }
+  //   return pantryIngredients;
+  // };
 
   const kamiApi = (ingredients) => {
-    let ingredientString = ingredients.join("\\&q\\=");
+    let ingredientString = ingredients.join("&q=");
     let queryUrl =
-    "http://recipes.kami.io/api/ingredient\?q\=" + ingredientString;
+    "http://recipes.kami.io/api/ingredient?q=" + ingredientString;
 
     console.log(queryUrl);
 
 
     axios.get(queryUrl)
       .then(function (response) {
-        console.log(response.data.hits);
-        setRecipes(response.data.hits);
+        console.log(response.data);
+        setRecipes(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -82,18 +83,6 @@ const Home = () => {
   return (
     <div>
       <h1>Hello, {user.email}.</h1>
-
-      {/* <Input type="text" value={inputValue} onChange={handleInputChange} placeholder="add an item">
-      </Input>
-      <p>{inputValue}</p>
-      <FormBtn onClick={handleClick}>
-        Save to Pantry
-            </FormBtn>
-      <FormBtn onClick={() => kamiApi(ingredients)}>
-        Generate Results
-            </FormBtn>
-      <p>{ingredients}</p>
-      <p>{JSON.stringify(recipes)}</p> */}
       <LogoutButton />
       <Jumbotron>
         <Container>
@@ -137,7 +126,7 @@ const Home = () => {
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
             <div className="generateButton">
-              <p>{pantry}</p>
+              {/* <p>{renderPantry()}</p> */}
               <FormBtn id="generate" onClick={() => kamiApi(ingredients)}>
                 Generate Results
             </FormBtn>
@@ -146,10 +135,26 @@ const Home = () => {
         </Row>
       </Container>
 
+      <Container>
+        {/* <Row></Row>
       <Col size="sm-12" id="generatedRecipes">
         Recipes Go Here
-        <p>{JSON.stringify(recipes)}</p>
-        </Col>
+        
+      </Col> */}
+      {/* {recipes.map(recipe => {
+        return (
+          <>
+            <ApiRecipe
+              // key={recipe.uri}
+              title={recipe.recipe.label}
+              image={recipe.recipe.image}
+              link={recipe.recipe.url}
+            />
+          </>
+        );
+      })} */}
+        
+      </Container>
 
 
 
