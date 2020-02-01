@@ -98,8 +98,8 @@ a:hover {
 /* Icons  */
 i /*Size of each icon */{ 
   font-size: 50px; 
-  padding-left: 50px;
-  padding-right: 50px; 
+  text-align: center; 
+  display: inline-block;
 }
 .iconText {
   text-align: center; 
@@ -114,6 +114,8 @@ i /*Size of each icon */{
 #fish {
   color: RoyalBlue; 
 }
-
+#fish-col{
+  text-align: center;
+}
 
 /* -------------------------------------------------- */
