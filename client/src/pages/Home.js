@@ -21,15 +21,13 @@ export default function Home() {
 
     const [inputValue, setValue] = useState("");
 
-    const [ingredients, setIngredients] = useState([]);
-
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
         setUser(user);
         fetchPantry(user.email)
         renderPantry();
-    });
+    }, []);
 
     const handleInputChange = e => {
         const {value} = e.target;
@@ -43,15 +41,14 @@ export default function Home() {
           }
           axios.post("/api/pantryRoutes/pantry", data).then(res=> {
             console.log("INGREDIENT ADDED");
+            fetchPantry(user.email)
+            renderPantry();
+            setValue("");
         });
-        setIngredients(oldArray => [...oldArray, inputValue]);
-        fetchPantry(user.email);
-        renderPantry()
-        setValue("");
     };
 
     const resetPantry = (userEmail) => {
-      axios.delete("api/pantryRoutes/pantry/" + userEmail).then(res => {
+      axios.delete("api/pantryRoutes/pantry/user/" + userEmail).then(res => {
         console.log("pantry-reset")
       })
         // API.deletePantry(userEmail).then(res => {
@@ -69,12 +66,8 @@ export default function Home() {
 
   const fetchPantry = (userEmail) => {
     API.getPantry(userEmail).then(res => {
-      // for(let i = 0; i < res.data.length; i++) {
-      //   setPantry(oldArray => [...oldArray, res.data[i].ingredient]);
-      // }
-      // console.log(res.data);
       setPantry(res.data);
-      // console.log(pantry);
+      console.log(pantry);
     }).catch(err => console.log(err));
   };
 
@@ -101,7 +94,14 @@ export default function Home() {
     return pantryIngredients;
   };
 
-  const edamamApi = (ingredients) => {
+  const edamamApi = (pantry) => {
+
+    let ingredients = [];
+
+    for (let i=0; i< pantry.length; i++) {
+      ingredients.push(pantry[i].ingredient);
+    }
+
     let AppKey = "c31de725535780190b9ff532d8eb8706";
     let appId = "d0ac8702";
     let ingredientString = ingredients.join(" ");
@@ -113,7 +113,9 @@ export default function Home() {
       "&app_key=" +
       AppKey;
 
+    console.log(queryUrl);
 
+    
     axios.get(queryUrl)
       .then(function (response) {
         console.log(response.data.hits);
@@ -136,18 +138,6 @@ export default function Home() {
   return (
     
     <div>
-
-      {/* <Input type="text" value={inputValue} onChange={handleInputChange} placeholder="add an item">
-      </Input>
-      <p>{inputValue}</p>
-      <FormBtn onClick={handleClick}>
-        Save to Pantry
-            </FormBtn>
-      <FormBtn onClick={() => edamamApi(ingredients)}>
-        Generate Results
-            </FormBtn>
-      <p>{ingredients}</p>
-      <p>{JSON.stringify(recipes)}</p> */}
       <Container>
       <Row>
           <h5>Hello, {user.email}!</h5> <LogoutButton />
@@ -170,16 +160,6 @@ export default function Home() {
         </Container>
       </Jumbotron>
 
-=======
-      <h1>Hello, {user.nickname}.</h1>
-      <LogoutButton />
-
-    <Jumbotron>
-        <h1>What's In My Pantry</h1>
-          <a href="#container-3"><strong>LETS GO</strong></a>
-          <a href="/favorites"><strong>MY FAVORITES</strong></a>
-    </Jumbotron>
-    
       <Container>
         <Row>
           <h2>How it Works</h2>
@@ -215,7 +195,7 @@ export default function Home() {
           <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
               {renderPantry()}
             <div className="generateButton">
-              <FormBtn id="generate" onClick={() => edamamApi(ingredients)}>
+              <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
                 Generate Results
             </FormBtn>
             </div>
@@ -262,6 +242,5 @@ export default function Home() {
       </Container>
 
     </div>
-    </>
   );
 };
