@@ -7,6 +7,7 @@ import Grid, { Container, Row, Col } from "../components/Grid";
 import Form, { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
+import Header from "../components/Header"; 
 
 const Home = () => {
   const { user } = useAuth0();
@@ -86,8 +87,6 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Hello, {user.email}.</h1>
-
       {/* <Input type="text" value={inputValue} onChange={handleInputChange} placeholder="add an item">
       </Input>
       <p>{inputValue}</p>
@@ -99,12 +98,25 @@ const Home = () => {
             </FormBtn>
       <p>{ingredients}</p>
       <p>{JSON.stringify(recipes)}</p> */}
-      <LogoutButton />
+      <Container>
+      <Row>
+          <h5>Hello, {user.email}!</h5> <LogoutButton />
+      </Row>
+      </Container>
+
       <Jumbotron>
         <Container>
-          <h1>What's In My Pantry</h1>
-          <a href="#container-3"><strong>LETS GO</strong></a>
-          <a href="/favorites"><strong>MY FAVORITES</strong></a>
+          <Row>
+            <Col size="md-12">
+          <h1>What's in my pantry?</h1>
+            </Col>
+          </Row>
+          <Row>
+            <Col size="md-12">
+          <button className="button"><a href="#container-3">LETS GO</a></button>
+          <button className="button-2"><a href="/favorites">MY FAVORITES</a></button>
+            </Col>
+          </Row>
         </Container>
       </Jumbotron>
 
@@ -114,19 +126,20 @@ const Home = () => {
         </Row>
         <Row>
           <Col size="md-4">
-            <i className="fa fa-fish"></i>
-            <p className="icons">Log the contents of your kitchen in our handy-dandy form below.</p>
+            <i className="fa fa-fish" id="fish"></i>
+            <p className="iconText">Log the contents of your kitchen in our handy-dandy form below.</p>
           </Col>
           <Col size="md-4">
-            <i className="fas fa-utensils"></i>
-            <p className="icons">Use what you already have to make a delicious, easy recipe...</p>
+            <i className="fas fa-utensils" id="utensils"></i>
+            <p className="iconText">Use what you already have to make a delicious, easy recipe...</p>
           </Col>
           <Col size="md-4">
-            <i className="fas fa-carrot"></i>
-            <p className="icons">...or see what else you need in order to make it!</p>
+            <i className="fas fa-carrot" id="carrot"></i>
+            <p className="iconText">...or see what else you need in order to make it!</p>
           </Col>
         </Row>
       </Container>
+
       <Container>
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
@@ -156,10 +169,6 @@ const Home = () => {
         <p>{JSON.stringify(recipes)}</p>
         </Col>
 
-
-
-
-    <LogoutButton />
     </div>
   );
 };

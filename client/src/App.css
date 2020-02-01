@@ -1,38 +1,119 @@
-.App {
-  text-align: center;
-}
+/* General Page Elements */
+@import url('https://fonts.googleapis.com/css?family=Mansalva+Roboto');
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #353535; 
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.row {
+  padding: 10px; 
 }
+h1 {
+  font-family: 'Mansalva', cursive;
+  color: #F7C331; 
+  font-size: 58px; 
+}
+h2, h3, h4, h5, p {
+  color: white; 
+  font-family: 'Roboto', sans-serif;
+}
+a {
+  color: white; 
+  text-decoration: none;
+}
+a:hover {
+  color: white; 
+  text-decoration: none;
+}
+/* -------------------------------------------------- */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+
+
+/* Buttons */
+.button{
+  background-color:#FC4A1A;
+  border: none;
   color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold; 
+  font-family: 'Roboto Condensed', sans-serif;
+  text-decoration: none;
+  margin: 10px; 
 }
 
-.App-link {
-  color: #61dafb;
+.button:hover {
+  background-color:#F7C331; 
+  color: white;
+  text-decoration: none; 
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button-2 {
+  background-color:#F7C331;
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold; 
+  font-family: 'Roboto Condensed', sans-serif;
+  text-decoration: none;
+  margin: 10px; 
 }
+
+.button-2:hover {
+  background-color:#FC4A1A; 
+  color: white;
+  text-decoration: none; 
+}
+
+.button-small {
+  background-color:#FC4A1A;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 10px; 
+  font-weight: bold; 
+  font-family: 'Roboto Condensed', sans-serif;
+  text-decoration: none;
+  margin-left: 10px; 
+}
+/* -------------------------------------------------- */
+
+
+#header-row {
+  background-color: white; 
+}
+
+.jumbotron {
+  background-color:#4ABDAC; 
+  height: 300; 
+  clear: "both"; 
+  text-align: "center"
+}
+
+
+
+/* Icons  */
+i /*Size of each icon */{ 
+  font-size: 50px; 
+  padding-left: 50px;
+  padding-right: 50px; 
+}
+.iconText {
+  text-align: center; 
+}
+#utensils {
+  text-align: center; 
+  color: darkgray; 
+}
+#carrot {
+  color: #F7882F; 
+}
+#fish {
+  color: RoyalBlue; 
+}
+
+
+/* -------------------------------------------------- */
