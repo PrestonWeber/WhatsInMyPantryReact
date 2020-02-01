@@ -3,33 +3,67 @@ import { LogoutButton } from "../components/Button";
 import { useAuth0 } from "../react-auth0-spa";
 import axios from "axios";
 import Jumbotron from "../components/Jumbotron";
-import Grid, { Container, Row, Col } from "../components/Grid";
-import Form, { Input, FormBtn } from "../components/Form";
+import  { Container, Row, Col } from "../components/Grid";
+import { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
 import ApiRecipe from "../components/ApiRecipe";
 
-const Home = () => {
-  const { user } = useAuth0();
-  const [ingredients, setIngredients] = useState([]);
-  const [inputValue, setValue] = useState("");
-  const [recipes, setRecipes] = useState([]);
-  const [pantry, setPantry] = useState([]);
+export default function Home() {
 
-  const handleInputChange = e => {
-    const { value } = e.target;
-    setValue(value);
-  }
+    const { user } = useAuth0();
 
-  const handleClick = () => {
-    setIngredients(oldArray => [...oldArray, inputValue]);
-    setValue("");
-  }
+    const [currentUser, setUser] = useState({});
 
-  useEffect(() => {
-    fetchPantry(user.email);
-    // renderPantry();
-  }, []);
+    const [pantry, setPantry] = useState([]);
+
+    const [inputValue, setValue] = useState("");
+
+    const [ingredients, setIngredients] = useState([]);
+
+    const [recipes, setRecipes] = useState([]);
+
+    useEffect(() => {
+        setUser(user);
+        fetchPantry(user.email)
+        renderPantry();
+    });
+
+    const handleInputChange = e => {
+        const {value} = e.target;
+        setValue(value);
+    }
+
+    const addIngredient = () => {
+        let data = {
+            ingredient: inputValue,
+            user: user.email
+          }
+          axios.post("/api/pantryRoutes/pantry", data).then(res=> {
+            console.log("INGREDIENT ADDED");
+        });
+        setIngredients(oldArray => [...oldArray, inputValue]);
+        fetchPantry(user.email);
+        renderPantry()
+        setValue("");
+    };
+
+    const resetPantry = (userEmail) => {
+      axios.delete("api/pantryRoutes/pantry/" + userEmail).then(res => {
+        console.log("pantry-reset")
+      })
+        // API.deletePantry(userEmail).then(res => {
+        //   console.log("pantry reset");
+        //     fetchPantry(user.email)
+        // })
+    }
+
+    const deleteIngredient = (ingId => {
+       API.deleteIngredient(ingId).then(res => {
+           console.log("INGREDIENT DELETED");
+           fetchPantry(user.email);
+       });
+    });
 
   const fetchPantry = (userEmail) => {
     API.getPantry(userEmail).then(res => {
@@ -42,27 +76,33 @@ const Home = () => {
     }).catch(err => console.log(err));
   };
 
-  // const renderPantry = () => {
-  //   let pantryIngredients = [];
-  //   if (pantry.length > 0) {
-  //     pantryIngredients.push(
-  //       pantry.map(ingredient => {
-  //         return (
-  //           <Ingredient
-  //             key={ingredient._id}
-  //             ingredient={ingredient.ingredient}
-  //           />
-  //         );
-  //       })
-  //     )
-  //   } else {
-  //     pantryIngredients.push(<div key="none">Fill Your Pantry!</div>);
-  //   }
-  //   return pantryIngredients;
-  // };
+  const renderPantry = () => {
+    let pantryIngredients = [];
+    if (pantry.length > 0) {
+      pantryIngredients.push(
+        pantry.map(ingredient => {
+          return (
+                <Ingredient
+                    key={ingredient._id}
+                    id={ingredient._id}
+                    ingredient={ingredient.ingredient}
+                    user={ingredient.user}
+                    button="delete"
+                    deleteIngredient={deleteIngredient}
+                />
+          );
+        })
+      )
+    } else {
+      pantryIngredients.push(<div key="none">Fill Your Pantry!</div>);
+    }
+    return pantryIngredients;
+  };
 
-  const kamiApi = (ingredients) => {
-    let ingredientString = ingredients.join("&q=");
+  const edamamApi = (ingredients) => {
+    let AppKey = "c31de725535780190b9ff532d8eb8706";
+    let appId = "d0ac8702";
+    let ingredientString = ingredients.join(" ");
     let queryUrl =
     "http://recipes.kami.io/api/ingredient?q=" + ingredientString;
 
@@ -77,21 +117,28 @@ const Home = () => {
       .catch(function (error) {
         console.log(error);
       });
+  }
 
-  };
+  const saveRecipe = (data => {
+    console.log(data);
+    axios.post("/api/recipeRoutes/recipe", data).then(res=> {
+      console.log("RECIPE ADDED");
+    });
 
+  }) 
+  
+  
   return (
+    <>
     <div>
-      <h1>Hello, {user.email}.</h1>
+      <h1>Hello, {user.nickname}.</h1>
       <LogoutButton />
-      <Jumbotron>
-        <Container>
-          <h1>What's In My Pantry</h1>
+
+    <Jumbotron>
+        <h1>What's In My Pantry</h1>
           <a href="#container-3"><strong>LETS GO</strong></a>
           <a href="/favorites"><strong>MY FAVORITES</strong></a>
-        </Container>
-      </Jumbotron>
-
+    </Jumbotron>
       <Container>
         <Row>
           <h2>How it Works</h2>
@@ -115,19 +162,18 @@ const Home = () => {
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
             <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood"></Input>
-            <p>{inputValue}</p>
-            <FormBtn onClick={handleClick}>
+            
+            <FormBtn onClick={addIngredient}>
               Save to Pantry
             </FormBtn>
-            <p>{ingredients}</p>
 
             <br></br>
-            <button className="btn btn-danger">Reset</button>
+            <button  onClick={() => resetPantry(user.email)} className="btn btn-danger">Reset</button>
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
+              {renderPantry()}
             <div className="generateButton">
-              {/* <p>{renderPantry()}</p> */}
-              <FormBtn id="generate" onClick={() => kamiApi(ingredients)}>
+              <FormBtn id="generate" onClick={() => edamamApi(ingredients)}>
                 Generate Results
             </FormBtn>
             </div>
@@ -138,10 +184,22 @@ const Home = () => {
       <Container>
         {/* <Row></Row>
       <Col size="sm-12" id="generatedRecipes">
-        Recipes Go Here
-        
-      </Col> */}
-      {/* {recipes.map(recipe => {
+      Recipes Go Here
+      
+    </Col> */}
+      {recipes.map(recipe => {
+
+        const handleSave = () => {
+          let data = {
+            title: recipe.recipe.label,
+            image: recipe.recipe.image,
+            link: recipe.recipe.url,
+            userEmail: user.email
+          }
+          saveRecipe(data)
+          
+        }
+
         return (
           <>
             <ApiRecipe
@@ -149,6 +207,7 @@ const Home = () => {
               title={recipe.recipe.label}
               image={recipe.recipe.image}
               link={recipe.recipe.url}
+              handleSave={handleSave}
             />
           </>
         );
@@ -156,11 +215,7 @@ const Home = () => {
         
       </Container>
 
-
-
-
-    <LogoutButton />
     </div>
+    </>
   );
 };
-export default Home;
