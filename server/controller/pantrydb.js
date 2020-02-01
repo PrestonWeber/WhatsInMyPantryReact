@@ -16,14 +16,16 @@ module.exports = {
     remove: function(req, res) {
         console.log(req.params.ingId);
         db.Pantry
-          .deleteOne({ _id: req.params.ingId })
-          // .then(dbModel => dbModel.deleteOne())
+          .findOne({ _id: req.params.ingId })
+          .then(dbModel => dbModel.remove())
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err));
     },
     removeAll: function(req, res) {
       db.Pantry
-        .deleteMany()
+        .find({ user: req.params.useremail })
         .then(dbModel => dbModel.removeAll())
+        .catch(err => res.status(422).json(err));
+
     }
 }

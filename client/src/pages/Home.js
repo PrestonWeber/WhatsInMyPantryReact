@@ -35,28 +35,30 @@ export default function Home() {
     const addIngredient = () => {
         let data = {
             ingredient: inputValue,
-            user: currentUser.email
+            user: user.email
           }
           axios.post("/api/pantryRoutes/pantry", data).then(res=> {
             console.log("INGREDIENT ADDED");
             fetchPantry(user.email)
             renderPantry();
+            setValue("");
         });
-
     };
 
-    const resetPantry = (userId) => { 
-        API.deletePantry(userId).then(res => {
-            fetchPantry(currentUser.email)
-            console.log(res)
-            console.log("pantry reset");
-        }).catch(err => console.log(err));
+    const resetPantry = (userEmail) => {
+      axios.delete("api/pantryRoutes/pantry/" + userEmail).then(res => {
+        console.log("pantry-reset")
+      })
+        // API.deletePantry(userEmail).then(res => {
+        //   console.log("pantry reset");
+        //     fetchPantry(user.email)
+        // })
     }
 
     const deleteIngredient = (ingId => {
        API.deleteIngredient(ingId).then(res => {
            console.log("INGREDIENT DELETED");
-           fetchPantry(currentUser.email);
+           fetchPantry(user.email);
        });
     });
 
@@ -120,10 +122,19 @@ export default function Home() {
       .catch(function (error) {
         console.log(error);
       });
-}
+  }
 
+  const saveRecipe = (data => {
+    console.log(data);
+    axios.post("/api/recipeRoutes/recipe", data).then(res=> {
+      console.log("RECIPE ADDED");
+    });
+
+  }) 
+  
+  
   return (
-      <>
+    <>
     <div>
       <h1>Hello, {user.nickname}.</h1>
       <LogoutButton />
@@ -162,7 +173,7 @@ export default function Home() {
             </FormBtn>
 
             <br></br>
-            <button className="btn btn-danger">Reset</button>
+            <button  onClick={() => resetPantry(user.email)} className="btn btn-danger">Reset</button>
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
               {renderPantry()}
@@ -178,10 +189,22 @@ export default function Home() {
       <Container>
         {/* <Row></Row>
       <Col size="sm-12" id="generatedRecipes">
-        Recipes Go Here
-        
-      </Col> */}
+      Recipes Go Here
+      
+    </Col> */}
       {recipes.map(recipe => {
+
+        const handleSave = () => {
+          let data = {
+            title: recipe.recipe.label,
+            image: recipe.recipe.image,
+            link: recipe.recipe.url,
+            userEmail: user.email
+          }
+          saveRecipe(data)
+          
+        }
+
         return (
           <>
             <ApiRecipe
@@ -189,6 +212,7 @@ export default function Home() {
               title={recipe.recipe.label}
               image={recipe.recipe.image}
               link={recipe.recipe.url}
+              handleSave={handleSave}
             />
           </>
         );
@@ -196,10 +220,6 @@ export default function Home() {
         
       </Container>
 
-
-
-
-    <LogoutButton />
     </div>
     </>
   );
