@@ -22,10 +22,19 @@ module.exports = {
           .catch(err => res.status(422).json(err));
     },
     removeAll: function(req, res) {
+      res.send("Success");
       db.Pantry
-        .find({ user: req.params.useremail })
-        .then(dbModel => dbModel.removeAll())
-        .catch(err => res.status(422).json(err));
+        // .find({ user: req.params.useremail })
+        // .then(dbModel => dbModel.removeAll())
+        // .deleteMany({ user: req.params.useremail })
+        // .catch(err => res.status(422).json(err));
+        .deleteMany({ user: req.params.useremail }, function(err, result) {
+          if (err) {
+            res.send(err);
+          } else {
+            res.send(result);
+          }
+        });
 
     }
 }

@@ -46,7 +46,7 @@ export default function Home() {
     };
 
     const resetPantry = (userEmail) => {
-      axios.delete("api/pantryRoutes/pantry/" + userEmail).then(res => {
+      axios.delete("api/pantryRoutes/pantry/user/" + userEmail).then(res => {
         console.log("pantry-reset")
       })
         // API.deletePantry(userEmail).then(res => {
