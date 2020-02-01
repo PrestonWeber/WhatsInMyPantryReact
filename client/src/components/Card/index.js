@@ -32,15 +32,15 @@ export function CardTitle(props) {
 
 export function CardLink(props) {
     return (
-        <a className="btn btn-primary" {...props} >
+        <button className="button" {...props} >
             {props.children}
-        </a>
+        </button>
     );
 }
 
 export function DeleteBtn(props) {
     return (
-        <button className="delete btn btn-danger" {...props}>
+        <button className="button" {...props}>
             {props.children}
         </button>
     )
