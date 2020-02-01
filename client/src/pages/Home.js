@@ -19,12 +19,12 @@ export default function Home() {
 
     const [inputValue, setValue] = useState("");
 
-    const [ingredients, setIngredients] = useState([]);
+    // const [ingredients, setIngredients] = useState([]);
 
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
-        setUser(user);
+        // setUser(user);
         fetchPantry(user.email)
         renderPantry();
     });
@@ -41,11 +41,11 @@ export default function Home() {
           }
           axios.post("/api/pantryRoutes/pantry", data).then(res=> {
             console.log("INGREDIENT ADDED");
+            
+            fetchPantry(user.email);
+            renderPantry()
+            setValue("");
         });
-        setIngredients(oldArray => [...oldArray, inputValue]);
-        fetchPantry(user.email);
-        renderPantry()
-        setValue("");
     };
 
     const resetPantry = (userEmail) => {
@@ -176,7 +176,7 @@ export default function Home() {
           <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
               {renderPantry()}
             <div className="generateButton">
-              <FormBtn id="generate" onClick={() => edamamApi(ingredients)}>
+              <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
                 Generate Results
             </FormBtn>
             </div>
