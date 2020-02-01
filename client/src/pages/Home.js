@@ -138,18 +138,6 @@ export default function Home() {
   return (
     
     <div>
-
-      {/* <Input type="text" value={inputValue} onChange={handleInputChange} placeholder="add an item">
-      </Input>
-      <p>{inputValue}</p>
-      <FormBtn onClick={handleClick}>
-        Save to Pantry
-            </FormBtn>
-      <FormBtn onClick={() => edamamApi(ingredients)}>
-        Generate Results
-            </FormBtn>
-      <p>{ingredients}</p>
-      <p>{JSON.stringify(recipes)}</p> */}
       <Container>
       <Row>
           <h5>Hello, {user.email}!</h5> <LogoutButton />
@@ -172,16 +160,6 @@ export default function Home() {
         </Container>
       </Jumbotron>
 
-=======
-      <h1>Hello, {user.nickname}.</h1>
-      <LogoutButton />
-
-    <Jumbotron>
-        <h1>What's In My Pantry</h1>
-          <a href="#container-3"><strong>LETS GO</strong></a>
-          <a href="/favorites"><strong>MY FAVORITES</strong></a>
-    </Jumbotron>
-    
       <Container>
         <Row>
           <h2>How it Works</h2>
@@ -264,6 +242,5 @@ export default function Home() {
       </Container>
 
     </div>
-    </>
   );
 };
