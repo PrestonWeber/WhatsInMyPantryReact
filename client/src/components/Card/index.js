@@ -32,9 +32,9 @@ export function CardTitle(props) {
 
 export function CardLink(props) {
     return (
-        <button className="button" {...props} >
+        <a className="btn btn-large btn-primary" target="_blank" {...props} >
             {props.children}
-        </button>
+        </a>
     );
 }
 
