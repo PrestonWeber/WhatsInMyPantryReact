@@ -13,13 +13,9 @@ export default function Home() {
 
     const { user } = useAuth0();
 
-    const [currentUser, setUser] = useState({});
-
     const [pantry, setPantry] = useState([]);
 
     const [inputValue, setValue] = useState("");
-
-    // const [ingredients, setIngredients] = useState([]);
 
     const [recipes, setRecipes] = useState([]);
 
@@ -41,7 +37,7 @@ export default function Home() {
           }
           axios.post("/api/pantryRoutes/pantry", data).then(res=> {
             console.log("INGREDIENT ADDED");
-            
+
             fetchPantry(user.email);
             renderPantry()
             setValue("");
