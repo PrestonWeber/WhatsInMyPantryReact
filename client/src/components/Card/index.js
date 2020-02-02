@@ -32,7 +32,7 @@ export function CardTitle(props) {
 
 export function CardLink(props) {
     return (
-        <a className="btn btn-primary" {...props} >
+        <a className="btn btn-large btn-primary" target="_blank" {...props} >
             {props.children}
         </a>
     );
@@ -40,7 +40,7 @@ export function CardLink(props) {
 
 export function DeleteBtn(props) {
     return (
-        <button className="delete btn btn-danger" {...props}>
+        <button className="button" {...props}>
             {props.children}
         </button>
     )
