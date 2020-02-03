@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardImage, CardBody, CardTitle, CardLink } from "../Card";
+import { Card, CardImage, CardBody, CardTitle, Instructions, Ingredients } from "../Card";
 import { SaveButton } from "../Button";
 
 export default function ApiRecipe(props) {
@@ -12,9 +12,12 @@ export default function ApiRecipe(props) {
                 <CardTitle>
                     {props.title}
                 </CardTitle>
-                <CardLink href={props.link}>
-                    Link
-                </CardLink>
+                <Ingredients>
+                    {props.ingredients}
+                </Ingredients>
+                <Instructions>
+                    {props.instructions}
+                </Instructions>
                 <SaveButton value={props.recipeData} onClick={ () => props.handleSave()}>
                     Save Recipe
                 </SaveButton>
