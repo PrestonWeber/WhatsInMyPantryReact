@@ -3,22 +3,22 @@
 @import url('https://fonts.googleapis.com/css?family=Mansalva+Roboto');
 
 body {
-  background-color: #353535; 
+  background-color: cornsilk; 
 }
 .row {
   padding: 10px; 
 }
 h1 {
   font-family: 'Mansalva', cursive;
-  color: #F7C331; 
+  color:black; 
   font-size: 58px; 
 }
 h2, h3, h4, h5, p {
-  color: white; 
+  color: #383838; 
   font-family: 'Roboto', sans-serif;
 }
 a {
-  color: white; 
+  color: white;  
   text-decoration: none;
 }
 a:hover {
@@ -83,40 +83,56 @@ a:hover {
 /* -------------------------------------------------- */
 
 
-#header-row {
-  background-color: white; 
-}
-
 .jumbotron {
-  background-color:#4ABDAC; 
+  background-color: #7dd0b6;  
   height: 300; 
   clear: "both"; 
   text-align: "center"
 }
 
+.howItWorks {
+  text-align: center; 
+  display: inline-block; 
+}
+
+#how-works-header {
+  text-align: center; 
+}
+
+
+
+
+.column-1 {
+  padding-top: 50px; 
+}
+
+
+.column-2 {
+  background-image: url(./assets/lemons.jpg);
+  font-weight: bold; 
+}
+
+#pantry-div {
+margin-top: 30px; 
+}
+
 
 
 /* Icons  */
+
 i /*Size of each icon */{ 
-  font-size: 50px; 
-  text-align: center; 
-  display: inline-block;
+  font-size: 60px; 
 }
-.iconText {
-  text-align: center; 
-}
+
 #utensils {
+  color: darkgray; 
   text-align: center; 
+}
+#cart {
   color: darkgray; 
 }
-#carrot {
-  color: #F7882F; 
-}
-#fish {
-  color: RoyalBlue; 
-}
-#fish-col{
-  text-align: center;
+#clipboard {
+  color: darkgray; 
 }
 
 /* -------------------------------------------------- */
