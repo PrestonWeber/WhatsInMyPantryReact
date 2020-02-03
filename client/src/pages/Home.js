@@ -7,9 +7,13 @@ import { Container, Row, Col } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
+import Header from "../components/Header";
 import ApiRecipe from "../components/ApiRecipe";
 
+
 export default function Home() {
+  const { user } = useAuth0();
+
   const { user } = useAuth0();
 
   const [currentUser, setUser] = useState({});
@@ -18,63 +22,54 @@ export default function Home() {
 
   const [inputValue, setValue] = useState("");
 
-  const [ingredients, setIngredients] = useState([]);
-
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     setUser(user);
-    fetchPantry(user.email);
+    fetchPantry(user.email)
     renderPantry();
   }, []);
 
   const handleInputChange = e => {
     const { value } = e.target;
     setValue(value);
-  };
+  }
 
   const addIngredient = () => {
     let data = {
       ingredient: inputValue,
       user: user.email
-    };
+    }
     axios.post("/api/pantryRoutes/pantry", data).then(res => {
       console.log("INGREDIENT ADDED");
+      fetchPantry(user.email)
+      renderPantry();
+      setValue("");
     });
-    setIngredients(oldArray => [...oldArray, inputValue]);
-    fetchPantry(user.email);
-    renderPantry();
-    setValue("");
   };
 
-  const resetPantry = userEmail => {
-    axios.delete("api/pantryRoutes/pantry/" + userEmail).then(res => {
-      console.log("pantry-reset");
-    });
+  const resetPantry = (userEmail) => {
+    axios.delete("api/pantryRoutes/pantry/user/" + userEmail).then(res => {
+      console.log("pantry-reset")
+    })
     // API.deletePantry(userEmail).then(res => {
     //   console.log("pantry reset");
     //     fetchPantry(user.email)
     // })
-  };
+  }
 
-  const deleteIngredient = ingId => {
+  const deleteIngredient = (ingId => {
     API.deleteIngredient(ingId).then(res => {
       console.log("INGREDIENT DELETED");
       fetchPantry(user.email);
     });
-  };
+  });
 
-  const fetchPantry = userEmail => {
-    API.getPantry(userEmail)
-      .then(res => {
-        // for(let i = 0; i < res.data.length; i++) {
-        //   setPantry(oldArray => [...oldArray, res.data[i].ingredient]);
-        // }
-        // console.log(res.data);
-        setPantry(res.data);
-        // console.log(pantry);
-      })
-      .catch(err => console.log(err));
+  const fetchPantry = (userEmail) => {
+    API.getPantry(userEmail).then(res => {
+      setPantry(res.data);
+      console.log(pantry);
+    }).catch(err => console.log(err));
   };
 
   const renderPantry = () => {
@@ -100,18 +95,34 @@ export default function Home() {
     return pantryIngredients;
   };
 
-  const edamamApi = ingredients => {
-    let ingredientString = ingredients.join("&q=");
+  const edamamApi = (pantry) => {
+
+    let ingredients = [];
+
+    for (let i = 0; i < pantry.length; i++) {
+      ingredients.push(pantry[i].ingredient);
+    }
+
+    let AppKey = "c31de725535780190b9ff532d8eb8706";
+    let appId = "d0ac8702";
+    let ingredientString = ingredients.join(" ");
     let queryUrl =
-      "http://recipes.kami.io/api/ingredient?q=" + ingredientString;
+      "https://api.edamam.com/search?q=" +
+      ingredientString +
+      "&app_id=" +
+      appId +
+      "&app_key=" +
+      AppKey;
 
     console.log(queryUrl);
 
-    axios
-      .get(queryUrl)
-      .then(function(response) {
-        console.log(response.data);
-        setRecipes(response.data);
+
+    axios.get(queryUrl)
+      .then(function (response) {
+
+        console.log(response.data.hits);
+        setRecipes(response.data.hits);
+
       })
       .catch(function(error) {
         console.log(error);
@@ -125,115 +136,147 @@ export default function Home() {
     });
   };
 
+  
+
+
   return (
-    <>
-      <div>
-        <h1>Hello, {user.nickname}.</h1>
-        <LogoutButton />
 
-        <Jumbotron>
-          <h1>What's In My Pantry</h1>
-          <a href="#container-3">
-            <strong>LETS GO</strong>
-          </a>
-          <a href="/favorites">
-            <strong>MY FAVORITES</strong>
-          </a>
-        </Jumbotron>
+    <div>
+      <Container>
+        <Row>
+          <h5>Hello, {user.email}!</h5> <LogoutButton />
+        </Row>
+      </Container>
+
+      <Jumbotron>
         <Container>
           <Row>
-            <h2>How it Works</h2>
+            <Col size="md-12">
+              <h1>What's in my pantry?</h1>
+            </Col>
           </Row>
           <Row>
-            <Col size="md-4">
-              <i className="fa fa-fish"></i>
-              <p className="icons">
-                Log the contents of your kitchen in our handy-dandy form below.
-              </p>
-            </Col>
-            <Col size="md-4">
-              <i className="fas fa-utensils"></i>
-              <p className="icons">
-                Use what you already have to make a delicious, easy recipe...
-              </p>
-            </Col>
-            <Col size="md-4">
-              <i className="fas fa-carrot"></i>
-              <p className="icons">
-                ...or see what else you need in order to make it!
-              </p>
+            <Col size="md-12">
+              <button className="button"><a href="#container-3">LETS GO</a></button>
+              <button className="button-2"><a href="/favorites">MY FAVORITES</a></button>
             </Col>
           </Row>
         </Container>
-        <Container>
-          <Row>
-            <Col size="lg-6 sm-12" className="column-1">
-              <Input
-                type="text"
-                name="food"
-                value={inputValue}
-                onChange={handleInputChange}
-                placeholder="Add up to 10 items..."
-                id="myFood"
-              ></Input>
+      </Jumbotron>
 
-              <FormBtn onClick={addIngredient}>Save to Pantry</FormBtn>
+      <Container>
+        <Row>
+          <h2>How it Works</h2>
+        </Row>
+        <Row>
+          <Col size="md-4">
+            <i className="fa fa-fish" id="fish"></i>
+            <p className="iconText">Log the contents of your kitchen in our handy-dandy form below.</p>
+          </Col>
+          <Col size="md-4">
+            <i className="fas fa-utensils" id="utensils"></i>
+            <p className="iconText">Use what you already have to make a delicious, easy recipe...</p>
+          </Col>
+          <Col size="md-4">
+            <i className="fas fa-carrot" id="carrot"></i>
+            <p className="iconText">...or see what else you need in order to make it!</p>
+          </Col>
+        </Row>
+      </Container>
 
-              <br></br>
-              <button
-                onClick={() => resetPantry(user.email)}
-                className="btn btn-danger"
-              >
-                Reset
-              </button>
-            </Col>
-            <Col
-              size="lg-6 sm-12"
-              className="column-2 ingredients"
-              id="pantry-div"
-            >
-              {renderPantry()}
-              <div className="generateButton">
-                <FormBtn id="generate" onClick={() => edamamApi(ingredients)}>
-                  Generate Results
-                </FormBtn>
-              </div>
-            </Col>
-          </Row>
-        </Container>
+      <Container>
+        <Row>
+          <Col size="lg-6 sm-12" className="column-1">
+            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood"></Input>
 
-        <Container>
-          {/* <Row></Row>
-      <Col size="sm-12" id="generatedRecipes">
-      Recipes Go Here
-      
-    </Col> */}
-          {recipes.map(recipe => {
-            const handleSave = () => {
-              let data = {
-                title: recipe.title,
-                instructions: recipe.instructions,
-                // ingredients: {JSON.stringify(recipe.ingredients)},
-                userEmail: user.email
-              };
-              saveRecipe(data);
-              console.log(recipe.ingredients.ingredient);
-            };
+            <FormBtn onClick={addIngredient}>
+              Save to Pantry
+            </FormBtn>
 
-            return (
-              <>
-                <ApiRecipe
-                  // key={recipe.uri}
-                  title={recipe.title}
-                  instructions={recipe.instructions}
-                  ingredients={JSON.stringify(recipe.ingredients)}
-                  handleSave={handleSave}
-                />
-              </>
-            );
-          })}
-        </Container>
-      </div>
-    </>
+            <br></br>
+            <button onClick={() => resetPantry(user.email)} className="btn btn-danger">Reset</button>
+          </Col>
+          <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
+            {renderPantry()}
+            <div className="generateButton">
+              <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
+                Generate Results
+            </FormBtn>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+
+      <Container>
+        {recipes.map(recipe => {
+
+          let recipeIngredients = [];
+          let matchedIngredients = [];
+          let unmatchedIngredients = [];
+
+          // console.log(response);
+
+          // for (let i = 0; i < response.data.hits.length; i++) {
+          //   for (let j = 0; j < response.data.hits[i].recipe.ingredients.length; j++) {
+          //     let recipeIngredient = response.data.hits[i].recipe.ingredients[j].text.toLowerCase();
+          //     recipeIngredients.push(recipeIngredient);
+          //   }
+          // }
+
+          for (let i = 0; i < recipe.recipe.ingredients.length; i++) {
+            let recipeIngredient = recipe.recipe.ingredients[i].text.toLowerCase();
+            recipeIngredients.push(recipeIngredient);
+          }
+
+          for (let i = 0; i < recipeIngredients.length; i++) {
+            let isInArray = false;
+
+            for (let j = 0; j < pantry.length; j++) {
+              let lowercasePantry = pantry[j].ingredient.toLowerCase();
+              if (recipeIngredients[i].includes(lowercasePantry)) {
+                isInArray = true;
+              }
+            }
+
+            if (!isInArray) {
+              unmatchedIngredients.push(recipeIngredients[i]);
+            } else if (isInArray) {
+              matchedIngredients.push(recipeIngredients[i]);
+            }
+
+          }
+
+          console.log(unmatchedIngredients);
+          console.log(matchedIngredients);
+
+          const handleSave = () => {
+            let data = {
+              title: recipe.recipe.label,
+              image: recipe.recipe.image,
+              link: recipe.recipe.url,
+              userEmail: user.email
+            }
+            saveRecipe(data)
+
+          }
+
+          return (
+            <>
+              <ApiRecipe
+                // key={recipe.uri}
+                title={recipe.recipe.label}
+                image={recipe.recipe.image}
+                link={recipe.recipe.url}
+                handleSave={handleSave}
+                unmatchedIngredients={unmatchedIngredients}
+                matchedIngredients={matchedIngredients}
+              />
+            </>
+          );
+        })}
+
+      </Container>
+
+    </div>
   );
 }

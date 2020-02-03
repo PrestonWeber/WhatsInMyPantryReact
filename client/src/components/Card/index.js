@@ -21,33 +21,17 @@ export function CardTitle(props) {
 }
 
 export function CardLink(props) {
-  return (
-    <a className="btn btn-primary" {...props}>
-      {props.children}
-    </a>
-  );
-}
-
-export function Instructions(props) {
-  return (
-    <h6 className="card-body" {...props}>
-      {props.children}
-    </h6>
-  );
-}
-
-export function Ingredients(props) {
-  return (
-    <h6 className="card-body" {...props}>
-      {props.children}
-    </h6>
-  );
+    return (
+        <a className="btn btn-large btn-primary" target="_blank" {...props} >
+            {props.children}
+        </a>
+    );
 }
 
 export function DeleteBtn(props) {
-  return (
-    <button className="delete btn btn-danger" {...props}>
-      {props.children}
-    </button>
-  );
+    return (
+        <button className="button" {...props}>
+            {props.children}
+        </button>
+    )
 }
