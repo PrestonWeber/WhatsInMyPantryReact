@@ -148,7 +148,7 @@ export default function Home() {
       <p>{ingredients}</p>
       <p>{JSON.stringify(recipes)}</p> */}
       <Container>
-      <Row>
+      <Row id="top-row">
           <h5>Hello, {user.nickname}!</h5> <LogoutButton />
       </Row>
       </Container>
@@ -175,9 +175,8 @@ export default function Home() {
         </div>
         <Row className="howItWorks">
           <Col size="lg-12 sm-12" className="howItWorks">
-            <br></br>
             <i className="fas fa-clipboard-list" id="clipboard"></i>
-            <p className="iconText">Log the contents of your kitchen in our handy-dandy form below.</p>
+            <p className="iconText">Log the contents of your kitchen in the handy form below.</p>
             
             <br></br>
             <i className="fas fa-utensils" id="utensils"></i>
@@ -194,7 +193,7 @@ export default function Home() {
       <Container>
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
-            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood"></Input>
+            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood" maxlength = "30" ></Input>
             
             <FormBtn onClick={addIngredient}>
               ADD TO PANTRY
@@ -204,15 +203,15 @@ export default function Home() {
             <button onClick={() => resetPantry(user.email)} className="button-2">RESET</button>
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients">
+          <div className="generateButton">
+              <FormBtn id="generate" onClick={() => edamamApi(ingredients)}>
+                SEE RESULTS
+              </FormBtn>
+            </div>
             <div id="pantry-div">
             {renderPantry()}
             </div>
               
-            <div className="generateButton">
-              <FormBtn id="generate" onClick={() => edamamApi(ingredients)}>
-                SEE RESULTS
-            </FormBtn>
-            </div>
           </Col>
         </Row>
       </Container>

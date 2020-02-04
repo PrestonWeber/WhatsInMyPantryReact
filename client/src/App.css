@@ -72,7 +72,7 @@ a:hover {
   background-color:#FC4A1A;
   border: none;
   color: white;
-  padding: 8px 12px;
+  padding: 6px 10px;
   text-align: center;
   font-size: 10px; 
   font-weight: bold; 
@@ -82,10 +82,10 @@ a:hover {
 }
 /* -------------------------------------------------- */
 
-
+/* Unique Elements */
 .jumbotron {
   background-color: #7dd0b6;  
-  height: 300; 
+  height: 250;  
   clear: "both"; 
   text-align: "center"
 }
@@ -97,25 +97,44 @@ a:hover {
 
 #how-works-header {
   text-align: center; 
+  padding-top: 20px; 
 }
-
-
 
 
 .column-1 {
   padding-top: 50px; 
 }
 
-
 .column-2 {
   background-image: url(./assets/lemons.jpg);
   font-weight: bold; 
+  display: block; 
+  height: 600px; 
+  overflow: scroll; 
 }
 
 #pantry-div {
-margin-top: 30px; 
+margin-top: 30px;
+text-align: center; 
+font-family: 'Mansalva', cursive;
+font-size: 24px; 
 }
 
+#myFood {
+  background-color: #7dd0b6;
+  color: white;
+  outline: none; 
+}
+
+#myFood:focus {
+  border: 3px solid white;
+}
+
+
+#generate{
+}
+
+/* -------------------------------------------------- */
 
 
 /* Icons  */
@@ -123,7 +142,10 @@ margin-top: 30px;
 i /*Size of each icon */{ 
   font-size: 60px; 
 }
-
+.iconText {
+  font-family: 'Mansalva', cursive;
+  font-size: 20px; 
+}
 #utensils {
   color: darkgray; 
   text-align: center; 
