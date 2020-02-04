@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import Recipe from "../components/Recipe";
 import { useAuth0 } from "../react-auth0-spa";
+import "./favorite.css";
 
 export default function FavRecipes() {
     const [recipes, setRecipes] = useState([]);
@@ -35,7 +36,6 @@ export default function FavRecipes() {
                         button="delete"
                         deleteRecipe={deleteRecipe}
                         />
-                        <code>{JSON.stringify(user, null, 2)}</code>
                         </>
                     );
                 })

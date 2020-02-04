@@ -135,7 +135,7 @@ export default function Home() {
     <div>
       <Container>
         <Row>
-          <h5>Hello, {user.email}!</h5> <LogoutButton />
+          <h5>Hello, {user.nickname}!</h5> <LogoutButton />
         </Row>
       </Container>
 

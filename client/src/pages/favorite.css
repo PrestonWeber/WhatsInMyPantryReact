@@ -1,0 +1,18 @@
+.card {
+    text-align: center;
+    margin-top: 20px;
+    background-color: yellow;
+    border-radius: 20px;
+  }
+  .card-img-top {
+    border-radius: 20px;
+  }
+  .card-title {
+    color: black;
+    font-size: 25px;
+    font-weight: bolder;
+  }
+  
+  .button, .btn {
+    padding: 15px;
+  }

@@ -17,7 +17,6 @@ export default {
         return axios.delete("api/pantryRoutes/pantry/" + userEmail);
     },
     deleteIngredient: function(ingId) {
-        console.log(ingId);
         return axios.delete("api/pantryRoutes/pantry/" + ingId);
     },
     createIngredient: function(ingredient) {
