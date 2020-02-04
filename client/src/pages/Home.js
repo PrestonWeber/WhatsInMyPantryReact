@@ -198,7 +198,7 @@ export default function Home() {
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients">
           <div className="generateButton">
-              <FormBtn id="generate" onClick={() => edamamApi(ingredients)}>
+              <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
                 SEE RESULTS
               </FormBtn>
             </div>
