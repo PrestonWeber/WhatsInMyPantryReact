@@ -22,7 +22,6 @@ module.exports = {
           .catch(err => res.status(422).json(err));
     },
     removeAll: function(req, res) {
-      res.send("Success");
       db.Pantry
         // .find({ user: req.params.useremail })
         // .then(dbModel => dbModel.removeAll())
