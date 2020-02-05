@@ -154,6 +154,20 @@ i /*Size of each icon */{
 #clipboard {
   color: darkgray; 
 }
+.button-small {
+  position: absolute;
+  right: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .jumbotron, .container, .row {
+    text-align: center;
+  }
+  .button, .btn {
+    padding: 25px;
+    font-size: larger;
+  }
+}
 
 /* -------------------------------------------------- */
 
