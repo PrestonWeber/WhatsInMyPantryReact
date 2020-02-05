@@ -27,8 +27,6 @@ a:hover {
 }
 /* -------------------------------------------------- */
 
-
-
 /* Buttons */
 .button{
   background-color:#FC4A1A;
@@ -83,11 +81,36 @@ a:hover {
 /* -------------------------------------------------- */
 
 /* Unique Elements */
+.navbar {
+  background-color: #7dd0b6;  
+}
+
+.navbar-nav > li {
+  margin-left: 50px; 
+  font-family: 'Roboto Condensed', sans-serif; 
+}
+
+.navbarLabel {
+  color: black; 
+  font-size: 24px; 
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+#search-bar{
+ background: #F7C331;
+ color: white; 
+}
+
+#search-bar:focus {
+  border: 3px solid white;
+}
+
 .jumbotron {
   background-color: #7dd0b6;  
   height: 250;  
   clear: "both"; 
-  text-align: "center"
+  text-align: "center"; 
+  padding-bottom: 2%; 
 }
 
 .howItWorks {
@@ -129,6 +152,8 @@ font-size: 18px;
 #myFood:focus {
   border: 3px solid white;
 }
+
+
 
 
 

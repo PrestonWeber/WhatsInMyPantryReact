@@ -126,34 +126,52 @@ export default function Home() {
       console.log("RECIPE ADDED");
     });
   };
-
   
-
 
   return (
 
     <div>
       <Container>
-    
-      <Row id="top-row">
-          <h5>Hello, {user.nickname}!</h5> <LogoutButton />
-      </Row>
+          <nav className="navbar navbar-expand-lg">
+            <a className="navbarLabel" href="#">Hello, {user.nickname}!</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
 
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Favorites</a>
+            </li>
+        
+            <li class="nav-item">
+            <a class="nav-link disabled" href="#">Logout</a>
+            </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+            <Input id="search-bar" type="search" placeholder="Search" aria-label="Search" maxlength="30"  />
+            <FormBtn className="button" type="submit">SEARCH</FormBtn>
+          </form>
+        </div>
+        </nav>
       </Container>
 
       <Jumbotron>
         <Container>
           <Row>
-            <Col size="md-12">
+            {/* <Col size="md-12"> */}
               <h1>What's in my pantry?</h1>
-            </Col>
+            
           </Row>
-          <Row>
+          {/*<Row>
             <Col size="md-12">
               <button className="button"><a href="#container-3">LETS GO</a></button>
               <button className="button-2"><a href="/favorites">MY FAVORITES</a></button>
             </Col>
-          </Row>
+          </Row> */}
         </Container>
       </Jumbotron>
     
@@ -181,7 +199,7 @@ export default function Home() {
       <Container>
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
-            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood" maxlength = "30" ></Input>
+            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood" maxlength="30" ></Input>
             
             <FormBtn onClick={addIngredient}>
               ADD TO PANTRY
