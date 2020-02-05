@@ -3,6 +3,8 @@ import API from "../utils/API";
 import Recipe from "../components/Recipe";
 import { useAuth0 } from "../react-auth0-spa";
 import "./favorite.css";
+import {Col, Row, Container} from "../components/Grid";
+import {LogoutButton} from "../components/Button";
 
 export default function FavRecipes() {
     const [recipes, setRecipes] = useState([]);
@@ -56,6 +58,11 @@ export default function FavRecipes() {
 
     return (
         <div>
+            <Container>
+                <Row id="top-row">
+                    <h5>Hello, {user.nickname}!</h5> <LogoutButton />
+                </Row>
+            </Container>
             <div className="container">
                 <div className="row">{renderRecipes()}</div>
             </div>
