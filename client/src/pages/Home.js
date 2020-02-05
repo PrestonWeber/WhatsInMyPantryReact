@@ -197,14 +197,16 @@ export default function Home() {
 
             <br></br>
     
-            <button onClick={() => resetPantry(user.email)} className="button-2">RESET</button>
+            <button onClick={() => resetPantry(user.email)} className="button-2" id="add-btn">RESET</button>
+            <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
+                SEE RESULTS
+            </FormBtn>
+          
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients">
-          <div className="generateButton">
-              <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
-                SEE RESULTS
-              </FormBtn>
-            </div>
+            {/*<div className="generateButton" > */}
+              
+            {/* </div> */}
             <div id="pantry-div">
             {renderPantry()}
             </div>
