@@ -14,16 +14,13 @@ import ApiRecipe from "../components/ApiRecipe";
 export default function Home() {
   const { user } = useAuth0();
 
-  const [currentUser, setUser] = useState({});
-
-  const [pantry, setPantry] = useState([]);
+    const [pantry, setPantry] = useState([]);
 
   const [inputValue, setValue] = useState("");
 
-  const [recipes, setRecipes] = useState([]);
+    const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    setUser(user);
     fetchPantry(user.email)
     renderPantry();
   }, []);
@@ -49,7 +46,10 @@ export default function Home() {
   const resetPantry = (userEmail) => {
     axios.delete("api/pantryRoutes/pantry/user/" + userEmail).then(res => {
       console.log("pantry-reset")
-    })
+      setPantry([]);
+      // fetchPantry(user.email);
+      renderPantry();
+    });
     // API.deletePantry(userEmail).then(res => {
     //   console.log("pantry reset");
     //     fetchPantry(user.email)
@@ -136,7 +136,7 @@ export default function Home() {
     <div>
       <Container>
         <Row>
-          <h5>Hello, {user.email}!</h5> <LogoutButton />
+          <h5>Hello, {user.nickname}!</h5> <LogoutButton />
         </Row>
       </Container>
 
