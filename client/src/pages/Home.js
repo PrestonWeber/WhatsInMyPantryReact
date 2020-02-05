@@ -11,11 +11,11 @@ import ApiRecipe from "../components/ApiRecipe";
 
 
 export default function Home() {
-  const { user } = useAuth0();
+    const { user } = useAuth0();
 
     const [pantry, setPantry] = useState([]);
 
-  const [inputValue, setValue] = useState("");
+    const [inputValue, setValue] = useState("");
 
     const [recipes, setRecipes] = useState([]);
 
@@ -213,26 +213,25 @@ export default function Home() {
           let recipeIngredients = [];
           let matchedIngredients = [];
           let unmatchedIngredients = [];
-
-          // console.log(response);
-
-          // for (let i = 0; i < response.data.hits.length; i++) {
-          //   for (let j = 0; j < response.data.hits[i].recipe.ingredients.length; j++) {
-          //     let recipeIngredient = response.data.hits[i].recipe.ingredients[j].text.toLowerCase();
-          //     recipeIngredients.push(recipeIngredient);
-          //   }
-          // }
+          let pantryIngredients = pantry;
 
           for (let i = 0; i < recipe.ingredients.length; i++) {
             let recipeIngredient = recipe.ingredients[i].ingredient.toLowerCase();
             recipeIngredients.push(recipeIngredient);
           }
 
+          // This is in progress
+          // for (let i = 0; i < pantryIngredients.length; i++) {
+          //   if(pantryIngredients[i].endsWith("s")) {
+
+          //   }
+          // }
+
           for (let i = 0; i < recipeIngredients.length; i++) {
             let isInArray = false;
 
-            for (let j = 0; j < pantry.length; j++) {
-              let lowercasePantry = pantry[j].ingredient.toLowerCase();
+            for (let j = 0; j < pantryIngredients.length; j++) {
+              let lowercasePantry = pantryIngredients[j].ingredient.toLowerCase();
               if (recipeIngredients[i].includes(lowercasePantry)) {
                 isInArray = true;
               }
