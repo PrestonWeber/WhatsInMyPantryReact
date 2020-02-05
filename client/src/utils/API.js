@@ -1,16 +1,25 @@
 import axios from "axios";
 
 export default {
-    saveUser: function(userData) {
-        return axios.post("api/users/signup", userData);
-    },
-    loginUser: function(userData) {
-        return axios.post("api/users/login", userData);
-    },
-    getRecipes: function(favoriteRecipes) {
-        return axios.post("api/recipes", favoriteRecipes);
+    getRecipes: function(userEmail) {
+        return axios.get("api/recipeRoutes/recipes/" + userEmail);
     },
     getUser: function() {
         return axios.get("api/users");
+    },
+    deleteRecipe: function(recipeid) {
+        return axios.delete("api/recipeRoutes/recipes/" + recipeid);
+    },
+    getPantry: function(userId) {
+        return axios.get("api/pantryRoutes/pantry/" + userId);
+    },
+    deletePantry: function(userEmail) {
+        return axios.delete("api/pantryRoutes/pantry/" + userEmail);
+    },
+    deleteIngredient: function(ingId) {
+        return axios.delete("api/pantryRoutes/pantry/" + ingId);
+    },
+    createIngredient: function(ingredient) {
+        return axios.create("api/pantryRoutes/pantry", ingredient);
     }
 }
