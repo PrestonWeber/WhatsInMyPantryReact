@@ -21,7 +21,7 @@ export function CardTitle(props) {
 }
 
 export function CardInstructions(props) {
-  return <h6 {...props} className="card-text">{props.children}</h6>;
+  return <h6 className="card-text">{props.children}</h6>;
 }
 
 export function CardLink(props) {
