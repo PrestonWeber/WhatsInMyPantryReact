@@ -7,7 +7,6 @@ import { Container, Row, Col } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
-import Header from "../components/Header";
 import ApiRecipe from "../components/ApiRecipe";
 
 
@@ -135,9 +134,11 @@ export default function Home() {
 
     <div>
       <Container>
-        <Row>
+    
+      <Row id="top-row">
           <h5>Hello, {user.nickname}!</h5> <LogoutButton />
-        </Row>
+      </Row>
+
       </Container>
 
       <Jumbotron>
@@ -155,46 +156,53 @@ export default function Home() {
           </Row>
         </Container>
       </Jumbotron>
-
-      <Container>
-        <Row>
+    
+      <Container className="howItWorks">
+        <div id="how-works-header">
           <h2>How it Works</h2>
-        </Row>
-        <Row>
-          <Col size="md-4">
-            <i className="fa fa-fish" id="fish"></i>
-            <p className="iconText">Log the contents of your kitchen in our handy-dandy form below.</p>
-          </Col>
-          <Col size="md-4">
+        </div>
+        <Row className="howItWorks">
+          <Col size="lg-12 sm-12" className="howItWorks">
+            <i className="fas fa-clipboard-list" id="clipboard"></i>
+            <p className="iconText">Log the contents of your kitchen in the handy form below.</p>
+            
+            <br></br>
             <i className="fas fa-utensils" id="utensils"></i>
             <p className="iconText">Use what you already have to make a delicious, easy recipe...</p>
-          </Col>
-          <Col size="md-4">
-            <i className="fas fa-carrot" id="carrot"></i>
+            
+            <br></br>
+            <i className="fas fa-shopping-cart" id="cart"></i>
             <p className="iconText">...or see what else you need in order to make it!</p>
           </Col>
         </Row>
+        <br></br>
       </Container>
 
       <Container>
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
-            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood"></Input>
-
+            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood" maxlength = "30" ></Input>
+            
             <FormBtn onClick={addIngredient}>
-              Save to Pantry
+              ADD TO PANTRY
             </FormBtn>
 
             <br></br>
-            <button onClick={() => resetPantry(user.email)} className="btn btn-danger">Reset</button>
-          </Col>
-          <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
-            {renderPantry()}
-            <div className="generateButton">
-              <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
-                Generate Results
+    
+            <button onClick={() => resetPantry(user.email)} className="button-2" id="add-btn">RESET</button>
+            <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
+                SEE RESULTS
             </FormBtn>
+          
+          </Col>
+          <Col size="lg-6 sm-12" className="column-2 ingredients">
+            {/*<div className="generateButton" > */}
+              
+            {/* </div> */}
+            <div id="pantry-div">
+            {renderPantry()}
             </div>
+              
           </Col>
         </Row>
       </Container>
@@ -274,5 +282,6 @@ export default function Home() {
       </Container>
 
     </div>
+
   );
 }
