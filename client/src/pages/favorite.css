@@ -1,7 +1,7 @@
 .card {
     text-align: center;
     margin-top: 20px;
-    background-color: yellow;
+    background-color: #F7C331;
     border-radius: 20px;
   }
   .card-img-top {
@@ -11,8 +11,24 @@
     color: black;
     font-size: 25px;
     font-weight: bolder;
+    font-family: 'Roboto Condensed', sans-serif; 
+  }
+
+  .button, .btn{
+    background-color:#FC4A1A;
+    border: none;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold; 
+    font-family: 'Roboto Condensed', sans-serif;
+    text-decoration: none;
+    margin: 10px; 
   }
   
-  .button, .btn {
-    padding: 15px;
+  .button:hover, .btn:hover {
+    background-color: #7dd0b6; 
+    color: white;
+    text-decoration: none; 
   }
