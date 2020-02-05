@@ -11,7 +11,6 @@ import ApiRecipe from "../components/ApiRecipe";
 
 
 export default function Home() {
-
   const { user } = useAuth0();
 
     const [pantry, setPantry] = useState([]);
@@ -86,7 +85,7 @@ export default function Home() {
             />
           );
         })
-      )
+      );
     } else {
       pantryIngredients.push(<div key="none">Fill Your Pantry!</div>);
     }
@@ -101,16 +100,10 @@ export default function Home() {
       ingredients.push(pantry[i].ingredient);
     }
 
-    let AppKey = "c31de725535780190b9ff532d8eb8706";
-    let appId = "d0ac8702";
-    let ingredientString = ingredients.join(" ");
+    let ingredientString = ingredients.join("&q=");
     let queryUrl =
-      "https://api.edamam.com/search?q=" +
-      ingredientString +
-      "&app_id=" +
-      appId +
-      "&app_key=" +
-      AppKey;
+      "http://recipes.kami.io/api/ingredient?q=" +
+      ingredientString;
 
     console.log(queryUrl);
 
@@ -118,22 +111,23 @@ export default function Home() {
     axios.get(queryUrl)
       .then(function (response) {
 
-        console.log(response.data.hits);
-        setRecipes(response.data.hits);
+        console.log(response.data);
+        setRecipes(response.data);
 
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
-  }
+  };
 
-  const saveRecipe = (data => {
+  const saveRecipe = data => {
     console.log(data);
     axios.post("/api/recipeRoutes/recipe", data).then(res => {
       console.log("RECIPE ADDED");
     });
+  };
 
-  })
+  
 
 
   return (
@@ -249,8 +243,8 @@ export default function Home() {
           //   }
           // }
 
-          for (let i = 0; i < recipe.recipe.ingredients.length; i++) {
-            let recipeIngredient = recipe.recipe.ingredients[i].text.toLowerCase();
+          for (let i = 0; i < recipe.ingredients.length; i++) {
+            let recipeIngredient = recipe.ingredients[i].ingredient.toLowerCase();
             recipeIngredients.push(recipeIngredient);
           }
 
@@ -265,9 +259,13 @@ export default function Home() {
             }
 
             if (!isInArray) {
-              unmatchedIngredients.push(recipeIngredients[i]);
+              if(!unmatchedIngredients.includes(recipeIngredients[i])) {
+                unmatchedIngredients.push(recipeIngredients[i]);
+              }
             } else if (isInArray) {
-              matchedIngredients.push(recipeIngredients[i]);
+              if(!matchedIngredients.includes(recipeIngredients[i])) {
+                matchedIngredients.push(recipeIngredients[i]);
+              }
             }
 
           }
@@ -277,9 +275,9 @@ export default function Home() {
 
           const handleSave = () => {
             let data = {
-              title: recipe.recipe.label,
-              image: recipe.recipe.image,
-              link: recipe.recipe.url,
+              title: recipe.title,
+              image: recipe.image_url,
+              instructions: recipe.instructions,
               userEmail: user.email
             }
             saveRecipe(data)
@@ -290,9 +288,9 @@ export default function Home() {
             <>
               <ApiRecipe
                 // key={recipe.uri}
-                title={recipe.recipe.label}
-                image={recipe.recipe.image}
-                link={recipe.recipe.url}
+                title={recipe.title}
+                image={recipe.image_url}
+                instructions={recipe.instructions}
                 handleSave={handleSave}
                 unmatchedIngredients={unmatchedIngredients}
                 matchedIngredients={matchedIngredients}
@@ -306,4 +304,4 @@ export default function Home() {
     </div>
 
   );
-};
+}

@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, CardImage, DeleteBtn, CardBody, CardTitle, CardLink } from "../Card";
-import { Col, Row, Container } from "../Grid";
+import { Card, CardImage, DeleteBtn, CardBody, CardTitle, CardInstructions } from "../Card";
+import { Col } from "../Grid";
 
 export default function Recipe(props) {
     return (
@@ -13,9 +13,9 @@ export default function Recipe(props) {
                 <CardTitle>
                     {props.title}
                 </CardTitle>
-                <CardLink href={props.link}>
-                    Link
-                </CardLink>
+                <CardInstructions>
+                    {props.instructions}
+                </CardInstructions>
                 <DeleteBtn 
                     value={props.button}
                     onClick={() => props.deleteRecipe(props.id)}>
