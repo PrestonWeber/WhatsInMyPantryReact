@@ -10,7 +10,7 @@ const Login = () => {
         <div>
             <h1>Login Page</h1>
             {!isAuthenticated && (
-                <button onClick={() => loginWithRedirect({redirect_uri: process.env.AUTH0_CALLBACK_URL
+                <button onClick={() => loginWithRedirect({redirect_uri: "https://whats-in-my-pantry.herokuapp.com/home"
             })}>Log in</button>
             )}
 
