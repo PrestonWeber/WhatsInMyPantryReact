@@ -85,8 +85,13 @@ a:hover {
   background-color: #7dd0b6;  
 }
 
+.navbar-nav > li {
+  margin-left: 50px; 
+  font-family: 'Roboto Condensed', sans-serif; 
+}
+
 .navbarLabel {
-  color: white;
+  color: black; 
   font-size: 24px; 
   font-family: 'Roboto Condensed', sans-serif;
 }
@@ -105,7 +110,7 @@ a:hover {
   height: 250;  
   clear: "both"; 
   text-align: "center"; 
-  padding-bottom: 4%; 
+  padding-bottom: 2%; 
 }
 
 .howItWorks {

@@ -126,9 +126,7 @@ export default function Home() {
       console.log("RECIPE ADDED");
     });
   };
-
   
-
 
   return (
 
