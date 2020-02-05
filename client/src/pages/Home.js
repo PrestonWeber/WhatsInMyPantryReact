@@ -14,16 +14,13 @@ export default function Home() {
 
   const { user } = useAuth0();
 
-  const [currentUser, setUser] = useState({});
-
-  const [pantry, setPantry] = useState([]);
+    const [pantry, setPantry] = useState([]);
 
   const [inputValue, setValue] = useState("");
 
-  const [recipes, setRecipes] = useState([]);
+    const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    setUser(user);
     fetchPantry(user.email)
     renderPantry();
   }, []);
