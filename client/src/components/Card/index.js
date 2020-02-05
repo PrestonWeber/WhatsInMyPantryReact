@@ -20,6 +20,10 @@ export function CardTitle(props) {
   return <h5 className="card-title">{props.children}</h5>;
 }
 
+export function CardInstructions(props) {
+  return <h6 className="card-text">{props.children}</h6>;
+}
+
 export function CardLink(props) {
     return (
         <a className="btn btn-large btn-primary" target="_blank" {...props} >
