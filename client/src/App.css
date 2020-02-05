@@ -158,6 +158,27 @@ i /*Size of each icon */{
   position: absolute;
   right: 10px;
 }
+.btn {
+  margin: 5px;
+}
+.vl {
+  position: absolute;
+  left: 50%;
+  border-left: 3px solid black;
+  height: 100%;
+}
+h3 {
+  border-bottom: 3px solid black;
+}
+ul {
+  list-style-type: "-   ";
+  list-style-position: inside;
+  padding: 0;
+}
+li {
+  padding: 10px 0;
+  margin-left: 0;
+}
 
 @media only screen and (max-width: 600px) {
   .jumbotron, .container, .row {
