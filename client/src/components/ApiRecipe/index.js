@@ -13,12 +13,15 @@ export default function ApiRecipe(props) {
                 <CardTitle>
                     {props.title}
                 </CardTitle>
-                <CardInstructions>
-                    {props.instructions}
-                </CardInstructions>
                 <SaveButton value={props.recipeData} onClick={() => props.handleSave()}>
                     Save Recipe
                 </SaveButton>
+                <button className="btn btn-primary" data-toggle="collapse" data-target="#instructions">Instructions</button>
+                <div className="collapse" id="instructions" aria-expanded="false" aria-controls="instructions">
+                <CardInstructions>
+                    {props.instructions}
+                </CardInstructions>
+                </div>
                 <Row>
                     <Col size="md-5">
                         <h3>Ingredients You Have:</h3>
@@ -30,6 +33,11 @@ export default function ApiRecipe(props) {
                             })}
                         </ul>
                     </Col>
+                    <Col size="md-2">
+                        <div className="vl">
+                            <h3></h3>
+                        </div>
+                    </Col>  
                     <Col size="md-5">
                         <h3>Ingredients You Need:</h3>
                         <ul>

@@ -180,15 +180,17 @@ export default function Home() {
           <h2>How it Works</h2>
         </div>
         <Row className="howItWorks">
-          <Col size="lg-12 sm-12" className="howItWorks">
+          <Col size="lg-4 sm-12">
             <i className="fas fa-clipboard-list" id="clipboard"></i>
             <p className="iconText">Log the contents of your kitchen in the handy form below.</p>
-            
+          </Col>
             <br></br>
+          <Col size="lg-4 sm-12">
             <i className="fas fa-utensils" id="utensils"></i>
             <p className="iconText">Use what you already have to make a delicious, easy recipe...</p>
-            
             <br></br>
+          </Col>
+          <Col size="lg-4 sm-12">
             <i className="fas fa-shopping-cart" id="cart"></i>
             <p className="iconText">...or see what else you need in order to make it!</p>
           </Col>
