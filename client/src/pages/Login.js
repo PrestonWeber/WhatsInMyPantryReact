@@ -10,7 +10,7 @@ const Login = () => {
         <div>
             <h1>Login Page</h1>
             {!isAuthenticated && (
-                <button onClick={() => loginWithRedirect({redirect_uri: process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/home'
+                <button onClick={() => loginWithRedirect({redirect_uri: process.env.AUTH0_CALLBACK_URL
             })}>Log in</button>
             )}
 
