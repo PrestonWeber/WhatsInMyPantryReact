@@ -87,7 +87,7 @@ export default function Home() {
         })
       );
     } else {
-      pantryIngredients.push(<div key="none">Fill Your Pantry!</div>);
+      pantryIngredients.push(<div id="fill-pantry" key="none">Fill Your Pantry!</div>);
     }
     return pantryIngredients;
   };
@@ -140,15 +140,15 @@ export default function Home() {
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <li className="nav-item active">
+            <a className = "nav-link" href="http://localhost:3000/home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Favorites</a>
+            <a className="nav-link" href="http://localhost:3000/favorites">Favorites</a>
             </li>
         
-            <li class="nav-item">
-            <a class="nav-link disabled" href="#">Logout</a>
+            <li class="nav-item"> 
+            <LogoutButton />
             </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
