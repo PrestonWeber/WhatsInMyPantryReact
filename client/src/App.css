@@ -27,8 +27,6 @@ a:hover {
 }
 /* -------------------------------------------------- */
 
-
-
 /* Buttons */
 .button{
   background-color:#FC4A1A;
@@ -83,11 +81,36 @@ a:hover {
 /* -------------------------------------------------- */
 
 /* Unique Elements */
+.navbar {
+  background-color: #7dd0b6;  
+}
+
+.navbar-nav > li {
+  margin-left: 50px; 
+  font-family: 'Roboto Condensed', sans-serif; 
+}
+
+.navbarLabel {
+  color: black; 
+  font-size: 24px; 
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+#search-bar{
+ background: #F7C331;
+ color: white; 
+}
+
+#search-bar:focus {
+  border: 3px solid white;
+}
+
 .jumbotron {
   background-color: #7dd0b6;  
   height: 250;  
   clear: "both"; 
-  text-align: "center"
+  text-align: "center"; 
+  padding-bottom: 2%; 
 }
 
 .howItWorks {
@@ -132,6 +155,8 @@ font-size: 18px;
 
 
 
+
+
 /* -------------------------------------------------- */
 
 
@@ -157,6 +182,42 @@ i /*Size of each icon */{
 .button-small {
   position: absolute;
   right: 10px;
+}
+.button, .btn {
+  margin: 5px;
+  padding: 15px;
+}
+.vl {
+  position: absolute;
+  left: 50%;
+  border-left: 3px solid black;
+  height: 100%;
+}
+h3 {
+  border-bottom: 3px solid black;
+}
+ul {
+  list-style-type: "-   ";
+  list-style-position: inside;
+  padding: 0;
+}
+li {
+  padding: 10px 0;
+  margin-left: 0;
+}
+.card {
+  text-align: center;
+  margin-top: 20px;
+  background-color: #F7C331;
+  border-radius: 20px;
+}
+.card-img-top {
+  border-radius: 20px;
+}
+.card-title {
+  color: black;
+  font-size: 45px;
+  font-weight: bolder;
 }
 
 @media only screen and (max-width: 600px) {
