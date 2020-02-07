@@ -141,10 +141,10 @@ export default function Home() {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
             <li className="nav-item active">
-            <a className = "nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+            <a className = "nav-link" href="http://localhost:3000/home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-            <a className="nav-link" href="/favorites">Favorites</a>
+            <a className="nav-link" href="http://localhost:3000/favorites">Favorites</a>
             </li>
         
             <li class="nav-item"> 
