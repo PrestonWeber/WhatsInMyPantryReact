@@ -102,7 +102,7 @@ export default function Home() {
 
     let ingredientString = ingredients.join("&q=");
     let queryUrl =
-      "http://recipes.kami.io/api/ingredient?q=" +
+      "https://recipes.kami.io/api/ingredient?q=" +
       ingredientString;
 
     console.log(queryUrl);
