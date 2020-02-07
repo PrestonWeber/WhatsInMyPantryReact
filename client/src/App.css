@@ -85,10 +85,6 @@ a:hover {
   background-color: #7dd0b6;  
 }
 
-.active /*current page */ {
-  color: red; 
-}
-
 .navbar-nav > li {
   margin-left: 35px; 
   font-family: 'Roboto Condensed', sans-serif; 
@@ -119,8 +115,9 @@ a:hover {
 
 .howItWorks {
   text-align: center; 
-  display: inline-block; 
 }
+
+
 
 #how-works-header {
   text-align: center; 
