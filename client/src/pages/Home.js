@@ -278,7 +278,7 @@ export default function Home() {
                 // key={recipe.uri}
                 title={recipe.title}
                 image={recipe.image_url}
-                link={recipe.recipe.url}
+                instructions={recipe.instructions}
                 handleSave={handleSave}
                 unmatchedIngredients={unmatchedIngredients}
                 matchedIngredients={matchedIngredients}
