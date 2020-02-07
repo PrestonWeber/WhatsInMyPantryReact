@@ -225,50 +225,36 @@ export default function Home() {
 
       <Container>
         {recipes.map(recipe => {
-
           let recipeIngredients = [];
           let matchedIngredients = [];
           let unmatchedIngredients = [];
-
-          // console.log(response);
-
-          // for (let i = 0; i < response.data.hits.length; i++) {
-          //   for (let j = 0; j < response.data.hits[i].recipe.ingredients.length; j++) {
-          //     let recipeIngredient = response.data.hits[i].recipe.ingredients[j].text.toLowerCase();
-          //     recipeIngredients.push(recipeIngredient);
-          //   }
-          // }
-
+          let pantryIngredients = pantry;
           for (let i = 0; i < recipe.ingredients.length; i++) {
             let recipeIngredient = recipe.ingredients[i].ingredient.toLowerCase();
             recipeIngredients.push(recipeIngredient);
           }
-
+          
+          // This is in progress
+          // for (let i = 0; i < pantryIngredients.length; i++) {
+          //   if(pantryIngredients[i].endsWith("s")) {
+          //   }
+          // }
           for (let i = 0; i < recipeIngredients.length; i++) {
             let isInArray = false;
-
-            for (let j = 0; j < pantry.length; j++) {
-              let lowercasePantry = pantry[j].ingredient.toLowerCase();
+            for (let j = 0; j < pantryIngredients.length; j++) {
+              let lowercasePantry = pantryIngredients[j].ingredient.toLowerCase();
               if (recipeIngredients[i].includes(lowercasePantry)) {
                 isInArray = true;
               }
             }
-
             if (!isInArray) {
-              if(!unmatchedIngredients.includes(recipeIngredients[i])) {
-                unmatchedIngredients.push(recipeIngredients[i]);
-              }
+              unmatchedIngredients.push(recipeIngredients[i]);
             } else if (isInArray) {
-              if(!matchedIngredients.includes(recipeIngredients[i])) {
-                matchedIngredients.push(recipeIngredients[i]);
-              }
+              matchedIngredients.push(recipeIngredients[i]);
             }
-
           }
-
           console.log(unmatchedIngredients);
           console.log(matchedIngredients);
-
           const handleSave = () => {
             let data = {
               title: recipe.title,
@@ -277,9 +263,7 @@ export default function Home() {
               userEmail: user.email
             }
             saveRecipe(data)
-
           }
-
           return (
             <>
               <ApiRecipe
@@ -294,7 +278,6 @@ export default function Home() {
             </>
           );
         })}
-
       </Container>
 
     </div>
