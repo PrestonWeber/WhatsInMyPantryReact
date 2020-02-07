@@ -201,18 +201,12 @@ export default function Home() {
       <Container>
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
-            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood" maxlength="30" ></Input>
-            
+            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add food here..." id="myFood" maxlength="30" ></Input>
             <FormBtn onClick={addIngredient}>
               ADD TO PANTRY
             </FormBtn>
-
             <br></br>
-    
-            <button onClick={() => resetPantry(user.email)} className="button-2" id="add-btn">RESET</button>
-            <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
-                SEE RESULTS
-            </FormBtn>
+            <button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">RESET</button>
           
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients">
@@ -224,6 +218,12 @@ export default function Home() {
             </div>
               
           </Col>
+        </Row>
+          <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
+                SEE RESULTS
+            </FormBtn>
+        <Row>
+          
         </Row>
       </Container>
 

@@ -27,7 +27,7 @@ a:hover {
 }
 /* -------------------------------------------------- */
 
-/* Buttons */
+/* General Buttons */
 .button{
   background-color:#FC4A1A;
   border: none;
@@ -163,9 +163,9 @@ font-size: 18px; */
   border: 3px solid white;
 }
 
-
-
-
+#generate, #reset-btn  /* add to pantry btn */ {
+  float: left; 
+}
 
 /* -------------------------------------------------- */
 
