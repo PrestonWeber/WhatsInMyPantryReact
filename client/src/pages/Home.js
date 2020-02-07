@@ -7,19 +7,23 @@ import { Container, Row, Col } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
+import Header from "../components/Header";
 import ApiRecipe from "../components/ApiRecipe";
 
 
 export default function Home() {
   const { user } = useAuth0();
 
-    const [pantry, setPantry] = useState([]);
+  const [currentUser, setUser] = useState({});
+
+  const [pantry, setPantry] = useState([]);
 
   const [inputValue, setValue] = useState("");
 
-    const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
+    setUser(user);
     fetchPantry(user.email)
     renderPantry();
   }, []);
@@ -45,10 +49,7 @@ export default function Home() {
   const resetPantry = (userEmail) => {
     axios.delete("api/pantryRoutes/pantry/user/" + userEmail).then(res => {
       console.log("pantry-reset")
-      setPantry([]);
-      // fetchPantry(user.email);
-      renderPantry();
-    });
+    })
     // API.deletePantry(userEmail).then(res => {
     //   console.log("pantry reset");
     //     fetchPantry(user.email)
@@ -111,8 +112,8 @@ export default function Home() {
     axios.get(queryUrl)
       .then(function (response) {
 
-        console.log(response.data);
-        setRecipes(response.data);
+        console.log(response.data.hits);
+        setRecipes(response.data.hits);
 
       })
       .catch(function(error) {
@@ -126,103 +127,74 @@ export default function Home() {
       console.log("RECIPE ADDED");
     });
   };
+
   
+
 
   return (
 
     <div>
       <Container>
-          <nav className="navbar navbar-expand-lg">
-            <a className="navbarLabel" href="#">Hello, {user.nickname}!</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Favorites</a>
-            </li>
-        
-            <li class="nav-item">
-            <a class="nav-link disabled" href="#">Logout</a>
-            </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-            <Input id="search-bar" type="search" placeholder="Search" aria-label="Search" maxlength="30"  />
-            <FormBtn className="button" type="submit">SEARCH</FormBtn>
-          </form>
-        </div>
-        </nav>
+        <Row>
+          <h5>Hello, {user.email}!</h5> <LogoutButton />
+        </Row>
       </Container>
 
       <Jumbotron>
         <Container>
           <Row>
-            {/* <Col size="md-12"> */}
+            <Col size="md-12">
               <h1>What's in my pantry?</h1>
-            
+            </Col>
           </Row>
-          {/*<Row>
+          <Row>
             <Col size="md-12">
               <button className="button"><a href="#container-3">LETS GO</a></button>
               <button className="button-2"><a href="/favorites">MY FAVORITES</a></button>
             </Col>
-          </Row> */}
+          </Row>
         </Container>
       </Jumbotron>
-    
-      <Container className="howItWorks">
-        <div id="how-works-header">
+
+      <Container>
+        <Row>
           <h2>How it Works</h2>
-        </div>
-        <Row className="howItWorks">
-          <Col size="lg-4 sm-12">
-            <i className="fas fa-clipboard-list" id="clipboard"></i>
-            <p className="iconText">Log the contents of your kitchen in the handy form below.</p>
+        </Row>
+        <Row>
+          <Col size="md-4">
+            <i className="fa fa-fish" id="fish"></i>
+            <p className="iconText">Log the contents of your kitchen in our handy-dandy form below.</p>
           </Col>
-            <br></br>
-          <Col size="lg-4 sm-12">
+          <Col size="md-4">
             <i className="fas fa-utensils" id="utensils"></i>
             <p className="iconText">Use what you already have to make a delicious, easy recipe...</p>
-            <br></br>
           </Col>
-          <Col size="lg-4 sm-12">
-            <i className="fas fa-shopping-cart" id="cart"></i>
+          <Col size="md-4">
+            <i className="fas fa-carrot" id="carrot"></i>
             <p className="iconText">...or see what else you need in order to make it!</p>
           </Col>
         </Row>
-        <br></br>
       </Container>
 
       <Container>
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
-            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood" maxlength="30" ></Input>
-            
+            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood"></Input>
+
             <FormBtn onClick={addIngredient}>
-              ADD TO PANTRY
+              Save to Pantry
             </FormBtn>
 
             <br></br>
-    
-            <button onClick={() => resetPantry(user.email)} className="button-2" id="add-btn">RESET</button>
-            <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
-                SEE RESULTS
-            </FormBtn>
-          
+            <button onClick={() => resetPantry(user.email)} className="btn btn-danger">Reset</button>
           </Col>
-          <Col size="lg-6 sm-12" className="column-2 ingredients">
-            {/*<div className="generateButton" > */}
-              
-            {/* </div> */}
-            <div id="pantry-div">
+          <Col size="lg-6 sm-12" className="column-2 ingredients" id="pantry-div">
             {renderPantry()}
+            <div className="generateButton">
+              <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
+                Generate Results
+            </FormBtn>
             </div>
-              
           </Col>
         </Row>
       </Container>
@@ -243,8 +215,8 @@ export default function Home() {
           //   }
           // }
 
-          for (let i = 0; i < recipe.ingredients.length; i++) {
-            let recipeIngredient = recipe.ingredients[i].ingredient.toLowerCase();
+          for (let i = 0; i < recipe.recipe.ingredients.length; i++) {
+            let recipeIngredient = recipe.recipe.ingredients[i].text.toLowerCase();
             recipeIngredients.push(recipeIngredient);
           }
 
@@ -259,13 +231,9 @@ export default function Home() {
             }
 
             if (!isInArray) {
-              if(!unmatchedIngredients.includes(recipeIngredients[i])) {
-                unmatchedIngredients.push(recipeIngredients[i]);
-              }
+              unmatchedIngredients.push(recipeIngredients[i]);
             } else if (isInArray) {
-              if(!matchedIngredients.includes(recipeIngredients[i])) {
-                matchedIngredients.push(recipeIngredients[i]);
-              }
+              matchedIngredients.push(recipeIngredients[i]);
             }
 
           }
@@ -290,7 +258,7 @@ export default function Home() {
                 // key={recipe.uri}
                 title={recipe.title}
                 image={recipe.image_url}
-                instructions={recipe.instructions}
+                link={recipe.recipe.url}
                 handleSave={handleSave}
                 unmatchedIngredients={unmatchedIngredients}
                 matchedIngredients={matchedIngredients}
@@ -302,6 +270,5 @@ export default function Home() {
       </Container>
 
     </div>
-
   );
 }
