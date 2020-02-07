@@ -111,8 +111,8 @@ export default function Home() {
     axios.get(queryUrl)
       .then(function (response) {
 
-        console.log(response.data.hits);
-        setRecipes(response.data.hits);
+        console.log(response.data);
+        setRecipes(response.data);
 
       })
       .catch(function(error) {
