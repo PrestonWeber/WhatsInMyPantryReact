@@ -7,7 +7,6 @@ import { Container, Row, Col } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
-import Header from "../components/Header";
 import ApiRecipe from "../components/ApiRecipe";
 
 
@@ -88,7 +87,7 @@ export default function Home() {
         })
       );
     } else {
-      pantryIngredients.push(<div key="none">Fill Your Pantry!</div>);
+      pantryIngredients.push(<div id="fill-pantry" key="none">Fill Your Pantry!</div>);
     }
     return pantryIngredients;
   };
@@ -135,9 +134,31 @@ export default function Home() {
 
     <div>
       <Container>
-        <Row>
-          <h5>Hello, {user.email}!</h5> <LogoutButton />
-        </Row>
+          <nav className="navbar navbar-expand-lg">
+            <a className="navbarLabel" href="#">Hello, {user.nickname}!</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li className="nav-item active">
+            <a className = "nav-link" href="http://localhost:3000/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a className="nav-link" href="http://localhost:3000/favorites">Favorites</a>
+            </li>
+        
+            <li class="nav-item"> 
+            <LogoutButton />
+            </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+            <Input id="search-bar" type="search" placeholder="Search" aria-label="Search" maxlength="30"  />
+            <FormBtn className="button" type="submit">SEARCH</FormBtn>
+          </form>
+        </div>
+        </nav>
       </Container>
 
       <Jumbotron>
