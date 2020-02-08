@@ -2,7 +2,7 @@ const router = require("express").Router();
 const recipeController = require("../../controller/recipedb");
 
 router.route("/recipe")
-  .post(recipeController.create)
+  .post(recipeController.create);
 
 router.route("/recipes/:useremail")
   .get(recipeController.findAll);

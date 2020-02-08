@@ -14,3 +14,11 @@ export function SaveButton(props) {
     );
 }
 
+export function DetailButton(props) {
+    return (
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detail" {...props}>
+            Detail
+        </button>
+    );
+}
+
