@@ -125,13 +125,14 @@ a:hover {
 
 .column-1 {
   padding-top: 50px; 
+  text-align: center; 
 }
 
 .column-2 {
   background-image: url(./assets/lemons.jpg);
   font-weight: bold; 
   display: block; 
-  height: 600px; 
+  height: 450px; 
   overflow: scroll; 
 }
 
@@ -151,6 +152,9 @@ font-size: 18px;
   background-color: #7dd0b6;
   color: white;
   outline: none; 
+  width: 100%; 
+  text-align: left; 
+  margin-bottom: 20px; 
 }
 
 #myFood:focus {
