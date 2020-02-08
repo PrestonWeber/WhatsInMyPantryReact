@@ -253,13 +253,16 @@ export default function Home() {
 
           for (let i = 0; i < pantry.length; i++) {
             let pantryIngredient = pantry[i].ingredient.toLowerCase();
-            if(pantryIngredient.endsWith('s')) {
+            if (pantryIngredient.endsWith('s')) {
               let secondIngredient = pantryIngredient.substring(0, pantryIngredient.length - 1);
               pantryIngredients.push(secondIngredient);
-              pantryIngredients.push(pantryIngredient);
-            } else {
-              pantryIngredients.push(pantryIngredient);
+            } else if (pantryIngredient.includes(" ")) {
+              let pantryIngArr = pantryIngredient.split(" ");
+              for (let j = 0; j < pantryIngArr.length; j++) {
+                pantryIngredients.push(pantryIngArr[j]);
+              }
             }
+            pantryIngredients.push(pantryIngredient);
           }
 
           for (let i = 0; i < recipeIngredients.length; i++) {
@@ -291,7 +294,8 @@ export default function Home() {
               title: recipe.title,
               image: recipe.image_url,
               instructions: recipe.instructions,
-              userEmail: user.email
+              userEmail: user.email,
+              apiId: recipe.recipe_id
             }
             saveRecipe(data)
 

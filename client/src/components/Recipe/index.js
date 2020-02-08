@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardImage, DeleteBtn, CardBody, CardTitle, CardInstructions } from "../Card";
 import { Col } from "../Grid";
+import { DetailButton } from "../Button";
 
 export default function Recipe(props) {
     return (
@@ -16,6 +17,9 @@ export default function Recipe(props) {
                 <CardInstructions>
                     {props.instructions}
                 </CardInstructions>
+                <DetailButton
+                    onClick={() => props.edamamApiId(props.id)}
+                />
                 <DeleteBtn 
                     value={props.button}
                     onClick={() => props.deleteRecipe(props.id)}>
