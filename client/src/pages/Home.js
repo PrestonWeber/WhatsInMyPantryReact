@@ -9,20 +9,24 @@ import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
 import ApiRecipe from "../components/ApiRecipe";
 import { Link } from "react-router-dom";
+import { useRef } from "react"
 
 export default function Home() {
-    const { user } = useAuth0();
-
+  const { user } = useAuth0();
+  
   const [pantry, setPantry] = useState([]);
-
-    const [inputValue, setValue] = useState("");
-
+  
+  const [inputValue, setValue] = useState("");
+  
   const [recipes, setRecipes] = useState([]);
+  
+  const refContainer = useRef(null);
 
   useEffect(() => {
     fetchPantry(user.email);
     renderPantry();
   }, []);
+
 
   const handleInputChange = e => {
     const { value } = e.target;
@@ -135,10 +139,10 @@ export default function Home() {
       console.log("RECIPE ADDED");
     });
   };
-
+  console.log(refContainer);
   return (
     <div>
-      <Container>
+      <div>
           <nav className="navbar navbar-expand-lg">
             <a className="navbarLabel" href="#">Hello, {user.nickname}!</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -168,7 +172,7 @@ export default function Home() {
           </form>
         </div>
         </nav>
-      </Container>
+      </div>
 
       <Jumbotron>
         <Container>
@@ -231,16 +235,17 @@ export default function Home() {
             {/* </div> */}
             <div id="pantry-div">{renderPantry()}</div>
           </Col>
-        </Row>
           <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
               SEE RESULTS
           </FormBtn>
+        </Row>
         <Row>
           
         </Row>
       </Container>
+      
 
-      <Container>
+      <div ref="hello" className="recipeDiv">
         {recipes.map(recipe => {
           let recipeIngredients = [];
           let matchedIngredients = [];
@@ -296,7 +301,8 @@ export default function Home() {
               title: recipe.title,
               image: recipe.image_url,
               instructions: recipe.instructions,
-              userEmail: user.email
+              userEmail: user.email,
+              apiId: recipe.recipe_id
             };
             saveRecipe(data);
             alert("RECIPE ADDED")
@@ -316,7 +322,7 @@ export default function Home() {
             </>
           );
         })}
-      </Container>
+      </div>
     </div>
   );
 }

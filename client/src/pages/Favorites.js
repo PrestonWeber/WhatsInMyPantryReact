@@ -84,7 +84,7 @@ export default function FavRecipes() {
                         <>
                         <Recipe
                         key={recipe._id}
-                        id={recipe.apiId}
+                        id={recipe._id}
                         title={recipe.title}
                         image={recipe.image}
                         instructions={recipe.instructions}
@@ -102,34 +102,6 @@ export default function FavRecipes() {
         }
         return recipeCards;
     };
-
-  const renderRecipes = () => {
-    let recipeCards = [];
-    if (recipes.length > 0) {
-      recipeCards.push(
-        recipes.map(recipe => {
-          return (
-            <>
-              <Recipe
-                key={recipe._id}
-                id={recipe._id}
-                title={recipe.title}
-                image={recipe.image}
-                instructions={recipe.instructions}
-                user={recipe.user}
-                button="delete"
-                deleteRecipe={deleteRecipe}
-                // details={details}
-              />
-            </>
-          );
-        })
-      );
-    } else {
-      recipeCards.push(<div key="none">There are no saved recipes</div>);
-    }
-    return recipeCards;
-  };
 
   const deleteRecipe = recipeId => {
     console.log(recipeId);
