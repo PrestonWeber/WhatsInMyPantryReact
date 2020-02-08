@@ -188,7 +188,7 @@ export default function Home() {
             <p className="iconText">View recipes that use what you already have...</p>
             <br></br>
             <i className="fas fa-shopping-cart" id="cart"></i>
-            <p className="iconText">...and tell you what else you need to make them!</p>
+            <p className="iconText">...and see what else you need to make them!</p>
           </Col>
         </Row>
         <br></br>
