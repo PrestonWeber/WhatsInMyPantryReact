@@ -9,44 +9,33 @@ const Login = () => {
     const { isAuthenticated, loginWithRedirect } = useAuth0();
 
     return (
-        <div>
+    
+        <div className="picDiv">
+            <Row>
+                <Col className="loginCol1" size="lg-4">
+                    <h1 id="welcome-text">Welcome!</h1>
+                        {!isAuthenticated && (
+                        <button id="login-btn" onClick={() => loginWithRedirect({redirect_uri: 'http://localhost:3000/home'})}>LOG IN</button>
+                        )}
+                        {isAuthenticated && <Link to="/home" className="btn btn-primary" id="homepg-btn">Go to Home Page</Link>}
+                </Col>
 
-        <Container className="landingContainer">
-            <Row className="landingRow"> 
-
-
-            <Col size="md-12" className="">
-                <Row>
-                <Col size ="md-6" className="textCol">
+                <Col className="loginCol2" size="lg-8">
                     <div id="white-box">
-                    <p id="login-pg-p">Have you ever been stuck on what to cook?
-                    What's In My Pantry solves that dilemma by recommending thousands of recipes,
-                    using what you already have at home.
-                    
-                    <br></br>
-                    <br></br>
-                    
-                    Save your tried and true recipes and visit them later on your Favorites page!
-                    </p>
-
+                        <p id="login-pg-p">Ever been stumped on what to cook?
+                        What's In My Pantry solves that dilemma by recommending thousands of recipes,
+                        using ingredients you already have at home.
+                        <br></br>
+                        <br></br>
+                        Save your tried and true recipes and visit them later on your Favorites page!
+                        </p>
                     </div>
                 </Col>
 
-                <Col size = "md-6" className="eggCol">
-                    <h1 id="welcome-text">Welcome!</h1>
-                    {!isAuthenticated && (
-                    <button id="login-btn" onClick={() => loginWithRedirect({redirect_uri: 'http://localhost:3000/home'})}>LOG IN</button>
-                    )}
-                    {isAuthenticated && <Link to="/home" className="btn btn-primary">Go to Home Page</Link>}
-                </Col>
             </Row>
-           
-            </Col>
 
-            </Row>
-            
-        </Container>
         </div>
+        
     );
 
 }
