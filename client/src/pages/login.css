@@ -1,3 +1,18 @@
+.picDiv{
+  background-image: url(../assets/spices.jpg); 
+  height: 100vh; 
+  width: 100vw; 
+  background-repeat: no-repeat;
+}
+
+.loginCol1 {
+  padding: 6%; 
+  
+ }
+
+ .loginCol2 {
+   padding: 4%; 
+ }
 
 #login-btn {
     background-color: red;
@@ -9,42 +24,36 @@
     font-weight: bold; 
     font-family: 'Roboto Condensed', sans-serif;
     text-decoration: none;
-    margin: 10px; 
   }
   
   #login-btn:hover {
     background-color: #F7C331; 
-    
+  
   }
 
- .textCol {
-  padding: 4%; 
- }
 
- .eggCol {
-  background-image: url(../assets/eggs.jpg);  
-  text-align: left;
-  }
 
-#welcome-text {
-  margin-top: 30px; 
+
+#welcome-text { 
   font-size: 70px; 
   margin-bottom: 0; 
+
 }  
 
 #login-pg-p {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;  
   font-size: 18px; 
   text-align: left; 
   margin-left: 10px; 
   margin-right: 10px; 
-
 }
+
 
 #white-box {
-  background-color: white; 
+  background-color: white; opacity: 0.8; 
   padding: 10%; 
+  margin-top: 15px; 
 }
 #white-box:hover {
-  background-color: white; opacity:0.8; 
+  
 }
