@@ -14,11 +14,8 @@ export default function Recipe(props) {
                 <CardTitle>
                     {props.title}
                 </CardTitle>
-                <CardInstructions>
-                    {props.instructions}
-                </CardInstructions>
                 <DetailButton
-                    onClick={() => props.edamamApiId(props.id)}
+                    onClick={() => props.edamamApiId(props.apiId)}
                 />
                 <DeleteBtn 
                     value={props.button}

@@ -5,6 +5,8 @@ export function RecipeModal(props) {
     let instructions = props.instructions.split(".");
     instructions = instructions.filter((a, b) => instructions.indexOf(a) === b);
 
+    console.log("hey there");
+
     return (
         <div id="detail" className="modal" tabindex="-1" role="dialog">
             <div className="modal-dialog" role="document">
