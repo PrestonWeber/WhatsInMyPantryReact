@@ -1,4 +1,7 @@
-
+.favTitle {
+    font-size: 35px;
+    font-weight: bolder;
+}
 .card {
     text-align: center;
     margin-top: 20px;
