@@ -1,9 +1,6 @@
-#login-div {
-
-}
 
 #login-btn {
-    background-color: #7dd0b6;
+    background-color: red;
     border: none;
     color: white;
     padding: 15px 25px;
@@ -16,24 +13,38 @@
   }
   
   #login-btn:hover {
-    background-color:#F7C331; 
-    color: white;
-    text-decoration: none; 
+    background-color: #F7C331; 
+    
   }
 
-  #div-a {
+ .textCol {
+  padding: 4%; 
+ }
+
+ .eggCol {
+  background-image: url(../assets/eggs.jpg);  
+  text-align: left;
   }
 
-  #div-b {
-  }
+#welcome-text {
+  margin-top: 30px; 
+  font-size: 70px; 
+  margin-bottom: 0; 
+}  
 
-  #login-pg-p {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 18px; 
-    text-align: left; 
+#login-pg-p {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 18px; 
+  text-align: left; 
+  margin-left: 10px; 
+  margin-right: 10px; 
 
-  }
+}
 
-  #chicken-nugget {
-      background-color: red; 
-  }
+#white-box {
+  background-color: white; 
+  padding: 10%; 
+}
+#white-box:hover {
+  background-color: white; opacity:0.8; 
+}
