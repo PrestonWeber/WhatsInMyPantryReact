@@ -151,10 +151,10 @@ export default function Home() {
             <LogoutButton />
             </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-            <Input id="search-bar" type="search" placeholder="Search" aria-label="Search" maxlength="30"  />
-            <FormBtn className="button" type="submit">SEARCH</FormBtn>
-          </form>
+            {/* <form class="form-inline my-2 my-lg-0">
+             <Input id="search-bar" type="search" placeholder="Search" aria-label="Search" maxlength="30"  />
+             <FormBtn className="button" type="submit">SEARCH</FormBtn> 
+          </form> */ }
         </div>
         </nav>
       </Container>
@@ -202,8 +202,11 @@ export default function Home() {
               ADD TO PANTRY
             </FormBtn>
             <br></br>
-            <button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">RESET</button>
-          
+            <button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">RESET PANTRY</button>
+            
+            <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
+                SEE RESULTS
+            </FormBtn>
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients">
             {/*<div className="generateButton" > */}
@@ -215,12 +218,10 @@ export default function Home() {
               
           </Col>
         </Row>
-          <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
-                SEE RESULTS
-            </FormBtn>
-        <Row>
           
-        </Row>
+        
+  
+        
       </Container>
 
       <Container>

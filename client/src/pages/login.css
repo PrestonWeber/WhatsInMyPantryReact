@@ -1,0 +1,39 @@
+#login-div {
+
+}
+
+#login-btn {
+    background-color: #7dd0b6;
+    border: none;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold; 
+    font-family: 'Roboto Condensed', sans-serif;
+    text-decoration: none;
+    margin: 10px; 
+  }
+  
+  #login-btn:hover {
+    background-color:#F7C331; 
+    color: white;
+    text-decoration: none; 
+  }
+
+  #div-a {
+  }
+
+  #div-b {
+  }
+
+  #login-pg-p {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 18px; 
+    text-align: left; 
+
+  }
+
+  #chicken-nugget {
+      background-color: red; 
+  }
