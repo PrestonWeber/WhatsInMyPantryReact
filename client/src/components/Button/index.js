@@ -10,7 +10,15 @@ export function LogoutButton(props) {
 
 export function SaveButton(props) {
     return (
-        <button className="btn btn-primary" {...props}>{props.children}</button>
+        <button className="btn btn-primary saveBtn" {...props}>{props.children}</button>
+    );
+}
+
+export function DetailButton(props) {
+    return (
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detail" {...props}>
+            Detail
+        </button>
     );
 }
 
