@@ -11,7 +11,7 @@ export default function Recipe(props) {
                 src={props.image}
             />
             <CardBody>
-                <CardTitle>
+                <CardTitle className="favTitle">
                     {props.title}
                 </CardTitle>
                 <DetailButton
