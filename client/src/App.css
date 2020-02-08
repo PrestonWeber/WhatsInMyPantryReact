@@ -27,9 +27,9 @@ a:hover {
 }
 /* -------------------------------------------------- */
 
-/* Buttons */
+/* General Buttons */
 .button{
-  background-color:#FC4A1A;
+  background-color:red;
   border: none;
   color: white;
   padding: 15px 25px;
@@ -42,7 +42,7 @@ a:hover {
 }
 
 .button:hover {
-  background-color:#F7C331; 
+  background-color:red; 
   color: white;
   text-decoration: none; 
 }
@@ -66,7 +66,7 @@ a:hover {
   text-decoration: none; 
 }
 
-.button-small {
+.buttonSmall {
   background-color:#FC4A1A;
   border: none;
   color: white;
@@ -82,11 +82,8 @@ a:hover {
 
 /* Unique Elements */
 .navbar {
-  background-color: #7dd0b6;  
-}
-
-.active /*current page */ {
-  color: red; 
+  background-color:#F7C331; 
+  height: 38px;  
 }
 
 .navbar-nav > li {
@@ -95,19 +92,20 @@ a:hover {
 }
 
 .navbarLabel {
-  color: black; 
-  font-size: 24px; 
+  color:red; 
+  font-size: 20px; 
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-#search-bar{
+
+/* #search-bar{
  background: #F7C331;
  color: white; 
-}
+} 
 
 #search-bar:focus {
   border: 3px solid white;
-}
+} */ 
 
 .jumbotron {
   background-color: #7dd0b6;  
@@ -119,7 +117,6 @@ a:hover {
 
 .howItWorks {
   text-align: center; 
-  display: inline-block; 
 }
 
 #how-works-header {
@@ -128,14 +125,17 @@ a:hover {
 }
 
 .column-1 {
-  padding-top: 50px; 
+  margin-top: 50px; 
+  text-align: center; 
 }
 
 .column-2 {
   background-image: url(./assets/lemons.jpg);
-  font-weight: bold; 
+  font-weight: bold;
+  border-style: solid;
+  border-width: 1px; 
   display: block; 
-  height: 600px; 
+  height: 450px; 
   overflow: scroll; 
 }
 
@@ -144,8 +144,6 @@ margin-top: 30px;
 text-align: center; 
 font-family: 'Roboto Condensed', sans-serif; 
 font-size: 18px; 
-/*font-family: 'Mansalva', cursive;
-font-size: 18px; */
 }
 
 #fill-pantry {
@@ -157,15 +155,18 @@ font-size: 18px; */
   background-color: #7dd0b6;
   color: white;
   outline: none; 
+  width: 100%; 
+  text-align: left; 
+  margin-bottom: 20px; 
 }
 
 #myFood:focus {
   border: 3px solid white;
 }
 
-
-
-
+#reset-btn {
+  margin-left: 9px; 
+}
 
 /* -------------------------------------------------- */
 
@@ -189,14 +190,14 @@ i /*Size of each icon */{
 #clipboard {
   color: darkgray; 
 }
-.button-small {
-  position: absolute;
-  right: 10px;
-}
-.button, .btn {
+
+/* -------------------------------------------------- */
+
+/* .button, .btn {
   margin: 5px;
   padding: 15px;
-}
+} */
+
 .vl {
   position: absolute;
   left: 50%;
@@ -237,7 +238,7 @@ li {
   .button, .btn {
     padding: 25px;
     font-size: larger;
-  }
+  } 
 }
 
 /* -------------------------------------------------- */
