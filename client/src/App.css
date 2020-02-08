@@ -92,10 +92,11 @@ a:hover {
 }
 
 .navbarLabel {
-  color: black; 
+  color:red; 
   font-size: 20px; 
   font-family: 'Roboto Condensed', sans-serif;
 }
+
 
 /* #search-bar{
  background: #F7C331;
@@ -124,13 +125,15 @@ a:hover {
 }
 
 .column-1 {
-  padding-top: 50px; 
+  margin-top: 50px; 
   text-align: center; 
 }
 
 .column-2 {
   background-image: url(./assets/lemons.jpg);
-  font-weight: bold; 
+  font-weight: bold;
+  border-style: solid;
+  border-width: 1px; 
   display: block; 
   height: 450px; 
   overflow: scroll; 

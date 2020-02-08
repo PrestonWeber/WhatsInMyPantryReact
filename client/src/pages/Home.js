@@ -133,7 +133,7 @@ export default function Home() {
     <div>
       <Container>
           <nav className="navbar navbar-expand-lg">
-            <a className="navbarLabel" href="#">Hello, {user.nickname}!</a>
+            <a className="navbarLabel" href="#" >Hello, {user.nickname}!</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -182,13 +182,13 @@ export default function Home() {
         <Row className="howItWorks">
           <Col size="lg-12 sm-12" className="howItWorks">
             <i className="fas fa-clipboard-list" id="clipboard"></i>
-            <p className="iconText">Log the contents of your kitchen in the handy form below.</p>
+            <p className="iconText">Log your ingredients in the form below.</p>
             <br></br>
             <i className="fas fa-utensils" id="utensils"></i>
-            <p className="iconText">Use what you already have to make a delicious, easy recipe...</p>
+            <p className="iconText">View recipes that use what you already have...</p>
             <br></br>
             <i className="fas fa-shopping-cart" id="cart"></i>
-            <p className="iconText">...or see what else you need in order to make it!</p>
+            <p className="iconText">...and tell you what else you need to make them!</p>
           </Col>
         </Row>
         <br></br>
@@ -197,7 +197,7 @@ export default function Home() {
       <Container>
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
-            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add food here..." id="myFood" maxlength="30" ></Input>
+            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="LOG INGREDIENTS HERE" id="myFood" maxlength="30" ></Input>
             <FormBtn onClick={addIngredient}>
               ADD TO PANTRY
             </FormBtn>
