@@ -10,6 +10,7 @@
   }
   .card-img-top {
     border-radius: 20px;
+    
   }
   .card-title {
     color: black;
@@ -35,5 +36,21 @@
     background-color: #7dd0b6; 
     color: white;
     text-decoration: none; 
+  }
+
+  .navbar {
+    background-color:#F7C331; 
+    height: 38px;  
+  }
+  
+  .navbar-nav > li {
+    margin-left: 35px; 
+    font-family: 'Roboto Condensed', sans-serif; 
+  }
+  
+  .navbarLabel {
+    color: black; 
+    font-size: 20px; 
+    font-family: 'Roboto Condensed', sans-serif;
   }
 
