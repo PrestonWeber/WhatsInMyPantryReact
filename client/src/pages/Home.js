@@ -98,7 +98,13 @@ export default function Home() {
     let ingredients = [];
 
     for (let i = 0; i < pantry.length; i++) {
-      ingredients.push(pantry[i].ingredient);
+
+      if (pantry[i].ingredient.includes(" ")) {
+        let newStr = pantry[i].ingredient.replace(/\s/g, "%20");
+        ingredients.push(newStr);
+      } else {
+        ingredients.push(pantry[i].ingredient);
+      }
     }
 
     let ingredientString = ingredients.join("&q=");
@@ -135,29 +141,29 @@ export default function Home() {
       <Container>
           <nav className="navbar navbar-expand-lg">
             <a className="navbarLabel" href="#">Hello, {user.nickname}!</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
             </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <Link to="/home">
-                <a className = "nav-link">Home <span class="sr-only">(current)</span></a>
+                <a className = "nav-link">Home <span className="sr-only">(current)</span></a>
               </Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link to="/favorites">
                 <a className="nav-link">Favorites</a>
               </Link>
             </li>
         
-            <li class="nav-item"> 
+            <li className="nav-item"> 
             <LogoutButton />
             </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-            <Input id="search-bar" type="search" placeholder="Search" aria-label="Search" maxlength="30"  />
+            <form className="form-inline my-2 my-lg-0">
+            <Input id="search-bar" type="search" placeholder="Search" aria-label="Search" maxLength="30"  />
             <FormBtn className="button" type="submit">SEARCH</FormBtn>
           </form>
         </div>
@@ -206,7 +212,7 @@ export default function Home() {
       <Container>
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
-            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add food here..." id="myFood" maxlength="30" ></Input>
+            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add food here..." id="myFood" maxLength="30" ></Input>
             <FormBtn onClick={addIngredient}>
               ADD TO PANTRY
             </FormBtn>
@@ -225,8 +231,8 @@ export default function Home() {
           </Col>
         </Row>
           <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
-                SEE RESULTS
-            </FormBtn>
+              SEE RESULTS
+          </FormBtn>
         <Row>
           
         </Row>
@@ -238,26 +244,29 @@ export default function Home() {
           let recipeIngredients = [];
           let matchedIngredients = [];
           let unmatchedIngredients = [];
-          let pantryIngredients = pantry;
+          let pantryIngredients = [];
 
           for (let i = 0; i < recipe.ingredients.length; i++) {
             let recipeIngredient = recipe.ingredients[i].ingredient.toLowerCase();
             recipeIngredients.push(recipeIngredient);
           }
 
-          // This is in progress
-          // for (let i = 0; i < pantryIngredients.length; i++) {
-          //   if(pantryIngredients[i].endsWith("s")) {
-
-          //   }
-          // }
+          for (let i = 0; i < pantry.length; i++) {
+            let pantryIngredient = pantry[i].ingredient.toLowerCase();
+            if(pantryIngredient.endsWith('s')) {
+              let secondIngredient = pantryIngredient.substring(0, pantryIngredient.length - 1);
+              pantryIngredients.push(secondIngredient);
+              pantryIngredients.push(pantryIngredient);
+            } else {
+              pantryIngredients.push(pantryIngredient);
+            }
+          }
 
           for (let i = 0; i < recipeIngredients.length; i++) {
             let isInArray = false;
 
             for (let j = 0; j < pantryIngredients.length; j++) {
-              let lowercasePantry = pantryIngredients[j].ingredient.toLowerCase();
-              if (recipeIngredients[i].includes(lowercasePantry)) {
+              if (recipeIngredients[i].includes(pantryIngredients[j])) {
                 isInArray = true;
               }
             }
