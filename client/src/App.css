@@ -230,6 +230,9 @@ li {
   font-size: 45px;
   font-weight: bolder;
 }
+.container {
+  width: 100%;
+}
 
 @media only screen and (max-width: 600px) {
   .jumbotron, .container, .row {
