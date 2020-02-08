@@ -11,11 +11,11 @@ export default function Recipe(props) {
                 src={props.image}
             />
             <CardBody>
-                <CardTitle>
+                <CardTitle className="favTitle">
                     {props.title}
                 </CardTitle>
                 <CardInstructions>
-                    {props.instructions}
+                    {/* {props.instructions} */}
                 </CardInstructions>
                 <DetailButton
                     onClick={() => props.edamamApiId(props.id)}
