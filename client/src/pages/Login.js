@@ -10,7 +10,8 @@ const Login = () => {
         <div>
             <h1>Login Page</h1>
             {!isAuthenticated && (
-                <button onClick={() => loginWithRedirect({redirect_uri: 'http://localhost:3000/home'})}>Log in</button>
+                <button onClick={() => loginWithRedirect({redirect_uri: "http://localhost:3000/home"
+            })}>Log in</button>
             )}
 
             {isAuthenticated && <Link to="/home" className="btn btn-primary">Go to Home Page</Link>}

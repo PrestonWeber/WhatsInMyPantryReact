@@ -4,6 +4,9 @@ import { SaveButton } from "../Button";
 import { Col, Row } from "../Grid";
 
 export default function ApiRecipe(props) {
+    let instructions = props.instructions.split(".");
+    instructions = instructions.filter((a, b) => instructions.indexOf(a) === b);
+
     return (
         <Card key={props.id}>
             <CardImage
@@ -19,7 +22,13 @@ export default function ApiRecipe(props) {
                 <button className="btn btn-primary" data-toggle="collapse" data-target="#instructions">Instructions</button>
                 <div className="collapse" id="instructions" aria-expanded="false" aria-controls="instructions">
                 <CardInstructions>
-                    {props.instructions}
+                    {instructions.map(instruction => {
+                        return (
+                            <>
+                                {instruction}<br/><br/>
+                            </>
+                        );
+                    })}
                 </CardInstructions>
                 </div>
                 <Row>

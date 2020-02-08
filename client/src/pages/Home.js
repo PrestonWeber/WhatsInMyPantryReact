@@ -8,14 +8,15 @@ import { Input, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
 import ApiRecipe from "../components/ApiRecipe";
+import { Link } from "react-router-dom";
 
 
 export default function Home() {
-  const { user } = useAuth0();
+    const { user } = useAuth0();
 
     const [pantry, setPantry] = useState([]);
 
-  const [inputValue, setValue] = useState("");
+    const [inputValue, setValue] = useState("");
 
     const [recipes, setRecipes] = useState([]);
 
@@ -87,7 +88,7 @@ export default function Home() {
         })
       );
     } else {
-      pantryIngredients.push(<div key="none">Fill Your Pantry!</div>);
+      pantryIngredients.push(<div id="fill-pantry" key="none">Fill Your Pantry!</div>);
     }
     return pantryIngredients;
   };
@@ -97,12 +98,18 @@ export default function Home() {
     let ingredients = [];
 
     for (let i = 0; i < pantry.length; i++) {
-      ingredients.push(pantry[i].ingredient);
+
+      if (pantry[i].ingredient.includes(" ")) {
+        let newStr = pantry[i].ingredient.replace(/\s/g, "%20");
+        ingredients.push(newStr);
+      } else {
+        ingredients.push(pantry[i].ingredient);
+      }
     }
 
     let ingredientString = ingredients.join("&q=");
     let queryUrl =
-      "http://recipes.kami.io/api/ingredient?q=" +
+      "https://recipes.kami.io/api/ingredient?q=" +
       ingredientString;
 
     console.log(queryUrl);
@@ -134,25 +141,29 @@ export default function Home() {
       <Container>
           <nav className="navbar navbar-expand-lg">
             <a className="navbarLabel" href="#">Hello, {user.nickname}!</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
             </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+              <Link to="/home">
+                <a className = "nav-link">Home <span className="sr-only">(current)</span></a>
+              </Link>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Favorites</a>
+            <li className="nav-item">
+              <Link to="/favorites">
+                <a className="nav-link">Favorites</a>
+              </Link>
             </li>
         
-            <li class="nav-item">
-            <a class="nav-link disabled" href="#">Logout</a>
+            <li className="nav-item"> 
+            <LogoutButton />
             </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-            <Input id="search-bar" type="search" placeholder="Search" aria-label="Search" maxlength="30"  />
+            <form className="form-inline my-2 my-lg-0">
+            <Input id="search-bar" type="search" placeholder="Search" aria-label="Search" maxLength="30"  />
             <FormBtn className="button" type="submit">SEARCH</FormBtn>
           </form>
         </div>
@@ -201,18 +212,12 @@ export default function Home() {
       <Container>
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
-            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add up to 10 items..." id="myFood" maxlength="30" ></Input>
-            
+            <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="Add food here..." id="myFood" maxLength="30" ></Input>
             <FormBtn onClick={addIngredient}>
               ADD TO PANTRY
             </FormBtn>
-
             <br></br>
-    
-            <button onClick={() => resetPantry(user.email)} className="button-2" id="add-btn">RESET</button>
-            <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
-                SEE RESULTS
-            </FormBtn>
+            <button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">RESET</button>
           
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients">
@@ -225,6 +230,12 @@ export default function Home() {
               
           </Col>
         </Row>
+          <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
+              SEE RESULTS
+          </FormBtn>
+        <Row>
+          
+        </Row>
       </Container>
 
       <Container>
@@ -233,27 +244,32 @@ export default function Home() {
           let recipeIngredients = [];
           let matchedIngredients = [];
           let unmatchedIngredients = [];
-
-          // console.log(response);
-
-          // for (let i = 0; i < response.data.hits.length; i++) {
-          //   for (let j = 0; j < response.data.hits[i].recipe.ingredients.length; j++) {
-          //     let recipeIngredient = response.data.hits[i].recipe.ingredients[j].text.toLowerCase();
-          //     recipeIngredients.push(recipeIngredient);
-          //   }
-          // }
+          let pantryIngredients = [];
 
           for (let i = 0; i < recipe.ingredients.length; i++) {
             let recipeIngredient = recipe.ingredients[i].ingredient.toLowerCase();
             recipeIngredients.push(recipeIngredient);
           }
 
+          for (let i = 0; i < pantry.length; i++) {
+            let pantryIngredient = pantry[i].ingredient.toLowerCase();
+            if (pantryIngredient.endsWith('s')) {
+              let secondIngredient = pantryIngredient.substring(0, pantryIngredient.length - 1);
+              pantryIngredients.push(secondIngredient);
+            } else if (pantryIngredient.includes(" ")) {
+              let pantryIngArr = pantryIngredient.split(" ");
+              for (let j = 0; j < pantryIngArr.length; j++) {
+                pantryIngredients.push(pantryIngArr[j]);
+              }
+            }
+            pantryIngredients.push(pantryIngredient);
+          }
+
           for (let i = 0; i < recipeIngredients.length; i++) {
             let isInArray = false;
 
-            for (let j = 0; j < pantry.length; j++) {
-              let lowercasePantry = pantry[j].ingredient.toLowerCase();
-              if (recipeIngredients[i].includes(lowercasePantry)) {
+            for (let j = 0; j < pantryIngredients.length; j++) {
+              if (recipeIngredients[i].includes(pantryIngredients[j])) {
                 isInArray = true;
               }
             }
@@ -278,7 +294,8 @@ export default function Home() {
               title: recipe.title,
               image: recipe.image_url,
               instructions: recipe.instructions,
-              userEmail: user.email
+              userEmail: user.email,
+              apiId: recipe.recipe_id
             }
             saveRecipe(data)
 

@@ -27,7 +27,7 @@ a:hover {
 }
 /* -------------------------------------------------- */
 
-/* Buttons */
+/* General Buttons */
 .button{
   background-color:#FC4A1A;
   border: none;
@@ -85,8 +85,12 @@ a:hover {
   background-color: #7dd0b6;  
 }
 
+.active /*current page */ {
+  color: red; 
+}
+
 .navbar-nav > li {
-  margin-left: 50px; 
+  margin-left: 35px; 
   font-family: 'Roboto Condensed', sans-serif; 
 }
 
@@ -123,7 +127,6 @@ a:hover {
   padding-top: 20px; 
 }
 
-
 .column-1 {
   padding-top: 50px; 
 }
@@ -139,8 +142,15 @@ a:hover {
 #pantry-div {
 margin-top: 30px;
 text-align: center; 
-font-family: 'Mansalva', cursive;
+font-family: 'Roboto Condensed', sans-serif; 
 font-size: 18px; 
+/*font-family: 'Mansalva', cursive;
+font-size: 18px; */
+}
+
+#fill-pantry {
+  font-family: 'Mansalva', cursive; 
+  font-size: 30px; 
 }
 
 #myFood {
@@ -153,9 +163,9 @@ font-size: 18px;
   border: 3px solid white;
 }
 
-
-
-
+#generate, #reset-btn  /* add to pantry btn */ {
+  float: left; 
+}
 
 /* -------------------------------------------------- */
 
