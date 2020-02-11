@@ -74,6 +74,13 @@ export default function FavRecipes() {
                 // console.log(recipes);
         }).catch(err => console.log(err));
     };
+    const deleteRecipe = recipeId => {
+      console.log(recipeId);
+      API.deleteRecipe(recipeId).then(res => {
+        console.log("RECIPE DELETED");
+        fetchRecipes(user.email);
+      });
+    };
     
     const renderRecipes = () => {
         let recipeCards = [];
@@ -141,15 +148,6 @@ export default function FavRecipes() {
       </Container>
     </div>
     );
-
-  const deleteRecipe = recipeId => {
-    console.log(recipeId);
-    API.deleteRecipe(recipeId).then(res => {
-      console.log("RECIPE DELETED");
-      fetchRecipes(user.email);
-    });
-  };
-
 
   return (
     <div>
