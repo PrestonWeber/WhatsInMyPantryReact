@@ -84,7 +84,7 @@ export default function FavRecipes() {
                         <>
                         <Recipe
                         key={recipe._id}
-                        id={recipe.apiId}
+                        id={recipe._id}
                         title={recipe.title}
                         image={recipe.image}
                         instructions={recipe.instructions}

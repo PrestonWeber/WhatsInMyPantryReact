@@ -230,6 +230,20 @@ li {
   font-size: 45px;
   font-weight: bolder;
 }
+.container {
+  width: 100%;
+}
+#reset-btn {
+  position: -webkit-sticky;
+  position: sticky;  
+    top:0;
+}
+.loadingDiv {
+  text-align: center;
+}
+.navbar-toggler-icon {
+  color: blue;
+}
 
 @media only screen and (max-width: 600px) {
   .jumbotron, .container, .row {
