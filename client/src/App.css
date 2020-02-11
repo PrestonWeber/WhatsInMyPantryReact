@@ -28,6 +28,10 @@ a:hover {
 /* -------------------------------------------------- */
 
 /* General Buttons */
+
+.button, .btn {
+}
+
 .button{
   background-color:red;
   border: none;
@@ -39,10 +43,11 @@ a:hover {
   font-family: 'Roboto Condensed', sans-serif;
   text-decoration: none;
   margin: 10px; 
+  border-radius: none;
 }
 
 .button:hover {
-  background-color:red; 
+  background-color: #F7C331; 
   color: white;
   text-decoration: none; 
 }
@@ -58,6 +63,7 @@ a:hover {
   font-family: 'Roboto Condensed', sans-serif;
   text-decoration: none;
   margin: 10px; 
+  border-radius: none; 
 }
 
 .button-2:hover {
@@ -70,13 +76,12 @@ a:hover {
   background-color:#FC4A1A;
   border: none;
   color: white;
-  padding: 6px 10px;
+  padding: 10px 20px;
   text-align: center;
   font-size: 10px; 
   font-weight: bold; 
   font-family: 'Roboto Condensed', sans-serif;
   text-decoration: none;
-  margin-left: 10px; 
 }
 /* -------------------------------------------------- */
 
@@ -140,6 +145,11 @@ a:hover {
   display: block; 
   height: 450px; 
   overflow: scroll; 
+}
+
+#reset-div {
+text-align: right;
+margin-top: 2px; 
 }
 
 #pantry-div {
@@ -236,11 +246,13 @@ li {
 .container {
   width: 100%;
 }
-#reset-btn {
+
+/*#reset-btn {
   position: -webkit-sticky;
   position: sticky;  
     top:0;
-}
+}*/
+
 .loadingDiv {
   text-align: center;
 }
@@ -256,9 +268,11 @@ li {
   .jumbotron, .container, .row {
     text-align: center;
   }
+
+  
   .button, .btn {
     padding: 25px;
-    font-size: larger;
+    font-size: larger; 
   } 
 }
 
