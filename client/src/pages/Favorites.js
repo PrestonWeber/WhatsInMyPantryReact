@@ -45,6 +45,7 @@ export default function FavRecipes() {
     }
 
     const edamamApiId = (id) => {
+        id = encodeURIComponent(id);
         let queryUrl =
             "https://recipes.kami.io/api/recipe/" + id;
 
@@ -64,7 +65,7 @@ export default function FavRecipes() {
             let ingredientsArr = [];
 
             for (let i = 0; i < ingredients.length; i++) {
-                ingredientsArr.push(ingredients[i].ingredient);
+                ingredientsArr.push(ingredients[i].original);
             }
             //     console.log(ingredientsArr);
             setIngredients(ingredientsArr);

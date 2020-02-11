@@ -268,7 +268,7 @@ export default function Home() {
           for (let i = 0; i < recipe.ingredients.length; i++) {
             let recipeIngredient = recipe.ingredients[
               i
-            ].ingredient.toLowerCase();
+            ].original.toLowerCase();
             recipeIngredients.push(recipeIngredient);
           }
 
