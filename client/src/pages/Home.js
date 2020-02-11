@@ -139,7 +139,6 @@ export default function Home() {
       console.log("RECIPE ADDED");
     });
   };
-  console.log(refContainer);
   return (
     <div>
       <div>
@@ -248,7 +247,7 @@ export default function Home() {
       </Container>
       
 
-      <div ref="hello" className="recipeDiv">
+      <div className="recipeDiv">
         {recipes.map(recipe => {
           let recipeIngredients = [];
           let matchedIngredients = [];
