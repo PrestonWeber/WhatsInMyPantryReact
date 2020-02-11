@@ -12,8 +12,9 @@ export function Input(props) {
 
 export function FormBtn(props) {
   return (
-    <button {...props} /*style={{ float: "right", marginBottom: 10 }}*/ className="button">
+     <button type="submit" {...props} className="button"> <a  /*style={{ float: "right", marginBottom: 10 }}*/>
       {props.children}
+    </a>
     </button>
   );
 }

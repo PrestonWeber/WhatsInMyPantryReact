@@ -6,7 +6,8 @@
 }
 
 .loginCol1 {
-  padding: 6%; 
+  padding: 10%; 
+  text-align: center; 
   
  }
 
@@ -24,6 +25,8 @@
     font-weight: bold; 
     font-family: 'Roboto Condensed', sans-serif;
     text-decoration: none;
+    margin-left: 70px; 
+    margin-top: 10px; 
   }
   
   #login-btn:hover {
@@ -37,6 +40,7 @@
 #welcome-text { 
   font-size: 70px; 
   margin-bottom: 0; 
+  text-align: center; 
 
 }  
 

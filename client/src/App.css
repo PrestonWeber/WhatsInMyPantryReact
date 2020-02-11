@@ -28,6 +28,10 @@ a:hover {
 /* -------------------------------------------------- */
 
 /* General Buttons */
+
+.button, .btn {
+}
+
 .button{
   background-color:red;
   border: none;
@@ -39,10 +43,11 @@ a:hover {
   font-family: 'Roboto Condensed', sans-serif;
   text-decoration: none;
   margin: 10px; 
+  border-radius: none;
 }
 
 .button:hover {
-  background-color:red; 
+  background-color: #F7C331; 
   color: white;
   text-decoration: none; 
 }
@@ -58,6 +63,7 @@ a:hover {
   font-family: 'Roboto Condensed', sans-serif;
   text-decoration: none;
   margin: 10px; 
+  border-radius: none; 
 }
 
 .button-2:hover {
@@ -70,30 +76,32 @@ a:hover {
   background-color:#FC4A1A;
   border: none;
   color: white;
-  padding: 6px 10px;
+  padding: 10px 20px;
   text-align: center;
   font-size: 10px; 
   font-weight: bold; 
   font-family: 'Roboto Condensed', sans-serif;
   text-decoration: none;
-  margin-left: 10px; 
 }
 /* -------------------------------------------------- */
 
 /* Unique Elements */
 .navbar {
-  background-color:#F7C331; 
-  height: 38px;  
+  background-color:#F7C331;
+  height: auto;
 }
 
 .navbar-nav > li {
   margin-left: 35px; 
   font-family: 'Roboto Condensed', sans-serif; 
 }
+.nav-link {
+  color: black !important;
+}
 
-.navbarLabel {
-  color:red; 
-  font-size: 20px; 
+.navbar-brand {
+  color:red !important; 
+  font-size: 30px; 
   font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -139,6 +147,13 @@ a:hover {
   overflow: scroll; 
 }
 
+#reset-div {
+text-align: right;
+/*margin-top: 2px;*/
+position: sticky;  
+top: 0; 
+}
+
 #pantry-div {
 margin-top: 30px;
 text-align: center; 
@@ -166,6 +181,7 @@ font-size: 18px;
 
 #reset-btn {
   margin-left: 9px; 
+  margin-top: 0.5px; 
 }
 
 /* -------------------------------------------------- */
@@ -230,14 +246,32 @@ li {
   font-size: 45px;
   font-weight: bolder;
 }
+.container {
+  width: 100%;
+}
+
+
+
+.loadingDiv {
+  text-align: center;
+}
+.navbar-toggler-icon {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+.navbar-toggler {
+  background-color: white;
+}
 
 @media only screen and (max-width: 600px) {
   .jumbotron, .container, .row {
     text-align: center;
   }
+
+  
   .button, .btn {
     padding: 25px;
-    font-size: larger;
+    font-size: larger; 
   } 
 }
 

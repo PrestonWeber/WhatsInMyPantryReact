@@ -9,20 +9,25 @@ import API from "../utils/API";
 import Ingredient from "../components/Ingredient";
 import ApiRecipe from "../components/ApiRecipe";
 import { Link } from "react-router-dom";
+import { useRef } from "react"
+import Loading from "../components/Loading";
 
 export default function Home() {
-    const { user } = useAuth0();
-
+  const { user } = useAuth0();
+  
   const [pantry, setPantry] = useState([]);
-
-    const [inputValue, setValue] = useState("");
-
+  
+  const [inputValue, setValue] = useState("");
+  
   const [recipes, setRecipes] = useState([]);
+  
+  const refContainer = useRef(null);
 
   useEffect(() => {
     fetchPantry(user.email);
     renderPantry();
   }, []);
+
 
   const handleInputChange = e => {
     const { value } = e.target;
@@ -129,22 +134,26 @@ export default function Home() {
       });
   };
 
+  const loadFunction = () => {
+    return (
+        <Loading type="bars" color="red" />
+    )
+  }
+
   const saveRecipe = data => {
     console.log(data);
     axios.post("/api/recipeRoutes/recipe", data).then(res => {
       console.log("RECIPE ADDED");
     });
   };
-
   return (
     <div>
-      <Container>
-          <nav className="navbar navbar-expand-lg">
+      <div>
+          <nav className="navbar navbar-expand-lg navbar-light">
     
-            <a className="navbarLabel" href="#" >Hello, {user.nickname}!</a>
+            <a className="navbar-brand" href="#" >Hello, {user.nickname}!</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-
             </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -165,14 +174,9 @@ export default function Home() {
             </li>
             </ul>
 
-            {/* <form class="form-inline my-2 my-lg-0">
-             <Input id="search-bar" type="search" placeholder="Search" aria-label="Search" maxlength="30"  />
-             <FormBtn className="button" type="submit">SEARCH</FormBtn> 
-          </form> */ }
-
         </div>
         </nav>
-      </Container>
+      </div>
 
       <Jumbotron>
         <Container>
@@ -194,15 +198,18 @@ export default function Home() {
           <h2>How it Works</h2>
         </div>
         <Row className="howItWorks">
-          <Col size="lg-12 sm-12" className="howItWorks">
+          <Col size="md-4" className="howItWorks">
             <i className="fas fa-clipboard-list" id="clipboard"></i>
 
             <p className="iconText">Log your ingredients in the form below.</p>
             <br></br>
+          </Col>
+          <Col size="md-4">
             <i className="fas fa-utensils" id="utensils"></i>
             <p className="iconText">View recipes that use what you already have...</p>
-
             <br></br>
+          </Col>
+          <Col size="md-4">
             <i className="fas fa-shopping-cart" id="cart"></i>
             <p className="iconText">...and see what else you need to make them!</p>
           </Col>
@@ -213,32 +220,40 @@ export default function Home() {
       <Container>
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
-
+          <form onSubmit={e => e.preventDefault()}>
             <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="LOG INGREDIENTS HERE" id="myFood" maxlength="30" ></Input>
 
-            <FormBtn onClick={addIngredient}>
+            <FormBtn onClick={addIngredient} className="button-2">
               ADD TO PANTRY
             </FormBtn>
             <br></br>
-            <button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">RESET PANTRY</button>
             <br></br>
-            <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
-                SEE RESULTS
-            </FormBtn>
+
+            {/*<button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">CLEAR PANTRY</button> */}
+            
+            <a className="button-2" id="generate" onClick={() => edamamApi(pantry)} href="javascript:setTimeout(()=>{window. location = '#recipeDiv' },2000);">
+                SEE RECIPES!
+            </a>
+          </form>
+          <br></br>
+          <br></br>
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients">
-            {/*<div className="generateButton" > */}
-
-            {/* </div> */}
+            <div id="reset-div">
+            <button onClick={() => resetPantry(user.email)} className="buttonSmall" id="reset-btn">RESET PANTRY</button>
+            </div>
             <div id="pantry-div">{renderPantry()}</div>
-          </Col>
+          </Col>  
         </Row>
-
+        <Row>
+          
+        </Row>
          
         
       </Container>
+      
 
-      <Container>
+      <div id="recipeDiv">
         {recipes.map(recipe => {
           let recipeIngredients = [];
           let matchedIngredients = [];
@@ -248,7 +263,7 @@ export default function Home() {
           for (let i = 0; i < recipe.ingredients.length; i++) {
             let recipeIngredient = recipe.ingredients[
               i
-            ].ingredient.toLowerCase();
+            ].original.toLowerCase();
             recipeIngredients.push(recipeIngredient);
           }
 
@@ -268,9 +283,13 @@ export default function Home() {
               }
             }
             if (!isInArray) {
-              unmatchedIngredients.push(recipeIngredients[i]);
+              if (!unmatchedIngredients.includes(recipeIngredients[i])) {
+                unmatchedIngredients.push(recipeIngredients[i]);
+              }
             } else if (isInArray) {
+              if (!matchedIngredients.includes(recipeIngredients[i])) {
               matchedIngredients.push(recipeIngredients[i]);
+              }
 
             }
           }
@@ -281,11 +300,12 @@ export default function Home() {
               title: recipe.title,
               image: recipe.image_url,
               instructions: recipe.instructions,
-              userEmail: user.email
-
-            }
-            saveRecipe(data)
-          }
+              userEmail: user.email,
+              apiId: recipe.recipe_id
+            };
+            saveRecipe(data);
+            alert("RECIPE ADDED")
+          };
 
           return (
             <>
@@ -301,7 +321,7 @@ export default function Home() {
             </>
           );
         })}
-      </Container>
+      </div>
     </div>
   );
 }
