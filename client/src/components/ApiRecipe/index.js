@@ -11,7 +11,7 @@ import { Container, Col, Row } from "../Grid";
 import "./style.css";
 export default function ApiRecipe(props) {
   return (
-    <Container className="recipeContainer">
+    <Container>
       <Row>
         <Col size="md-1"></Col>
         <Col size="md-10">
