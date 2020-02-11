@@ -28,6 +28,10 @@ a:hover {
 /* -------------------------------------------------- */
 
 /* General Buttons */
+
+.button, .btn {
+}
+
 .button{
   background-color:red;
   border: none;
@@ -39,6 +43,7 @@ a:hover {
   font-family: 'Roboto Condensed', sans-serif;
   text-decoration: none;
   margin: 10px; 
+  border-radius: none;
 }
 
 .button:hover {
@@ -58,6 +63,7 @@ a:hover {
   font-family: 'Roboto Condensed', sans-serif;
   text-decoration: none;
   margin: 10px; 
+  border-radius: none; 
 }
 
 .button-2:hover {
