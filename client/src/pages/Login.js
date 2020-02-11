@@ -15,7 +15,7 @@ const Login = () => {
                 <Col className="loginCol1" size="lg-4">
                     <h1 id="welcome-text">Welcome!</h1>
                         {!isAuthenticated && (
-                        <button id="login-btn" onClick={() => loginWithRedirect({redirect_uri: 'http://localhost:3000/home'})}>LOG IN</button>
+                        <button id="login-btn" onClick={() => loginWithRedirect({redirect_uri: 'https://whats-in-my-pantry.herokuapp.com/home'})}>LOG IN</button>
                         )}
                         {isAuthenticated && <Link to="/home" className="btn btn-primary" id="homepg-btn">Go to Home Page</Link>}
                 </Col>
