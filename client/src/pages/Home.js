@@ -174,11 +174,6 @@ export default function Home() {
             </li>
             </ul>
 
-            {/* <form class="form-inline my-2 my-lg-0">
-             <Input id="search-bar" type="search" placeholder="Search" aria-label="Search" maxlength="30"  />
-             <FormBtn className="button" type="submit">SEARCH</FormBtn> 
-          </form> */ }
-
         </div>
         </nav>
       </div>
