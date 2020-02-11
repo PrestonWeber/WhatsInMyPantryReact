@@ -82,18 +82,21 @@ a:hover {
 
 /* Unique Elements */
 .navbar {
-  background-color:#F7C331; 
-  height: 38px;  
+  background-color:#F7C331;
+  height: auto;
 }
 
 .navbar-nav > li {
   margin-left: 35px; 
   font-family: 'Roboto Condensed', sans-serif; 
 }
+.nav-link {
+  color: black !important;
+}
 
-.navbarLabel {
-  color:red; 
-  font-size: 20px; 
+.navbar-brand {
+  color:red !important; 
+  font-size: 30px; 
   font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -242,7 +245,11 @@ li {
   text-align: center;
 }
 .navbar-toggler-icon {
-  color: blue;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+.navbar-toggler {
+  background-color: white;
 }
 
 @media only screen and (max-width: 600px) {
