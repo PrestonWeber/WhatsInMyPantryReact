@@ -283,9 +283,13 @@ export default function Home() {
               }
             }
             if (!isInArray) {
-              unmatchedIngredients.push(recipeIngredients[i]);
+              if (!unmatchedIngredients.includes(recipeIngredients[i])) {
+                unmatchedIngredients.push(recipeIngredients[i]);
+              }
             } else if (isInArray) {
+              if (!matchedIngredients.includes(recipeIngredients[i])) {
               matchedIngredients.push(recipeIngredients[i]);
+              }
 
             }
           }

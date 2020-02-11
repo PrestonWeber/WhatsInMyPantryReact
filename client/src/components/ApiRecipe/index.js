@@ -9,7 +9,13 @@ import {
 import { SaveButton } from "../Button";
 import { Container, Col, Row } from "../Grid";
 import "./style.css";
+
+
 export default function ApiRecipe(props) {
+
+  let instructions = props.instructions.split(".");
+  instructions = instructions.filter((a, b) => instructions.indexOf(a) === b);
+
   return (
     <Container>
       <Row>
@@ -38,7 +44,15 @@ export default function ApiRecipe(props) {
                 aria-expanded="false"
                 aria-controls="instructions"
               >
-                <CardInstructions>{props.instructions}</CardInstructions>
+                <CardInstructions>
+                  {instructions.map(instruction => {
+                    return (
+                      <>
+                        {instruction}<br /><br />
+                      </>
+                    );
+                  })}
+                </CardInstructions>
               </div>
               <Row>
                 <Col size="md-5">
