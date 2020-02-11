@@ -17,7 +17,11 @@ export function CardBody(props) {
 }
 
 export function CardTitle(props) {
-  return <h5 className="card-title">{props.children}</h5>;
+  return (
+    <h5 className="card-title" {...props}>
+      {props.children}
+    </h5>
+  );
 }
 
 export function CardInstructions(props) {
@@ -25,17 +29,17 @@ export function CardInstructions(props) {
 }
 
 export function CardLink(props) {
-    return (
-        <a className="btn btn-large btn-primary" target="_blank" {...props} >
-            {props.children}
-        </a>
-    );
+  return (
+    <a className="btn btn-large btn-primary" target="_blank" {...props}>
+      {props.children}
+    </a>
+  );
 }
 
 export function DeleteBtn(props) {
-    return (
-        <button className="button" {...props}>
-            {props.children}
-        </button>
-    )
+  return (
+    <button className="button" {...props}>
+      {props.children}
+    </button>
+  );
 }
