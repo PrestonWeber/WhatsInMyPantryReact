@@ -232,6 +232,7 @@ export default function Home() {
               ADD TO PANTRY
             </FormBtn>
             <br></br>
+            <button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">CLEAR PANTRY</button>
             <br></br>
             <a className="button" id="generate" onClick={() => edamamApi(pantry)} href="javascript:setTimeout(()=>{window. location = '#recipeDiv' },2000);">
                 SEE RESULTS
