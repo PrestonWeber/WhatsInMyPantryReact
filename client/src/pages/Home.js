@@ -220,7 +220,7 @@ export default function Home() {
               ADD TO PANTRY
             </FormBtn>
             <br></br>
-            <button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">RESET PANTRY</button>
+            <button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">CLEAR PANTRY</button>
             <br></br>
             <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
                 SEE RESULTS
