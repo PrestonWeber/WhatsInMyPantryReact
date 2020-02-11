@@ -30,7 +30,7 @@ export default function FavRecipes() {
     const renderModal = (details) => {
         console.log('user', user)
         console.log('details', details)
-        if(details?.recipe_id) {
+        if(details) {
             return (
                 <RecipeModal
                     id={details.recipe_id}
