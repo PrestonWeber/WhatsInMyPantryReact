@@ -3,18 +3,18 @@ import API from "../utils/API";
 import Recipe from "../components/Recipe";
 import { useAuth0 } from "../react-auth0-spa";
 import "./favorite.css";
-import {Col, Row, Container} from "../components/Grid";
-import {LogoutButton} from "../components/Button";
+import { Col, Row, Container } from "../components/Grid";
+import { LogoutButton } from "../components/Button";
 import { RecipeModal } from "../components/RecipeModal";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function FavRecipes() {
     const [recipes, setRecipes] = useState([]);
-    const { user } = useAuth0();
-    const [recipeDetail, setRecipeDetail] = useState([]);
-    // const [pantry, setPantry] = useState([]);
+    const [recipeDetail, setRecipeDetail] = useState(null);
     const [ingredientsDetail, setIngredients] = useState([]);
+    const { user } = useAuth0();
+    // const [pantry, setPantry] = useState([]);
 
     useEffect(() => {
         // fetchPantry(user.email);
@@ -28,80 +28,83 @@ export default function FavRecipes() {
     //     }).catch(err => console.log(err));
     // };
 
-    const renderModal = () => {
-        return (
-        <RecipeModal
-            id={recipeDetail[0].recipe_id}
-            title={recipeDetail[0].title}
-            instructions={recipeDetail[0].instructions}
-            ingredients={ingredientsDetail}
-        />
-        );
+    const renderModal = (details) => {
+        console.log('user', user)
+        console.log('details', details)
+        if(details) {
+            return (
+                <RecipeModal
+                    id={details.recipe_id}
+                    title={details.title}
+                    instructions={details.instructions}
+                    ingredients={ingredientsDetail}
+                    />
+            )
+        }
+        return null;
+        
     }
 
-    const edamamApiId = async (id) => {
+    const edamamApiId = (id) => {
+        id = encodeURIComponent(id);
         let queryUrl =
-        "https://recipes.kami.io/api/recipe/" + id;
-    
+            "https://recipes.kami.io/api/recipe/" + id;
+
         console.log(queryUrl);
-    
-    
-         await axios.get(queryUrl)
-          .then(async function (response) {
-    
-            setRecipeDetail(response.data);
 
-            let ingredients = response.data[0].jsonb_agg;
+        console.log('user', user)
+        axios.get(queryUrl).then(result => {
+            console.log(result);
+            console.log('result.data', result.data)
+            setRecipeDetail({...result.data[0]});
+
+
+            //   .then(function (response) {
+
+            //     setRecipeDetail(response.data);
+            let ingredients = result.data[0].jsonb_agg;
             let ingredientsArr = [];
-            
-            for (let i = 0; i < ingredients.length; i++) {
-                ingredientsArr.push(ingredients[i].ingredient);
-            }
 
-            console.log(ingredientsArr);
+            for (let i = 0; i < ingredients.length; i++) {
+                ingredientsArr.push(ingredients[i].original);
+            }
+            //     console.log(ingredientsArr);
             setIngredients(ingredientsArr);
-            
-            renderModal();
- 
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
+
+
+            //   })
+            //   .catch(function(error) {
+            //     console.log(error);
+            //   });
+        });
     };
 
     const fetchRecipes = (userEmail) => {
         API.getRecipes(userEmail).then(res => {
-                setRecipes(res.data);
-                // console.log(recipes);
+            setRecipes(res.data);
+            // console.log(recipes);
         }).catch(err => console.log(err));
     };
 
-    const deleteRecipe = recipeId => {
-    console.log(recipeId);
-    API.deleteRecipe(recipeId).then(res => {
-      console.log("RECIPE DELETED");
-      fetchRecipes(user.email);
-    });
-  };
-    
     const renderRecipes = () => {
         let recipeCards = [];
-        if(recipes.length > 0) {
+        if (recipes.length > 0) {
             recipeCards.push(
                 recipes.map(recipe => {
                     return (
                         <>
-                        <Recipe
-                        key={recipe._id}
-                        id={recipe._id}
-                        title={recipe.title}
-                        image={recipe.image}
-                        instructions={recipe.instructions}
-                        user={recipe.user}
-                        button="delete"
-                        deleteRecipe={deleteRecipe}
-                        edamamApiId={edamamApiId}
-                        />
+                            <Recipe
+                                key={recipe._id}
+                                id={recipe._id}
+                                apiId={recipe.apiId}
+                                title={recipe.title}
+                                image={recipe.image}
+                                instructions={recipe.instructions}
+                                user={recipe.user}
+                                button="delete"
+                                deleteRecipe={deleteRecipe}
+                                edamamApiId={edamamApiId}
+                            />
                         </>
                     );
                 })
@@ -112,14 +115,20 @@ export default function FavRecipes() {
         return recipeCards;
     };
 
+    const deleteRecipe = (recipeId => {
+        console.log(recipeId);
+        API.deleteRecipe(recipeId).then(res => {
+            console.log("RECIPE DELETED");
+            fetchRecipes(user.email);
+        });
+    });
 
 
     return (
         <div>
-          <div>
-          <nav className="navbar navbar-expand-lg navbar-light">
-    
-            <a className="navbar-brand" href="#" >Hello, {user.nickname}!</a>
+{/* Navbar */}
+          <nav className="navbar navbar-expand-lg">
+            <a className="navbarLabel" href="#">Hello, {user.nickname}!</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -144,27 +153,14 @@ export default function FavRecipes() {
 
         </div>
         </nav>
-      </div>
 
-{/* Favorite Recipes Rendered Here */}
-      <Container>
             <div className="container">
                 <div className="row">{renderRecipes()}</div>
             </div>
-      </Container>
+
+            {renderModal(recipeDetail)}
+      
     </div>
     );
 
-  return (
-    <div>
-      <Container>
-        <Row id="top-row">
-          <h5>Hello, {user.nickname}!</h5> <LogoutButton />
-        </Row>
-      </Container>
-      <div className="container">
-        <div className="row">{renderRecipes()}</div>
-      </div>
-    </div>
-  );
 }
