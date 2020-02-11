@@ -10,6 +10,7 @@ import Ingredient from "../components/Ingredient";
 import ApiRecipe from "../components/ApiRecipe";
 import { Link } from "react-router-dom";
 import { useRef } from "react"
+import Loading from "../components/Loading";
 
 export default function Home() {
   const { user } = useAuth0();
@@ -133,6 +134,12 @@ export default function Home() {
       });
   };
 
+  const loadFunction = () => {
+    return (
+        <Loading type="bars" color="red" />
+    )
+  }
+
   const saveRecipe = data => {
     console.log(data);
     axios.post("/api/recipeRoutes/recipe", data).then(res => {
@@ -144,7 +151,7 @@ export default function Home() {
       <div>
           <nav className="navbar navbar-expand-lg">
     
-            <a className="navbarLabel" href="#" >Hello, {user.nickname}!</a>
+            <a className="navbar-brand" href="#" >Hello, {user.nickname}!</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
 
@@ -197,15 +204,18 @@ export default function Home() {
           <h2>How it Works</h2>
         </div>
         <Row className="howItWorks">
-          <Col size="lg-12 sm-12" className="howItWorks">
+          <Col size="md-4" className="howItWorks">
             <i className="fas fa-clipboard-list" id="clipboard"></i>
 
             <p className="iconText">Log your ingredients in the form below.</p>
             <br></br>
+          </Col>
+          <Col size="md-4">
             <i className="fas fa-utensils" id="utensils"></i>
             <p className="iconText">View recipes that use what you already have...</p>
-
             <br></br>
+          </Col>
+          <Col size="md-4">
             <i className="fas fa-shopping-cart" id="cart"></i>
             <p className="iconText">...and see what else you need to make them!</p>
           </Col>
@@ -216,28 +226,28 @@ export default function Home() {
       <Container>
         <Row>
           <Col size="lg-6 sm-12" className="column-1">
-
+          <form onSubmit={e => e.preventDefault()}>
             <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="LOG INGREDIENTS HERE" id="myFood" maxlength="30" ></Input>
 
             <FormBtn onClick={addIngredient}>
               ADD TO PANTRY
             </FormBtn>
             <br></br>
-            <button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">RESET PANTRY</button>
             <br></br>
-            <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
+            <a className="button" id="generate" onClick={() => edamamApi(pantry)} href="javascript:setTimeout(()=>{window. location = '#recipeDiv' },2000);">
                 SEE RESULTS
-            </FormBtn>
+            </a>
+          </form>
+          <br></br>
+          <br></br>
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients">
+            <button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">RESET PANTRY</button>
             {/*<div className="generateButton" > */}
 
             {/* </div> */}
             <div id="pantry-div">{renderPantry()}</div>
-          </Col>
-          <FormBtn id="generate" onClick={() => edamamApi(pantry)}>
-              SEE RESULTS
-          </FormBtn>
+          </Col>  
         </Row>
         <Row>
           
@@ -247,7 +257,7 @@ export default function Home() {
       </Container>
       
 
-      <div className="recipeDiv">
+      <div id="recipeDiv">
         {recipes.map(recipe => {
           let recipeIngredients = [];
           let matchedIngredients = [];
