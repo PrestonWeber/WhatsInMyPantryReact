@@ -149,7 +149,9 @@ a:hover {
 
 #reset-div {
 text-align: right;
-margin-top: 2px; 
+/*margin-top: 2px;*/
+position: sticky;  
+top: 0; 
 }
 
 #pantry-div {
@@ -179,6 +181,7 @@ font-size: 18px;
 
 #reset-btn {
   margin-left: 9px; 
+  margin-top: 0.5px; 
 }
 
 /* -------------------------------------------------- */
@@ -247,11 +250,7 @@ li {
   width: 100%;
 }
 
-/*#reset-btn {
-  position: -webkit-sticky;
-  position: sticky;  
-    top:0;
-}*/
+
 
 .loadingDiv {
   text-align: center;
