@@ -103,6 +103,45 @@ export default function FavRecipes() {
         return recipeCards;
     };
 
+
+
+    return (
+        <div>
+{/* Navbar */}
+      <Container>
+          <nav className="navbar navbar-expand-lg">
+            <a className="navbarLabel" href="#">Hello, {user.nickname}!</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li className="nav-item active">
+            <a className = "nav-link" href="http://localhost:3000/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a className="nav-link" href="http://localhost:3000/favorites">Favorites</a>
+            </li>
+        
+            <li class="nav-item"> 
+            <LogoutButton />
+            </li>
+            </ul>
+            
+        </div>
+        </nav>
+      </Container>
+
+{/* Favorite Recipes Rendered Here */}
+      <Container>
+            <div className="container">
+                <div className="row">{renderRecipes()}</div>
+            </div>
+      </Container>
+    </div>
+    );
+
   const deleteRecipe = recipeId => {
     console.log(recipeId);
     API.deleteRecipe(recipeId).then(res => {
