@@ -7,6 +7,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { LogoutButton } from "../components/Button";
 import { RecipeModal } from "../components/RecipeModal";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function FavRecipes() {
     const [recipes, setRecipes] = useState([]);
@@ -132,20 +133,24 @@ export default function FavRecipes() {
             <span class="navbar-toggler-icon"></span>
             </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-            <a className = "nav-link" href="http://localhost:3000/home">Home <span class="sr-only">(current)</span></a>
+              <Link to="/home">
+                <a className = "nav-link">Home <span className="sr-only">(current)</span></a>
+              </Link>
             </li>
-            <li class="nav-item">
-            <a className="nav-link" href="http://localhost:3000/favorites">Favorites</a>
+            <li className="nav-item">
+              <Link to="/favorites">
+                <a className="nav-link">Favorites</a>
+              </Link>
             </li>
         
-            <li class="nav-item"> 
+            <li className="nav-item"> 
             <LogoutButton />
             </li>
             </ul>
-            
+
         </div>
         </nav>
 

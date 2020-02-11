@@ -149,12 +149,11 @@ export default function Home() {
   return (
     <div>
       <div>
-          <nav className="navbar navbar-expand-lg">
+          <nav className="navbar navbar-expand-lg navbar-light">
     
             <a className="navbar-brand" href="#" >Hello, {user.nickname}!</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-
             </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -174,11 +173,6 @@ export default function Home() {
             <LogoutButton />
             </li>
             </ul>
-
-            {/* <form class="form-inline my-2 my-lg-0">
-             <Input id="search-bar" type="search" placeholder="Search" aria-label="Search" maxlength="30"  />
-             <FormBtn className="button" type="submit">SEARCH</FormBtn> 
-          </form> */ }
 
         </div>
         </nav>
@@ -229,24 +223,25 @@ export default function Home() {
           <form onSubmit={e => e.preventDefault()}>
             <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="LOG INGREDIENTS HERE" id="myFood" maxlength="30" ></Input>
 
-            <FormBtn onClick={addIngredient}>
+            <FormBtn onClick={addIngredient} className="button-2">
               ADD TO PANTRY
             </FormBtn>
             <br></br>
-            <button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">CLEAR PANTRY</button>
             <br></br>
-            <a className="button" id="generate" onClick={() => edamamApi(pantry)} href="javascript:setTimeout(()=>{window. location = '#recipeDiv' },2000);">
-                SEE RESULTS
+
+            {/*<button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">CLEAR PANTRY</button> */}
+            
+            <a className="button-2" id="generate" onClick={() => edamamApi(pantry)} href="javascript:setTimeout(()=>{window. location = '#recipeDiv' },2000);">
+                SEE RECIPES!
             </a>
           </form>
           <br></br>
           <br></br>
           </Col>
           <Col size="lg-6 sm-12" className="column-2 ingredients">
-            <button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">RESET PANTRY</button>
-            {/*<div className="generateButton" > */}
-
-            {/* </div> */}
+            <div id="reset-div">
+            <button onClick={() => resetPantry(user.email)} className="buttonSmall" id="reset-btn">RESET PANTRY</button>
+            </div>
             <div id="pantry-div">{renderPantry()}</div>
           </Col>  
         </Row>
