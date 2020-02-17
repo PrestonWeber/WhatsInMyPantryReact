@@ -18,6 +18,7 @@ export default function Recipe(props) {
                     onClick={() => props.edamamApiId(props.apiId)}
                 />
                 <DeleteBtn 
+                    id="delFavRecipe"
                     value={props.button}
                     onClick={() => props.deleteRecipe(props.id)}>
                         Delete
