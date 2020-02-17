@@ -38,7 +38,7 @@ export function CardLink(props) {
 
 export function DeleteBtn(props) {
   return (
-    <button className="button" {...props}>
+    <button className="btn btn-primary" {...props}>
       {props.children}
     </button>
   );

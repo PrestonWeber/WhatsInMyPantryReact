@@ -40,17 +40,16 @@
 
   .navbar {
     background-color:#F7C331; 
-    height: 38px;  
+    height: auto;  
   }
   
   .navbar-nav > li {
     margin-left: 35px; 
     font-family: 'Roboto Condensed', sans-serif; 
   }
-  
-  .navbarLabel {
-    color: black; 
-    font-size: 20px; 
-    font-family: 'Roboto Condensed', sans-serif;
+  #delFavRecipe:hover {
+    background-color: red;
   }
+  
+  
 

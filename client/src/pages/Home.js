@@ -151,13 +151,13 @@ export default function Home() {
       <div>
           <nav className="navbar navbar-expand-lg navbar-light">
     
-            <a className="navbar-brand" href="#" >Hello, {user.nickname}!</a>
+            <a className="navbar-brand" href="#">Hello, {user.nickname}!</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
+            <ul className="navbar-nav mr-auto nav nav-tabs">
             <li className="nav-item active">
               <Link to="/home">
                 <a className = "nav-link">Home <span className="sr-only">(current)</span></a>
@@ -223,7 +223,7 @@ export default function Home() {
           <form onSubmit={e => e.preventDefault()}>
             <Input type="text" name="food" value={inputValue} onChange={handleInputChange} placeholder="LOG INGREDIENTS HERE" id="myFood" maxlength="30" ></Input>
 
-            <FormBtn onClick={addIngredient} className="button-2">
+            <FormBtn onClick={addIngredient} id="ingredientSubmit">
               ADD TO PANTRY
             </FormBtn>
             <br></br>
@@ -231,7 +231,7 @@ export default function Home() {
 
             {/*<button onClick={() => resetPantry(user.email)} className="button-2" id="reset-btn">CLEAR PANTRY</button> */}
             
-            <a className="button-2" id="generate" onClick={() => edamamApi(pantry)} href="javascript:setTimeout(()=>{window. location = '#recipeDiv' },2000);">
+            <a className="button-2" id="generate" onClick={() => edamamApi(pantry)} href="javascript:setTimeout(()=>{window. location = '#recipeDiv' },2500);">
                 SEE RECIPES!
             </a>
           </form>
